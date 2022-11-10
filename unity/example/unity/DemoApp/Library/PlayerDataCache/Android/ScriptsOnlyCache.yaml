@@ -67,30 +67,32 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1608}
+      Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2592}
     - Class: 114
-      Script: {instanceID: 2748}
+      Script: {instanceID: 2736}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2750}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 2878}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 3992}
+      Script: {instanceID: 3522}
+    - Class: 114
+      Script: {instanceID: 3994}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -132,30 +134,32 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1608}
+      Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2592}
     - Class: 114
-      Script: {instanceID: 2748}
+      Script: {instanceID: 2736}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2750}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 2878}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 3136}
     - Class: 114
-      Script: {instanceID: 3992}
+      Script: {instanceID: 3522}
+    - Class: 114
+      Script: {instanceID: 3994}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -197,28 +201,30 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 89
+      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1608}
+      Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2590}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 2734}
+      Script: {instanceID: 2592}
     - Class: 114
-      Script: {instanceID: 2748}
+      Script: {instanceID: 2736}
     - Class: 114
-      Script: {instanceID: 2876}
+      Script: {instanceID: 2750}
     - Class: 114
-      Script: {instanceID: 3134}
+      Script: {instanceID: 2878}
     - Class: 114
-      Script: {instanceID: 3520}
+      Script: {instanceID: 3136}
+    - Class: 114
+      Script: {instanceID: 3522}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -965,4 +971,4 @@ ScriptsOnlyBuild:
   - Assets/FlutterUnityIntegration/Demo/Scenes/SampleScene.unity
   - Assets/FlutterUnityIntegration/Demo/Scenes/scene_2.unity
   - Assets/FlutterUnityIntegration/Demo/Scenes/NativeScene.unity
-  playerPath: /Users/vuphan/Development/rsupport/flutter-unity-view-widget/example/unity/DemoApp/Builds/flutterunitywidgets.apk
+  playerPath: /Users/vuphan/Development/rsupport/unity-view/unity/example/unity/DemoApp/Builds/flutterunitywidgets.apk

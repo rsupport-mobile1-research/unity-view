@@ -315,6 +315,17 @@
             ]
         },
         {
+            "managedAssemblyName": "UnityEngine.dll",
+            "nativeClass": "Cubemap",
+            "fullManagedTypeName": "UnityEngine.Cubemap",
+            "moduleName": "Core",
+            "usedInScenes": [
+                "Assets/FlutterUnityIntegration/Demo/Scenes/NativeScene.unity",
+                "Assets/FlutterUnityIntegration/Demo/Scenes/SampleScene.unity",
+                "Assets/FlutterUnityIntegration/Demo/Scenes/scene_2.unity"
+            ]
+        },
+        {
             "managedAssemblyName": "UnityEngine.UI.dll",
             "nativeClass": "",
             "fullManagedTypeName": "UnityEngine.EventSystems.EventSystem",
