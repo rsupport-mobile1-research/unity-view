@@ -64,7 +64,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
                           Expanded(
                               child: TextButton(
                                   onPressed: () {
-                                    setColor("#fff44336");
+                                    setColor("#f44336");
                                   },
                                   style: TextButton.styleFrom(
                                     //backgroundColor: Colors.white, // background
@@ -76,7 +76,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
                           Expanded(
                               child: TextButton(
                                   onPressed: () {
-                                    setColor("#ff2196f3");
+                                    setColor("#2196f3");
                                   },
                                   style: TextButton.styleFrom(
                                     //backgroundColor: Colors.white, // background
@@ -88,7 +88,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
                           Expanded(
                               child: TextButton(
                                   onPressed: () {
-                                    setColor("#ffffeb3b");
+                                    setColor("#ffeb3b");
                                   },
                                   style: TextButton.styleFrom(
                                     //backgroundColor: Colors.white, // background
@@ -101,7 +101,7 @@ class _SimpleScreenState extends State<SimpleScreen> {
                           Expanded(
                               child: TextButton(
                                   onPressed: () {
-                                    setColor("#ff4caf50");
+                                    setColor("#4caf50");
                                   },
                                   style: TextButton.styleFrom(
                                     //backgroundColor: Colors.white, // background

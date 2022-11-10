@@ -48,6 +48,8 @@ public class Rotate : MonoBehaviour, IEventSystemHandler
     public void SetColor(String color)
     {
         Debug.Log("New color = " + color);
-        // GameObject.Find("CubeDemo").GetComponent<Renderer>().material.color = new Color(0, 204, 102);
+        Color greenColor;
+        ColorUtility.TryParseHtmlString(color, out greenColor);
+        gameObject.GetComponent<Renderer>().material.color = greenColor;
     }
 }
