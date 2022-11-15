@@ -3616,6 +3616,26 @@ void RegisterAllStrippedInternalCalls()
 
 	//End Registrations for type : UnityEngine.UnityLogWriter
 
+	//Start Registrations for type : UnityEngine.WebCamTexture
+
+		//System.Void UnityEngine.WebCamTexture::Internal_CreateWebCamTexture(UnityEngine.WebCamTexture,System.String,System.Int32,System.Int32,System.Int32)
+		void Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
+		Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
+
+		//System.Void UnityEngine.WebCamTexture::Play()
+		void Register_UnityEngine_WebCamTexture_Play();
+		Register_UnityEngine_WebCamTexture_Play();
+
+		//System.Void UnityEngine.WebCamTexture::Stop()
+		void Register_UnityEngine_WebCamTexture_Stop();
+		Register_UnityEngine_WebCamTexture_Stop();
+
+		//UnityEngine.WebCamDevice[] UnityEngine.WebCamTexture::get_devices()
+		void Register_UnityEngine_WebCamTexture_get_devices();
+		Register_UnityEngine_WebCamTexture_get_devices();
+
+	//End Registrations for type : UnityEngine.WebCamTexture
+
 	//Start Registrations for type : UnityEngine.Yoga.Native
 
 		//System.Boolean UnityEngine.Yoga.Native::YGConfigGetUseWebDefaults(System.IntPtr)

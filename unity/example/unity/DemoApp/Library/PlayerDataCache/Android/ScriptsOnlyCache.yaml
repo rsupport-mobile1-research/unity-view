@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - GameManager
+    - MyCamera
     - Rotate
     - SceneLoader
     Unity.Rider.Editor.dll:
@@ -28,6 +29,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.Text
   serializedClasses:
     UnityEngine.CoreModule:
@@ -74,25 +76,25 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1536}
+    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1540}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 1610}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 2734}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 3134}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 3520}
     - Class: 114
-      Script: {instanceID: 3522}
-    - Class: 114
-      Script: {instanceID: 3994}
+      Script: {instanceID: 3992}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -141,25 +143,29 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1536}
+    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1540}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 1610}
+      Script: {instanceID: 2502}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2734}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 3134}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3520}
     - Class: 114
-      Script: {instanceID: 3994}
+      Script: {instanceID: 3992}
+    - Class: 114
+      Script: {instanceID: 20830}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -208,23 +214,25 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
+      Script: {instanceID: 1536}
+    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1540}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 1610}
+      Script: {instanceID: 2502}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2734}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 3134}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3520}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -966,6 +974,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
+  - hash:
+      serializedVersion: 2
+      Hash: 54da60e6fa3266965d4a177e32c58b56
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MyCamera
   platform: 13
   scenePathNames:
   - Assets/FlutterUnityIntegration/Demo/Scenes/SampleScene.unity

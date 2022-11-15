@@ -1,7 +1,10 @@
 ﻿using System;
 using FlutterUnityIntegration;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Collections;
+
 
 public class Rotate : MonoBehaviour, IEventSystemHandler
 {
