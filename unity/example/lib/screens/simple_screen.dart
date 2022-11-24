@@ -8,10 +8,10 @@ import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rsupport_open_gl/rsupport_open_gl.dart';
 
-List<CameraDescription> cameras;
+List<CameraDescription> cameras = [];
 
 class SimpleScreen extends StatefulWidget {
-  SimpleScreen({Key key}) : super(key: key);
+  SimpleScreen({Key? key}) : super(key: key);
 
   @override
   _SimpleScreenState createState() => _SimpleScreenState();
@@ -25,14 +25,14 @@ class _SimpleScreenState extends State<SimpleScreen>
   final _rsupportOpenGlPlugin = RsupportOpenGl();
 
   /// For camera
-  CameraController cameraController;
+  late CameraController cameraController;
 
   /// Others
 
-  UnityWidgetController _unityWidgetController;
+  late UnityWidgetController _unityWidgetController;
   double _sliderValue = 0.0;
   String textureId = "";
-  Image exampleImage = null;
+  Image? exampleImage = null;
   int time = DateTime.now().millisecondsSinceEpoch;
 
   @override
@@ -67,12 +67,12 @@ class _SimpleScreenState extends State<SimpleScreen>
     });
   }
 
-  Future<Image> convertYUV420toImageColor(CameraImage image) async {
+  Future<Image?> convertYUV420toImageColor(CameraImage image) async {
     try {
       final int width = image.width;
       final int height = image.height;
       final int uvRowStride = image.planes[1].bytesPerRow;
-      final int uvPixelStride = image.planes[1].bytesPerPixel;
+      final int? uvPixelStride = image.planes[1].bytesPerPixel;
 
       print("uvRowStride: " + uvRowStride.toString());
       print("uvPixelStride: " + uvPixelStride.toString());
@@ -83,7 +83,7 @@ class _SimpleScreenState extends State<SimpleScreen>
       // Fill image buffer with plane[0] from YUV420_888
       for(int x=0; x < width; x++) {
         for(int y=0; y < height; y++) {
-          final int uvIndex = uvPixelStride * (x/2).floor() + uvRowStride*(y/2).floor();
+          final int uvIndex = uvPixelStride! * (x/2).floor() + uvRowStride*(y/2).floor();
           final int index = y * width + x;
 
           final yp = image.planes[0].bytes[index];
@@ -102,7 +102,7 @@ class _SimpleScreenState extends State<SimpleScreen>
       imglib.PngEncoder pngEncoder = new imglib.PngEncoder(level: 0, filter: 0);
       List<int> png = pngEncoder.encodeImage(img);
       // muteYUVProcessing = false;
-      return Image.memory(png);
+      return Image.memory(Uint8List.fromList(png));
     } catch (e) {
       print(">>>>>>>>>>>> ERROR:" + e.toString());
     }
@@ -295,9 +295,9 @@ class _SimpleScreenState extends State<SimpleScreen>
     print('Received message from unity: ${message}');
   }
 
-  void onUnitySceneLoaded(SceneLoaded scene) {
-    print('Received scene loaded from unity: ${scene.name}');
-    print('Received scene loaded from unity buildIndex: ${scene.buildIndex}');
+  void onUnitySceneLoaded(SceneLoaded? scene) {
+    print('Received scene loaded from unity: ${scene?.name}');
+    print('Received scene loaded from unity buildIndex: ${scene?.buildIndex}');
   }
 
   // Callback that connects the created controller to the unity controller
