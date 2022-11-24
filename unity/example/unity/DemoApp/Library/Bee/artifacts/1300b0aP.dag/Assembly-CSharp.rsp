@@ -312,6 +312,7 @@
 -r:"Library/Bee/artifacts/1300b0aP.dag/UnityEngine.SpatialTracking.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aP.dag/UnityEngine.XR.LegacyInputHelpers.ref.dll"
+"Assets/FlutterUnityIntegration/Demo/Entities/DataEntity.cs"
 "Assets/FlutterUnityIntegration/Demo/GameManager.cs"
 "Assets/FlutterUnityIntegration/Demo/MyCamera.cs"
 "Assets/FlutterUnityIntegration/Demo/Rotate.cs"

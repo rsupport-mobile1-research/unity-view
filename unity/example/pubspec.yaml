@@ -14,6 +14,15 @@ dependencies:
     sdk: flutter
   flutter_unity_widget: ^2022.1.0+7
   pointer_interceptor: ^0.9.3+2
+  camera: 0.10.0+4
+  image: ^3.2.2
+  rsupport_open_gl:
+    # When depending on this package from a real application you should use:
+    #   rsupport_open_gl: ^x.y.z
+    # See https://dart.dev/tools/pub/dependencies#version-constraints
+    # The example app is bundled with the plugin so we use a path dependency on
+    # the parent directory to use the current plugin's version.
+    path: rsupport_open_gl/
 
 dev_dependencies:
   flutter_test:

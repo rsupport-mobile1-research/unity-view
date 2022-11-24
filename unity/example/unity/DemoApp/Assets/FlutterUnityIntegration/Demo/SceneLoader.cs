@@ -26,7 +26,6 @@ public class SceneLoader : MonoBehaviour
 
     public void MessengerFlutter()
     {
-
         UnityMessageManager.Instance.SendMessageToFlutter("Hey man");
     }
 

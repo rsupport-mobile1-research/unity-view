@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget_example/screens/no_interaction_screen.dart';
 import 'package:flutter_unity_widget_example/screens/orientation_screen.dart';
@@ -7,7 +8,9 @@ import 'screens/api_screen.dart';
 import 'screens/loader_screen.dart';
 import 'screens/simple_screen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
   runApp(MyApp());
 }
 

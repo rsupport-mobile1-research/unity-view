@@ -3182,6 +3182,10 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_Texture_Internal_GetActiveTextureColorSpace();
 		Register_UnityEngine_Texture_Internal_GetActiveTextureColorSpace();
 
+		//System.IntPtr UnityEngine.Texture::GetNativeTexturePtr()
+		void Register_UnityEngine_Texture_GetNativeTexturePtr();
+		Register_UnityEngine_Texture_GetNativeTexturePtr();
+
 		//System.Void UnityEngine.Texture::get_texelSize_Injected(UnityEngine.Vector2&)
 		void Register_UnityEngine_Texture_get_texelSize_Injected();
 		Register_UnityEngine_Texture_get_texelSize_Injected();
@@ -3615,26 +3619,6 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_UnityLogWriter_WriteStringToUnityLogImpl();
 
 	//End Registrations for type : UnityEngine.UnityLogWriter
-
-	//Start Registrations for type : UnityEngine.WebCamTexture
-
-		//System.Void UnityEngine.WebCamTexture::Internal_CreateWebCamTexture(UnityEngine.WebCamTexture,System.String,System.Int32,System.Int32,System.Int32)
-		void Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
-		Register_UnityEngine_WebCamTexture_Internal_CreateWebCamTexture();
-
-		//System.Void UnityEngine.WebCamTexture::Play()
-		void Register_UnityEngine_WebCamTexture_Play();
-		Register_UnityEngine_WebCamTexture_Play();
-
-		//System.Void UnityEngine.WebCamTexture::Stop()
-		void Register_UnityEngine_WebCamTexture_Stop();
-		Register_UnityEngine_WebCamTexture_Stop();
-
-		//UnityEngine.WebCamDevice[] UnityEngine.WebCamTexture::get_devices()
-		void Register_UnityEngine_WebCamTexture_get_devices();
-		Register_UnityEngine_WebCamTexture_get_devices();
-
-	//End Registrations for type : UnityEngine.WebCamTexture
 
 	//Start Registrations for type : UnityEngine.Yoga.Native
 
