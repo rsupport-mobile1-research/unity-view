@@ -6,4 +6,8 @@ class RsupportOpenGl {
   void testOpengl(String unityTextureId) {
     RsupportOpenGlPlatform.instance.testOpengl(unityTextureId);
   }
+
+  void testJanusSever(String janusTextureId) {
+    RsupportOpenGlPlatform.instance.testJanusSever(janusTextureId);
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget_example/janus/JanusHome.dart';
 import 'package:flutter_unity_widget_example/screens/no_interaction_screen.dart';
@@ -18,7 +17,6 @@ import 'screens/simple_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  cameras = await availableCameras();
   runApp(MyApp());
 }
 

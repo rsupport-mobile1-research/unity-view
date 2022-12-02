@@ -33,7 +33,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     public void InitializeAndroidSurface( int viewportWidth, int viewportHeight) {
         AndroidJavaClass androidWebViewApiClass =
-            new AndroidJavaClass("com.rsupport.opengl.rsupport_open_gl.TextureRendererPlugIn");
+            new AndroidJavaClass("com.cloudwebrtc.webrtc.TextureRendererPlugIn");
         
         AndroidJavaClass playerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 

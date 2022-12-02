@@ -1,14 +1,15 @@
-import 'dart:typed_data';
-
-import 'package:flutter/services.dart';
-import 'package:image/image.dart' as imglib;
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:rsupport_open_gl/rsupport_open_gl.dart';
 
-List<CameraDescription> cameras = [];
+///Video call
+import 'package:janus_client/janus_client.dart';
+import 'package:flutter_webrtc/flutter_webrtc.dart';
+import '../janus/Helper.dart';
+import '../janus/conf.dart';
+import 'package:logging/logging.dart';
+import 'package:flutter/foundation.dart';
 
 class SimpleScreen extends StatefulWidget {
   SimpleScreen({Key? key}) : super(key: key);
@@ -24,9 +25,6 @@ class _SimpleScreenState extends State<SimpleScreen>
 
   final _rsupportOpenGlPlugin = RsupportOpenGl();
 
-  /// For camera
-  late CameraController cameraController;
-
   /// Others
 
   late UnityWidgetController _unityWidgetController;
@@ -35,90 +33,265 @@ class _SimpleScreenState extends State<SimpleScreen>
   Image? exampleImage = null;
   int time = DateTime.now().millisecondsSinceEpoch;
 
+  /// Video call
+  late JanusClient j;
+  Map<dynamic, RemoteStream> remoteStreams = {};
+  Map<dynamic, dynamic> feedStreams = {};
+  Map<dynamic, dynamic> subscriptions = {};
+  Map<dynamic, dynamic> subStreams = {};
+  Map<dynamic, MediaStream?> mediaStreams = {};
+  List<SubscriberUpdateStream> subscribeStreams = [];
+  List<SubscriberUpdateStream> unSubscribeStreams = [];
+  late RestJanusTransport rest;
+  late WebSocketJanusTransport ws;
+  late JanusSession session;
+  late JanusVideoRoomPlugin plugin;
+  JanusVideoRoomPlugin? remoteHandle;
+  late int myId;
+  bool front = true;
+  dynamic myRoom = 1234;
+
   @override
-  void initState() {
-    /// For camera
-    super.initState();
-    cameraController = CameraController(cameras[0], ResolutionPreset.low);
-    cameraController.initialize().then((_) {
-      // cameraController.startImageStream((image) async {
-      //   if (DateTime.now().millisecondsSinceEpoch - time > 500) {
-      //     time = DateTime.now().millisecondsSinceEpoch;
-      //     print("${image.width} ${image.height}");
-      //     // exampleImage = await convertYUV420toImageColor(image);
-      //     // setState(() {});
-      //   }
-      // });
-      // if (!mounted) {
-      //   return;
-      // }
-      // setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            print('User denied camera access.');
-            break;
-          default:
-            print('Handle other errors.');
-            break;
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+    initialize();
+  }
+
+  initialize() async {
+    ws = WebSocketJanusTransport(url: servermap['servercheap']);
+    j = JanusClient(
+        transport: ws,
+        isUnifiedPlan: true,
+        iceServers: [
+          RTCIceServer(
+              urls: "stun:stun1.l.google.com:19302",
+              username: "",
+              credential: "")
+        ],
+        loggerLevel: Level.FINE);
+    session = await j.createSession();
+  }
+
+  subscribeTo(List<Map<dynamic, dynamic>> sources) async {
+    if (sources.length == 0) return;
+    var streams = (sources)
+        .map((e) => PublisherStream(mid: e['mid'], feed: e['feed']))
+        .toList();
+    if (remoteHandle != null) {
+      await remoteHandle?.update(
+          subscribe: subscribeStreams, unsubscribe: unSubscribeStreams);
+      subscribeStreams = [];
+      unSubscribeStreams = [];
+      return;
+    }
+    remoteHandle = await session.attach<JanusVideoRoomPlugin>();
+    remoteHandle?.initDataChannel();
+    remoteHandle?.data?.listen((event) {
+      print('subscriber data:=>');
+      print(event.text);
+    });
+    remoteHandle?.webRTCHandle?.peerConnection?.onRenegotiationNeeded =
+        () async {
+      await remoteHandle?.start(myRoom);
+    };
+    await remoteHandle?.joinSubscriber(myRoom, streams: streams);
+    remoteHandle?.typedMessages?.listen((event) async {
+      Object data = event.event.plugindata?.data;
+
+      if (data is VideoRoomAttachedEvent) {
+        data.streams?.forEach((element) {
+          if (element.mid != null && element.feedId != null) {
+            subStreams[element.mid!] = element.feedId!;
+          }
+          // to avoid duplicate subscriptions
+          if (subscriptions[element.feedId] == null)
+            subscriptions[element.feedId] = {};
+          subscriptions[element.feedId][element.mid] = true;
+        });
+      }
+      if (event.jsep != null) {
+        await remoteHandle?.handleRemoteJsep(event.jsep);
+        await remoteHandle?.start(myRoom);
+      }
+    }, onError: (error, trace) {
+      print('error');
+      print(error.toString());
+      if (error is JanusError) {
+        print(error.toMap());
+      }
+    });
+    remoteHandle?.remoteTrack?.listen((event) async {
+      String mid = event.mid!;
+      if (subStreams[mid] != null) {
+        dynamic feedId = subStreams[mid]!;
+        if (!remoteStreams.containsKey(feedId)) {
+          RemoteStream temp = RemoteStream(feedId.toString());
+          await temp.init();
+          setState(() {
+            remoteStreams.putIfAbsent(feedId, () => temp);
+          });
         }
+        if (event.track != null && event.flowing == true) {
+          remoteStreams[feedId]?.video.addTrack(event.track!);
+          remoteStreams[feedId]?.videoRenderer.srcObject =
+              remoteStreams[feedId]?.video;
+          if (kIsWeb) {
+            remoteStreams[feedId]?.videoRenderer.muted = false;
+          }
+        }
+      }
+    });
+    return;
+  }
+
+  Future<void> joinRoom() async {
+    plugin = await session.attach<JanusVideoRoomPlugin>();
+    await plugin.initDataChannel();
+    plugin.data?.listen((event) {
+      print('subscriber data:=>');
+      print(event.text);
+    });
+    await plugin.initializeMediaDevices(
+        mediaConstraints: {'video': true, 'audio': false});
+    RemoteStream myStream = RemoteStream('0');
+    await myStream.init();
+    myStream.videoRenderer.srcObject = plugin.webRTCHandle!.localStream;
+    setState(() {
+      remoteStreams.putIfAbsent(0, () => myStream);
+    });
+    await plugin.joinPublisher(myRoom, displayName: "Shivansh");
+    plugin.webRTCHandle?.peerConnection?.onRenegotiationNeeded = () async {
+      var offer = await plugin.createOffer(
+          audioRecv: false, audioSend: true, videoRecv: false, videoSend: true);
+      await plugin.configure(sessionDescription: offer);
+    };
+    plugin.typedMessages?.listen((event) async {
+      Object data = event.event.plugindata?.data;
+      if (data is VideoRoomJoinedEvent) {
+        (await plugin.publishMedia(bitrate: 3000000));
+        List<Map<dynamic, dynamic>> publisherStreams = [];
+        for (Publishers publisher in data.publishers ?? []) {
+          feedStreams[publisher.id!] = {
+            "id": publisher.id,
+            "display": publisher.display,
+            "streams": publisher.streams
+          };
+          for (Streams stream in publisher.streams ?? []) {
+            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            if (publisher.id != null && stream.mid != null) {
+              subStreams[stream.mid!] = publisher.id!;
+            }
+          }
+        }
+        subscribeTo(publisherStreams);
+      }
+      if (data is VideoRoomNewPublisherEvent) {
+        List<Map<String, dynamic>> publisherStreams = [];
+        for (Publishers publisher in data.publishers ?? []) {
+          feedStreams[publisher.id!] = {
+            "id": publisher.id,
+            "display": publisher.display,
+            "streams": publisher.streams
+          };
+          for (Streams stream in publisher.streams ?? []) {
+            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            if (publisher.id != null && stream.mid != null) {
+              subStreams[stream.mid!] = publisher.id!;
+            }
+            subscribeStreams.add(SubscriberUpdateStream(
+                feed: publisher.id, mid: stream.mid, crossrefid: null));
+          }
+        }
+        subscribeTo(publisherStreams);
+      }
+      if (data is VideoRoomLeavingEvent) {
+        unSubscribeStream(data.leaving!);
+      }
+      // if (data is VideoRoomConfigured) {}
+      plugin.handleRemoteJsep(event.jsep);
+    }, onError: (error, trace) {
+      if (error is JanusError) {
+        print(error.toMap());
       }
     });
   }
 
-  Future<Image?> convertYUV420toImageColor(CameraImage image) async {
-    try {
-      final int width = image.width;
-      final int height = image.height;
-      final int uvRowStride = image.planes[1].bytesPerRow;
-      final int? uvPixelStride = image.planes[1].bytesPerPixel;
-
-      print("uvRowStride: " + uvRowStride.toString());
-      print("uvPixelStride: " + uvPixelStride.toString());
-
-      // imgLib -> Image package from https://pub.dartlang.org/packages/image
-      var img = imglib.Image(width, height); // Create Image buffer
-
-      // Fill image buffer with plane[0] from YUV420_888
-      for(int x=0; x < width; x++) {
-        for(int y=0; y < height; y++) {
-          final int uvIndex = uvPixelStride! * (x/2).floor() + uvRowStride*(y/2).floor();
-          final int index = y * width + x;
-
-          final yp = image.planes[0].bytes[index];
-          final up = image.planes[1].bytes[uvIndex];
-          final vp = image.planes[2].bytes[uvIndex];
-          // Calculate pixel color
-          int r = (yp + vp * 1436 / 1024 - 179).round().clamp(0, 255);
-          int g = (yp - up * 46549 / 131072 + 44 -vp * 93604 / 131072 + 91).round().clamp(0, 255);
-          int b = (yp + up * 1814 / 1024 - 227).round().clamp(0, 255);
-          // color: 0x FF  FF  FF  FF
-          //           A   B   G   R
-          img.data[index] = (0xFF << 24) | (b << 16) | (g << 8) | r;
-        }
-      }
-
-      imglib.PngEncoder pngEncoder = new imglib.PngEncoder(level: 0, filter: 0);
-      List<int> png = pngEncoder.encodeImage(img);
-      // muteYUVProcessing = false;
-      return Image.memory(Uint8List.fromList(png));
-    } catch (e) {
-      print(">>>>>>>>>>>> ERROR:" + e.toString());
-    }
-    return null;
+  Future<void> unSubscribeStream(int id) async {
+// Unsubscribe from this publisher
+    var feed = this.feedStreams[id];
+    if (feed == null) return;
+    this.feedStreams.remove(id);
+    await remoteStreams[id]?.dispose();
+    remoteStreams.remove(id);
+    MediaStream? streamRemoved = this.mediaStreams.remove(id);
+    streamRemoved?.getTracks().forEach((element) async {
+      await element.stop();
+    });
+    unSubscribeStreams = (feed['streams'] as List<Streams>).map((stream) {
+      return SubscriberUpdateStream(
+          feed: id, mid: stream.mid, crossrefid: null);
+    }).toList();
+    if (remoteHandle != null)
+      await remoteHandle?.update(unsubscribe: unSubscribeStreams);
+    unSubscribeStreams = [];
+    this.subscriptions.remove(id);
   }
 
   @override
-  void dispose() {
-    /// For camera
-    cameraController.dispose();
-    _unityWidgetController.dispose();
+  void dispose() async {
     super.dispose();
+    await remoteHandle?.dispose();
+    await plugin.dispose();
+    session.dispose();
+
+    _unityWidgetController.dispose();
+  }
+
+  callEnd() async {
+    await plugin.hangup();
+    for (int i = 0; i < feedStreams.keys.length; i++) {
+      await unSubscribeStream(feedStreams.keys.elementAt(i));
+    }
+    remoteStreams.forEach((key, value) async {
+      value.dispose();
+    });
+    await plugin.webRTCHandle!.localStream?.dispose();
+    await plugin.dispose();
+    await remoteHandle?.dispose();
+    remoteHandle = null;
+    setState(() {
+      remoteStreams.clear();
+      feedStreams.clear();
+      subStreams.clear();
+      subscriptions.clear();
+      mediaStreams.clear();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    /// Data from Janus client
+    List<RemoteStream> items =
+        remoteStreams.entries.map((e) => e.value).toList();
+    RemoteStream? remoteStream;
+    if (items.length > 0) {
+      /// Send remoteStream to native plugins
+      // _rsupportOpenGlPlugin.;
+      remoteStream = items[0];
+      debugPrint("start video ${remoteStream.videoRenderer.textureId}");
+
+      _rsupportOpenGlPlugin.testJanusSever(remoteStream.videoRenderer.textureId.toString());
+      // RTCVideoView(remoteStream.videoRenderer,
+      //     filterQuality: FilterQuality.none,
+      //     objectFit:
+      //     RTCVideoViewObjectFit.RTCVideoViewObjectFitContain,
+      //     mirror: true);
+    }
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -137,103 +310,172 @@ class _SimpleScreenState extends State<SimpleScreen>
                     onUnitySceneLoaded: onUnitySceneLoaded,
                     useAndroidViewSurface: false,
                   )),
+              // (remoteStream != null)
+              //     ? Container(
+              //         width: 100,
+              //         height: 100,
+              //         child: Texture(
+              //           textureId: remoteStream.videoRenderer.textureId!,
+              //           filterQuality: FilterQuality.low,
+              //         ))
+              //     : Container(width: 60),
               PointerInterceptor(
                 child: Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
+                  bottom: 10,
+                  left: 10,
+                  right: 10,
                   child: Card(
                     elevation: 10,
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Text("Color:"),
-                        ),
-                        Row(children: [
-                          Expanded(
-                              child: TextButton(
-                                  onPressed: () {
-                                    setColor("#f44336");
-                                  },
-                                  style: TextButton.styleFrom(
-                                    //backgroundColor: Colors.white, // background
-                                    foregroundColor: Colors.red, // foreground
-                                  ),
-                                  child: Text('Red',
-                                      style: TextStyle(fontSize: 20))),
-                              flex: 1),
-                          Expanded(
-                              child: TextButton(
-                                  onPressed: () {
-                                    setColor("#2196f3");
-                                    drawImageByTextureId();
-                                  },
-                                  style: TextButton.styleFrom(
-                                    //backgroundColor: Colors.white, // background
-                                    foregroundColor: Colors.blue, // foreground
-                                  ),
-                                  child: Text('Blue',
-                                      style: TextStyle(fontSize: 20))),
-                              flex: 1),
-                          Expanded(
-                              child: TextButton(
-                                  onPressed: () {
-                                    setColor("#ffeb3b");
-                                    // setCameraAction("Stop image");
-                                    getCubeTextureId();
-                                  },
-                                  style: TextButton.styleFrom(
-                                    //backgroundColor: Colors.white, // background
-                                    foregroundColor:
-                                        Colors.yellow, // foreground
-                                  ),
-                                  child: Text('Yellow',
-                                      style: TextStyle(fontSize: 20))),
-                              flex: 1),
-                          Expanded(
-                              child: TextButton(
-                                  onPressed: () {
-                                    setColor("#4caf50");
-                                    // setCameraAction("Start image");
-                                    // setCameraData();
-                                  },
-                                  style: TextButton.styleFrom(
-                                    //backgroundColor: Colors.white, // background
-                                    foregroundColor: Colors.green, // foreground
-                                  ),
-                                  child: Text('Green',
-                                      style: TextStyle(fontSize: 20))),
-                              flex: 1)
-                        ]),
-                        // Container(
-                        //     width: 200,
-                        //     height: 200,
-                        //     child: (cameraController != null)
-                        //         ? CameraPreview(cameraController)
-                        //         : Container()),
-
-                        // (exampleImage != null) ? Container(width: 200, height: 200, child: exampleImage) : Container(),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Text("Rotation speed:"),
-                        ),
-                        Slider(
-                          onChanged: (value) {
-                            setState(() {
-                              _sliderValue = value;
-                            });
-                            setRotationSpeed(value.toString());
-                          },
-                          value: _sliderValue,
-                          min: 0.0,
-                          max: 1.0,
-                        ),
-                      ],
-                    ),
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: Column(
+                          children: <Widget>[
+                            Row(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Text("Color:"),
+                              ),
+                              Expanded(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        setColor("#f44336");
+                                      },
+                                      style: TextButton.styleFrom(
+                                        //backgroundColor: Colors.white, // background
+                                        foregroundColor:
+                                            Colors.red, // foreground
+                                      ),
+                                      child: Text('Red',
+                                          style: TextStyle(fontSize: 20))),
+                                  flex: 1),
+                              Expanded(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        setColor("#2196f3");
+                                        drawImageByTextureId();
+                                      },
+                                      style: TextButton.styleFrom(
+                                        //backgroundColor: Colors.white, // background
+                                        foregroundColor:
+                                            Colors.blue, // foreground
+                                      ),
+                                      child: Text('Blue',
+                                          style: TextStyle(fontSize: 20))),
+                                  flex: 1),
+                              Expanded(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        setColor("#ffeb3b");
+                                        // setCameraAction("Stop image");
+                                        getCubeTextureId();
+                                      },
+                                      style: TextButton.styleFrom(
+                                        //backgroundColor: Colors.white, // background
+                                        foregroundColor:
+                                            Colors.yellow, // foreground
+                                      ),
+                                      child: Text('Yellow',
+                                          style: TextStyle(fontSize: 20))),
+                                  flex: 1),
+                              Expanded(
+                                  child: TextButton(
+                                      onPressed: () {
+                                        setColor("#4caf50");
+                                        // setCameraAction("Start image");
+                                        // setCameraData();
+                                      },
+                                      style: TextButton.styleFrom(
+                                        //backgroundColor: Colors.white, // background
+                                        foregroundColor:
+                                            Colors.green, // foreground
+                                      ),
+                                      child: Text('Green',
+                                          style: TextStyle(fontSize: 20))),
+                                  flex: 1)
+                            ]),
+                            Row(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Text("Video call:"),
+                              ),
+                              Expanded(
+                                  child: IconButton(
+                                      icon: Icon(
+                                        Icons.call,
+                                        color: Colors.greenAccent,
+                                      ),
+                                      onPressed: () async {
+                                        await this.joinRoom();
+                                      }),
+                                  flex: 1),
+                              Expanded(
+                                  child: IconButton(
+                                      icon: Icon(
+                                        Icons.call_end,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () async {
+                                        await callEnd();
+                                      }),
+                                  flex: 1),
+                              Expanded(
+                                  child: IconButton(
+                                      icon: Icon(
+                                        Icons.switch_camera,
+                                        color: Colors.yellow,
+                                      ),
+                                      onPressed: () async {
+                                        setState(() {
+                                          front = !front;
+                                        });
+                                        await plugin.switchCamera(
+                                            deviceId:
+                                                await getCameraDeviceId(front));
+                                        RemoteStream myStream =
+                                            RemoteStream('0');
+                                        await myStream.init();
+                                        myStream.videoRenderer.srcObject =
+                                            plugin.webRTCHandle!.localStream;
+                                        setState(() {
+                                          remoteStreams.remove(0);
+                                          remoteStreams[0] = myStream;
+                                        });
+                                      }),
+                                  flex: 1),
+                              Expanded(
+                                  child: IconButton(
+                                      icon: Icon(
+                                        Icons.send_sharp,
+                                        color: Colors.blue,
+                                      ),
+                                      onPressed: () async {
+                                        await plugin.sendData("cool");
+                                        await remoteHandle?.sendData("cool");
+                                      }),
+                                  flex: 1),
+                            ]),
+                            Row(children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 0),
+                                child: Text("Rotation speed:"),
+                              ),
+                              Slider(
+                                onChanged: (value) {
+                                  setState(() {
+                                    _sliderValue = value;
+                                  });
+                                  setRotationSpeed(value.toString());
+                                },
+                                value: _sliderValue,
+                                min: 0.0,
+                                max: 1.0,
+                              )
+                            ])
+                          ],
+                        )),
                   ),
                 ),
-              ),
+              )
             ],
           )),
     );
@@ -254,27 +496,6 @@ class _SimpleScreenState extends State<SimpleScreen>
       color,
     );
   }
-
-  // void setCameraData() {
-  //   Map<String, dynamic> data = Map();
-  //   data['imageData'] = Uint8List.fromList([
-  //     0x30, 0x32, 0x32, 0x32, 0xe7, 0x30, 0xaa, 0x7f, 0x32, 0x32, 0x32, 0x32, 0xf9, 0x40, 0xbc, 0x7f, 0x03, 0x03, 0x03, 0x03, 0xf6, 0x30, 0x02, 0x05, 0x03, 0x03, 0x03, 0x03, 0xf4, 0x30, 0x03, 0x06,
-  //     0x32, 0x32, 0x32, 0x32, 0xf7, 0x40, 0xaa, 0x7f, 0x32, 0xf2, 0x02, 0xa8, 0xe7, 0x30, 0xff, 0xff, 0x03, 0x03, 0x03, 0xff, 0xe6, 0x40, 0x00, 0x0f, 0x00, 0xff, 0x00, 0xaa, 0xe9, 0x40, 0x9f, 0xff, 0x5b, 0x03, 0x03, 0x03, 0xca, 0x6a, 0x0f, 0x30, 0x03, 0x03, 0x03, 0xff, 0xca, 0x68, 0x0f, 0x30, 0xaa, 0x94, 0x90, 0x40, 0xba, 0x5b, 0xaf, 0x68, 0x40, 0x00, 0x00, 0xff, 0xca, 0x58, 0x0f, 0x20, 0x00, 0x00, 0x00, 0xff, 0xe6, 0x40, 0x01, 0x2c, 0x00, 0xff, 0x00, 0xaa, 0xdb, 0x41, 0xff, 0xff, 0x00, 0x00, 0x00, 0xff, 0xe8, 0x40, 0x01, 0x1c, 0x00, 0xff, 0x00, 0xaa, 0xbb, 0x40, 0xff, 0xff,
-  //   ]);
-  //   _unityWidgetController.postJsonMessage(
-  //     'CubeGame',
-  //     'SetCameraData',
-  //     data,
-  //   );
-  // }
-  //
-  // void setCameraAction(String action) {
-  //   _unityWidgetController.postMessage(
-  //     'CubeGame',
-  //     'SetCameraAction',
-  //     action,
-  //   );
-  // }
 
   void getCubeTextureId() {
     _unityWidgetController.postMessage(

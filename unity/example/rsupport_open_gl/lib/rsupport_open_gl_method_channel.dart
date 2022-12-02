@@ -15,4 +15,11 @@ class MethodChannelRsupportOpenGl extends RsupportOpenGlPlatform {
       'textureId': unityTextureId,
     });
   }
+
+  @override
+  void testJanusSever(janusTextureId) async {
+    methodChannel.invokeMethod<String>('testJanusSever', {
+      'textureId': janusTextureId,
+    });
+  }
 }

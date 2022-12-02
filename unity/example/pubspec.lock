@@ -49,46 +49,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  camera:
-    dependency: "direct main"
-    description:
-      name: camera
-      sha256: "493d88e42160a0740d606b3980575c7ec65edf9f0d84755f734c0c88622d3fde"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0+4"
-  camera_android:
-    dependency: transitive
-    description:
-      name: camera_android
-      sha256: fa16adc9caee1ec195b7c1993f6cd5916ba85e4ddd0b6f438dcbade188085712
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0+4"
-  camera_avfoundation:
-    dependency: transitive
-    description:
-      name: camera_avfoundation
-      sha256: "43021a22067b8be6d1fc3d9559d503766a7e6ca968c189bfbf79d4ede0bc5f7c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.8+6"
-  camera_platform_interface:
-    dependency: transitive
-    description:
-      name: camera_platform_interface
-      sha256: "11c3461bc40d11bdfe1cbcda6f5d5f8aef7a0c9d98ead84f1453babe4b302bd6"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.3.0"
-  camera_web:
-    dependency: transitive
-    description:
-      name: camera_web
-      sha256: "0c4bdd73e28affc36e7693d948bd90415e7b02bef3feea761dd18405e9485e2a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.0+1"
   characters:
     dependency: "direct main"
     description:
@@ -129,14 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  cross_file:
-    dependency: transitive
-    description:
-      name: cross_file
-      sha256: f71079978789bc2fe78d79227f1f8cfe195b31bbd8db2399b0d15a4b96fb843b
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.3+2"
   crypto:
     dependency: transitive
     description:
@@ -291,11 +243,9 @@ packages:
   janus_client:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "875ec6daf603b7af7e9444a3d49d4f426d9eeb26"
-      url: "https://github.com/devvuphan/flutter_janus_client.git"
-    source: git
+      path: flutter_janus_client
+      relative: true
+    source: path
     version: "2.2.9"
   js:
     dependency: transitive
@@ -481,14 +431,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.3"
-  quiver:
-    dependency: transitive
-    description:
-      name: quiver
-      sha256: "93982981971e812c94d4a6fa3a57b89f9ec12b38b6380cd3c1370c3b01e4580e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.1.0"
   rsupport_open_gl:
     dependency: "direct main"
     description:

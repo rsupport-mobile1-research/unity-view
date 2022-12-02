@@ -26,4 +26,8 @@ abstract class RsupportOpenGlPlatform extends PlatformInterface {
   void testOpengl(String unityTextureId) {
     throw UnimplementedError('testOpengl(String unityTextureId) has not been implemented.');
   }
+
+  void testJanusSever(janusTextureId) {
+    throw UnimplementedError('testJanusSever(janusTextureId) has not been implemented.');
+  }
 }

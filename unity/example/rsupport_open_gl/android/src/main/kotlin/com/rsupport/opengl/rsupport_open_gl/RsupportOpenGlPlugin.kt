@@ -47,9 +47,17 @@ class RsupportOpenGlPlugin : FlutterPlugin, MethodCallHandler {
             val arguments = call.arguments as HashMap<*, *>
 //                drawDataOnTexture(arguments["textureId"] as String)
             result.success("")
+        } else if (call.method == "testJanusSever") {
+            val arguments = call.arguments as HashMap<*, *>
+            sendTextureIdToAndroidPlugin(arguments["textureId"] as String)
+            result.success("")
         } else {
             result.notImplemented()
         }
+    }
+
+    private fun sendTextureIdToAndroidPlugin(janusTextureId: String) {
+//        if (TextureRendererPlugIn.getInstance() != null) TextureRendererPlugIn.getInstance().updateJanusTextureId(janusTextureId.toInt());
     }
 
 
