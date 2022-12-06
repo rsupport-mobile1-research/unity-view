@@ -12,6 +12,7 @@ import flutter_unity_widget
   	InitUnityIntegrationWithOptions(argc: CommandLine.argc, argv: CommandLine.unsafeArgv, launchOptions)
 
     GeneratedPluginRegistrant.register(with: self)
+    RenderTexturePlugin()
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
