@@ -7,6 +7,8 @@ ScriptsOnlyBuild:
     - SceneLoader
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.XR.ARCore.Editor.dll:
+    - UnityEditor.XR.ARCore.ARCoreSettings
     Unity.XR.ARCore.dll:
     - UnityEngine.XR.ARCore.ARCoreLoader
     Unity.XR.ARKit.Editor.dll:
@@ -75,25 +77,25 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
       Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 1542}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2594}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2738}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2752}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3138}
     - Class: 114
-      Script: {instanceID: 3996}
+      Script: {instanceID: 3524}
+    - Class: 114
+      Script: {instanceID: 3998}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -142,27 +144,27 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
       Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 1634}
+      Script: {instanceID: 1542}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 1636}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2594}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2738}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2752}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3138}
     - Class: 114
-      Script: {instanceID: 3996}
+      Script: {instanceID: 3524}
+    - Class: 114
+      Script: {instanceID: 3998}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -211,23 +213,23 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1536}
-    - Class: 114
       Script: {instanceID: 1538}
     - Class: 114
       Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2592}
+      Script: {instanceID: 1542}
     - Class: 114
-      Script: {instanceID: 2736}
+      Script: {instanceID: 2594}
     - Class: 114
-      Script: {instanceID: 2750}
+      Script: {instanceID: 2738}
     - Class: 114
-      Script: {instanceID: 2878}
+      Script: {instanceID: 2752}
     - Class: 114
-      Script: {instanceID: 3136}
+      Script: {instanceID: 2880}
     - Class: 114
-      Script: {instanceID: 3522}
+      Script: {instanceID: 3138}
+    - Class: 114
+      Script: {instanceID: 3524}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128

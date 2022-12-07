@@ -1166,8 +1166,8 @@ inline ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* Array_Empty_TisRu
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AndroidJavaObject_Call_mDEF7846E2AB1C5379069BB21049ED55A9D837B1C (AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* __this, String_t* ___methodName0, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* ___args1, const RuntimeMethod* method) ;
 // System.String System.IntPtr::ToString()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C (intptr_t* __this, const RuntimeMethod* method) ;
-// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.String)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m87357148D1DFBD3BB0DA5A39979EEE660DC91323 (String_t* ___message0, const RuntimeMethod* method) ;
+// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (intptr_t ___texture0, String_t* ___textureId1, const RuntimeMethod* method) ;
 // System.Void UnityEngine.AndroidJavaClass::.ctor(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AndroidJavaClass__ctor_mB5466169E1151B8CC44C8FED234D79984B431389 (AndroidJavaClass_tE6296B30CC4BF84434A9B765267F3FD0DD8DDB03* __this, String_t* ___className0, const RuntimeMethod* method) ;
 // FieldType UnityEngine.AndroidJavaObject::GetStatic<UnityEngine.AndroidJavaObject>(System.String)
@@ -1364,7 +1364,7 @@ inline void SingletonMonoBehaviour_1__ctor_mB959CC5C4F5F613426011598A0FFADE2812F
 {
 	((  void (*) (SingletonMonoBehaviour_1_tBFAF7683DA4F979C6C7C7C3DFE18973BAB4231CF*, const RuntimeMethod*))SingletonMonoBehaviour_1__ctor_m951CBAC39C5B1891C1AF0673AF8B1CAC9078AAA9_gshared)(__this, method);
 }
-IL2CPP_EXTERN_C void DEFAULT_CALL sendMessageToMobileApp(char*);
+IL2CPP_EXTERN_C void DEFAULT_CALL sendMessageToMobileApp(intptr_t, char*);
 IL2CPP_EXTERN_C void DEFAULT_CALL OnUnityMessage(char*);
 IL2CPP_EXTERN_C void DEFAULT_CALL OnUnitySceneLoaded(char*, int32_t, int32_t, int32_t);
 #ifdef __clang__
@@ -1619,18 +1619,19 @@ IL_0038:
 		L_4 = Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138(NULL);
 		if ((!(((uint32_t)L_4) == ((uint32_t)8))))
 		{
-			goto IL_0050;
+			goto IL_0056;
 		}
 	}
 	{
-		// IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer.ToString());
-		intptr_t* L_5 = (&__this->____nativeTexturePointer_5);
-		String_t* L_6;
-		L_6 = IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C(L_5, NULL);
-		IOSNativeAPI_sendMessageToMobileApp_m87357148D1DFBD3BB0DA5A39979EEE660DC91323(L_6, NULL);
+		// IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
+		intptr_t L_5 = __this->____nativeTexturePointer_5;
+		intptr_t* L_6 = (&__this->____nativeTexturePointer_5);
+		String_t* L_7;
+		L_7 = IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C(L_6, NULL);
+		IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72(L_5, L_7, NULL);
 	}
 
-IL_0050:
+IL_0056:
 	{
 		// }
 		return;
@@ -1761,21 +1762,21 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MyCamera__ctor_m0CE88422A5D977C542707ED8
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.String)
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m87357148D1DFBD3BB0DA5A39979EEE660DC91323 (String_t* ___message0, const RuntimeMethod* method) 
+// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (intptr_t ___texture0, String_t* ___textureId1, const RuntimeMethod* method) 
 {
-	typedef void (DEFAULT_CALL *PInvokeFunc) (char*);
+	typedef void (DEFAULT_CALL *PInvokeFunc) (intptr_t, char*);
 
-	// Marshaling of parameter '___message0' to native representation
-	char* ____message0_marshaled = NULL;
-	____message0_marshaled = il2cpp_codegen_marshal_string(___message0);
+	// Marshaling of parameter '___textureId1' to native representation
+	char* ____textureId1_marshaled = NULL;
+	____textureId1_marshaled = il2cpp_codegen_marshal_string(___textureId1);
 
 	// Native function invocation
-	reinterpret_cast<PInvokeFunc>(sendMessageToMobileApp)(____message0_marshaled);
+	reinterpret_cast<PInvokeFunc>(sendMessageToMobileApp)(___texture0, ____textureId1_marshaled);
 
-	// Marshaling cleanup of parameter '___message0' native representation
-	il2cpp_codegen_marshal_free(____message0_marshaled);
-	____message0_marshaled = NULL;
+	// Marshaling cleanup of parameter '___textureId1' native representation
+	il2cpp_codegen_marshal_free(____textureId1_marshaled);
+	____textureId1_marshaled = NULL;
 
 }
 // System.Void MyCamera/IOSNativeAPI::.ctor()

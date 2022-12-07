@@ -18,7 +18,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     public class IOSNativeAPI {
         [DllImport("__Internal")]
-        public static extern void sendMessageToMobileApp(string message);
+        public static extern void sendMessageToMobileApp(System.IntPtr texture, String textureId);
     }
 
     // Start is called before the first frame update
@@ -40,7 +40,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
                 _androidApiInstance.Call("updateSurfaceTexture");
             }
         } else if (Application.platform == RuntimePlatform.IPhonePlayer) {
-            IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer.ToString());
+            IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
         }
     }
 

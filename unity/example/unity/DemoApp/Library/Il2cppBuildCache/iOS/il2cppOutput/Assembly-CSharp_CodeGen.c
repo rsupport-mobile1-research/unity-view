@@ -40,8 +40,8 @@ extern void MyCamera_InitializeAndroidSurface_mE284F19C1E83D6982F09C4BF4454A664A
 extern void MyCamera_GetTextureId_m52DC91AB773CD613635A784C5DDE72251C81D5DD (void);
 // 0x00000012 System.Void MyCamera::.ctor()
 extern void MyCamera__ctor_m0CE88422A5D977C542707ED85B2ECFBD09D2A873 (void);
-// 0x00000013 System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.String)
-extern void IOSNativeAPI_sendMessageToMobileApp_m87357148D1DFBD3BB0DA5A39979EEE660DC91323 (void);
+// 0x00000013 System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
+extern void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (void);
 // 0x00000014 System.Void MyCamera/IOSNativeAPI::.ctor()
 extern void IOSNativeAPI__ctor_mDCC8E1542F201EE2B4E58932C8036A9AAF43B6F7 (void);
 // 0x00000015 System.Void Rotate::Start()
@@ -165,7 +165,7 @@ static Il2CppMethodPointer s_methodPointers[73] =
 	MyCamera_InitializeAndroidSurface_mE284F19C1E83D6982F09C4BF4454A664A5080367,
 	MyCamera_GetTextureId_m52DC91AB773CD613635A784C5DDE72251C81D5DD,
 	MyCamera__ctor_m0CE88422A5D977C542707ED85B2ECFBD09D2A873,
-	IOSNativeAPI_sendMessageToMobileApp_m87357148D1DFBD3BB0DA5A39979EEE660DC91323,
+	IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72,
 	IOSNativeAPI__ctor_mDCC8E1542F201EE2B4E58932C8036A9AAF43B6F7,
 	Rotate_Start_mD322E77A3CF2BEF28C4DF71D3F529107F511B1FB,
 	Rotate_Update_m73D585515036D9B7AAD8336BFB8567283CE4C7E7,
@@ -241,7 +241,7 @@ static const int32_t s_InvokerIndices[73] =
 	1269,
 	1918,
 	2180,
-	4308,
+	3758,
 	2180,
 	2180,
 	2180,

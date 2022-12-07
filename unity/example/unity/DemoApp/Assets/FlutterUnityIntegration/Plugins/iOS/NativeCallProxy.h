@@ -9,7 +9,8 @@
 - (void) showHostMainWindow;
 - (void) unloadPlayer;
 - (void) quitPlayer;
-- (void) sendMessageToMobileApp:(NSString*) unityTextureId;
+- (void) sendMessageToMobileApp:(char *) mtlTexture
+                      textureId:(NSString *) unityTextureId;
 // other methods
 @end
 
