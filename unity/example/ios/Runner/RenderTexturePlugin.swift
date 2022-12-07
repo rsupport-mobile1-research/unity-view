@@ -1,6 +1,6 @@
 import Foundation
 
-class RenderTexturePlugin: NSObject, ObservableObject, NativeCallsProtocol {
+class RenderTexturePlugin: NativeCallsProtocol {
     
     func showHostMainWindow() {
         print("showHostMainWindow")
@@ -15,8 +15,7 @@ class RenderTexturePlugin: NSObject, ObservableObject, NativeCallsProtocol {
     }
     
 
-    override init() {
-        super.init()
+    init() {
         NSClassFromString("FrameworkLibAPI")?.registerAPIforNativeCalls(self)
     }
 
