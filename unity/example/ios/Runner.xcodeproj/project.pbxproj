@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3276066F293DEF8F0029BA81 /* UnityFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CD6F5C8825C8A42B00F1B679 /* UnityFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		32D19AE3293F24DE00FB9C41 /* RenderTexturePlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32D19AE2293F24DE00FB9C41 /* RenderTexturePlugin.swift */; };
+		32923F8B2942E8C00033A6A1 /* MyRender.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32923F8A2942E8C00033A6A1 /* MyRender.mm */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		7F70AC63802CE1B13DE587B7 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EDB35CBD00C7BD29A64653 /* Pods_Runner.framework */; };
@@ -36,7 +36,8 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		18AA7A70303D2115BC2744F9 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
-		32D19AE2293F24DE00FB9C41 /* RenderTexturePlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderTexturePlugin.swift; sourceTree = "<group>"; };
+		32923F892942E8C00033A6A1 /* MyRender.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyRender.h; sourceTree = "<group>"; };
+		32923F8A2942E8C00033A6A1 /* MyRender.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MyRender.mm; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,7 +117,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
-				32D19AE2293F24DE00FB9C41 /* RenderTexturePlugin.swift */,
+				32923F892942E8C00033A6A1 /* MyRender.h */,
+				32923F8A2942E8C00033A6A1 /* MyRender.mm */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -282,7 +284,7 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				32D19AE3293F24DE00FB9C41 /* RenderTexturePlugin.swift in Sources */,
+				32923F8B2942E8C00033A6A1 /* MyRender.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

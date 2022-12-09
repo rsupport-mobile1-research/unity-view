@@ -11,8 +11,8 @@ import flutter_unity_widget
     // Initialize Unity
   	InitUnityIntegrationWithOptions(argc: CommandLine.argc, argv: CommandLine.unsafeArgv, launchOptions)
 
-    GeneratedPluginRegistrant.register(with: self)
-    RenderTexturePlugin()
+      GeneratedPluginRegistrant.register(with: self)
+      MyRender.initData()
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
