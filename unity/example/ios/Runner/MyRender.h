@@ -7,12 +7,12 @@
 
 #import <Foundation/Foundation.h>
 #import <UnityFramework/NativeCallProxy.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
-    
-    + (void) initData;
+@property NSString* oldTextureId;
 
     - (void) showHostMainWindow;
     - (void) unloadPlayer;
