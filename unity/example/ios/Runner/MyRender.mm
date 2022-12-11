@@ -93,6 +93,28 @@
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
     CGContextRelease(context);
     
+    for (int lineIndex = 0; lineIndex < height; lineIndex++) {
+        for (int pointPos = 0 ; pointPos < width / 2; pointPos++) {
+            long byteIndex = (lineIndex * bytesPerRow) + (pointPos * 4);
+            long targetIndex = (lineIndex * bytesPerRow) + ((width - pointPos - 1) * 4);
+
+            char m = rawData[targetIndex];
+            rawData[targetIndex] = rawData[byteIndex];
+            rawData[byteIndex] = m;
+
+            char m1 = rawData[targetIndex + 1];
+            rawData[targetIndex + 1] = rawData[byteIndex + 1];
+            rawData[byteIndex + 1] = m1;
+
+            char m2 = rawData[targetIndex + 2];
+            rawData[targetIndex + 2] = rawData[byteIndex + 2];
+            rawData[byteIndex + 2] = m2;
+
+            char m3 = rawData[targetIndex + 3];
+            rawData[targetIndex + 3] = rawData[byteIndex + 3];
+            rawData[byteIndex + 3] = m3;
+        }
+    }
     return rawData;
 }
 
