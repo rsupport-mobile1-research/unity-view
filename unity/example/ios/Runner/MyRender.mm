@@ -118,41 +118,41 @@
     return rawData;
 }
 
-- (UIImage *)resizeImage2:(UIImage *)image centerSize:(CGSize)size {
-    float newHeight = 0.0;
-    float newWidth = 0.0;
-
-    float oldWidth = image.size.width;
-    float widthScaleFactor = size.width / oldWidth;
-
-    float oldHeight = image.size.height;
-    float heightScaleFactor = size.height / oldHeight;
-    if (heightScaleFactor > widthScaleFactor) {
-        newHeight = oldHeight * widthScaleFactor;
-        newWidth = image.size.width * widthScaleFactor;
-    } else {
-        newHeight = image.size.height * heightScaleFactor;
-        newWidth = oldWidth * heightScaleFactor;
-    }
-
-    float cxPad = size.width - newWidth;
-    float cyPad = size.height - newHeight;
-    if (cyPad > 0) {
-        cyPad = cyPad / 2.0;
-    }
-    if (cxPad > 0) {
-        cxPad = cxPad / 2.0;
-    }
-
-    CGSize frameSize = CGSizeMake(size.width, size.height);
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(frameSize.width, frameSize.height), YES, 0.0);
-    [[UIColor whiteColor] setFill];
-    UIRectFill(CGRectMake(0, 0, frameSize.width, frameSize.height));
-    [image drawInRect:CGRectMake((int)cxPad, (int)cyPad, newWidth, newHeight)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+//- (UIImage *)resizeImage2:(UIImage *)image centerSize:(CGSize)size {
+//    float newHeight = 0.0;
+//    float newWidth = 0.0;
+//
+//    float oldWidth = image.size.width;
+//    float widthScaleFactor = size.width / oldWidth;
+//
+//    float oldHeight = image.size.height;
+//    float heightScaleFactor = size.height / oldHeight;
+//    if (heightScaleFactor > widthScaleFactor) {
+//        newHeight = oldHeight * widthScaleFactor;
+//        newWidth = image.size.width * widthScaleFactor;
+//    } else {
+//        newHeight = image.size.height * heightScaleFactor;
+//        newWidth = oldWidth * heightScaleFactor;
+//    }
+//
+//    float cxPad = size.width - newWidth;
+//    float cyPad = size.height - newHeight;
+//    if (cyPad > 0) {
+//        cyPad = cyPad / 2.0;
+//    }
+//    if (cxPad > 0) {
+//        cxPad = cxPad / 2.0;
+//    }
+//
+//    CGSize frameSize = CGSizeMake(size.width, size.height);
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(frameSize.width, frameSize.height), YES, 0.0);
+//    [[UIColor whiteColor] setFill];
+//    UIRectFill(CGRectMake(0, 0, frameSize.width, frameSize.height));
+//    [image drawInRect:CGRectMake((int)cxPad, (int)cyPad, newWidth, newHeight)];
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//}
 
 - (UIImage *)resizeImage:(UIImage *)image centerSize:(CGSize)size {
     CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
