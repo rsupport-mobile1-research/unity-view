@@ -4,15 +4,15 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=2.19.0-374.0.dev <3.0.0'
+  sdk: '>=2.15.0 <3.0.0'
   flutter: ">=2.5.0"
 
 dependencies:
   flutter:
     sdk: flutter
   plugin_platform_interface: ^2.0.2
-  flutter_webrtc:
-    path: ../flutter_janus_client/flutter-webrtc
+#  flutter_webrtc:
+#    path: ../flutter_janus_client/flutter-webrtc
 
 dev_dependencies:
   flutter_test:

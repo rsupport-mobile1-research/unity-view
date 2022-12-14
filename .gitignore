@@ -115,7 +115,8 @@ example/unity/DemoApp/Temp/
 !**/ios/**/default.perspectivev3
 !/unitypackages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-example/unity/DemoApp/test
-example/ios/UnityLibrary
-example/android/unityLibrary
-example/web/unityLibrary
+unity/example/unity/DemoApp/test
+unity/example/ios/UnityLibrary
+unity/example/android/unityLibrary
+unity/example/web/unityLibrary
+unity/example/ios_xcode/unityLibrary
