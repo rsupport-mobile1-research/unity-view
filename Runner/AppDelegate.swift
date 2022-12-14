@@ -118,7 +118,9 @@ import UnityFramework
 //              }
 //          })
     GeneratedPluginRegistrant.register(with: self)
-    MyRender.init()
+//      Unity.shared.setHostMainWindow(window)
+//      Unity.shared.show()
+      RenderTexturePlugin()
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
