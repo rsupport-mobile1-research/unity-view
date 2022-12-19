@@ -5,10 +5,7 @@ import Metal
 import CoreVideo
 import CoreMedia
 import UnityFramework
-<<<<<<< HEAD
 
-=======
->>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
 
 @UIApplicationMain
 
@@ -24,7 +21,6 @@ import UnityFramework
   
     // Initialize Unity
   	InitUnityIntegrationWithOptions(argc: CommandLine.argc, argv: CommandLine.unsafeArgv, launchOptions)
-<<<<<<< HEAD
       GeneratedPluginRegistrant.register(with: self)
      let myRender =  MyRender.init()
       let METHOD_CHANNEL_NAME = "rsupport_draw"
@@ -80,107 +76,6 @@ import UnityFramework
           })
 
  
-=======
-
-      
-//      let METHOD_CHANNEL_NAME = "com.rsupport.unityViewTest/opengl_texture"
-//          
-//        
-//
-//          let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
-
-//          let methodChannel = FlutterMethodChannel(name: METHOD_CHANNEL_NAME, binaryMessenger: controller.binaryMessenger)
-//
-//
-//          methodChannel.setMethodCallHandler({
-//              (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-//              switch call.method {
-//              case "create":
-//
-//                  if let args = call.arguments as? Dictionary<String, Any>,
-//
-//                    let inputTexture = args["textureID"]{
-//
-//                      let _device = MyCameraGL()
-//                      _device.getTexture()
-//
-//
-////                      var cvret: CVReturn
-////                      var   _CVMTLTextureCache:CVMetalTextureCache
-////                      cvret = CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, _device,nil,&_CVMTLTextureCache)
-////                      print(cvret)
-////
-//
-//
-////                      let descriptor = MTLTextureDescriptor()
-////                      descriptor.width = 500
-////                      descriptor.height = 500
-////                      descriptor.pixelFormat = .etc2_rgb8
-////
-////                      let metalLayer = CAMetalLayer()
-////                      metalLayer.device = MTLCreateSystemDefaultDevice
-//
-//
-//
-//
-////                      controller.view.backgroundColor = .red
-////
-////
-////
-////
-////
-////
-////                      controller.textureFrameAvailable(inputTexture as! Int64)
-////                      controller.view.backgroundColor = .blue
-////
-////                      let _myView = MTKView()
-////
-////                                          print("da khoi tao view")
-////
-////
-////                      _myView.device = MTLCreateSystemDefaultDevice()
-////
-////
-//////                      NSAssert(_view.device, @"Metal is not supported on this device");
-////                      guard _myView != nil  else {
-////                          return
-////                      }
-////                                         print("tao render")
-////
-////                      let renderer = AAPLMetalRenderer(device: _myView.device!, colorPixelFormat: _myView.pixelFormat!)
-////
-////                           print("tao render xong")
-////                          renderer.mtkView(_myView, drawableSizeWillChange: _myView.drawableSize)
-////                           print("ve")
-////
-////
-////
-////                      _myView.delegate = renderer
-////
-////                      controller.view.addSubview(_myView)
-////                      print(_myView)
-////
-//
-//
-//
-//
-//
-//
-//                      result(true) // or your syntax
-//                  } else {
-//                      result(false)
-//                  }
-//
-//
-//
-//
-//              default:
-//                  result(FlutterMethodNotImplemented)
-//              }
-//          })
-    GeneratedPluginRegistrant.register(with: self)
-    MyRender.init()
->>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
@@ -203,11 +98,7 @@ import UnityFramework
 //    }
     
     func getTexture() -> Void {
-<<<<<<< HEAD
      
-=======
-        
->>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
 
         let textureImageWidth = 1024
             let textureImageHeight = 1024
@@ -309,7 +200,6 @@ extension UIImage {
             }
         }
     }
-<<<<<<< HEAD
 }
 
 
@@ -318,6 +208,4 @@ class MyCaptureData: FlutterRTCVideoRenderer {
     func getTexTureID() -> String{
         return String(textureId)
     }
-=======
->>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
 }
