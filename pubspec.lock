@@ -58,7 +58,7 @@ packages:
     source: hosted
     version: "1.1.1"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       url: "https://pub.dartlang.org"
@@ -85,12 +85,24 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.2"
+<<<<<<< HEAD
   cupertino_icons:
-    dependency: "direct main"
+=======
+  dart_webrtc:
+    dependency: transitive
     description:
-      name: cupertino_icons
+      name: dart_webrtc
       url: "https://pub.dartlang.org"
     source: hosted
+    version: "1.0.12"
+  dartdoc:
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
+    dependency: "direct main"
+    description:
+      name: dartdoc
+      url: "https://pub.dartlang.org"
+    source: hosted
+<<<<<<< HEAD
     version: "1.0.5"
   dart_webrtc:
     dependency: transitive
@@ -106,6 +118,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.4"
+=======
+    version: "6.1.3"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   fake_async:
     dependency: transitive
     description:
@@ -132,6 +147,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_foreground_task:
     dependency: "direct main"
     description:
@@ -153,11 +169,14 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.7"
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_unity_widget:
     dependency: "direct main"
     description:
@@ -167,17 +186,28 @@ packages:
     version: "2022.2.0"
   flutter_web_plugins:
     dependency: transitive
+=======
+  flutter_web_plugins:
+    dependency: "direct main"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     description: flutter
     source: sdk
     version: "0.0.0"
   flutter_webrtc:
+<<<<<<< HEAD
     dependency: transitive
     description:
       path: "lib/utilities/flutter_janus_client/flutter-webrtc"
+=======
+    dependency: "direct main"
+    description:
+      path: flutter-webrtc
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
       relative: true
     source: path
     version: "0.9.18"
   glob:
+<<<<<<< HEAD
     dependency: transitive
     description:
       name: glob
@@ -227,15 +257,52 @@ packages:
     source: hosted
     version: "0.6.4"
   lints:
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     dependency: transitive
     description:
-      name: lints
+      name: glob
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.1"
   logging:
     dependency: transitive
     description:
+=======
+    version: "2.1.1"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.15.1"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.5"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.4"
+  logging:
+    dependency: "direct main"
+    description:
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
       name: logging
       url: "https://pub.dartlang.org"
     source: hosted
@@ -269,6 +336,16 @@ packages:
     source: hosted
     version: "1.8.0"
   package_config:
+<<<<<<< HEAD
+=======
+    dependency: transitive
+    description:
+      name: package_config
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  path:
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     dependency: transitive
     description:
       name: package_config
@@ -283,7 +360,11 @@ packages:
     source: hosted
     version: "1.8.2"
   path_provider:
+<<<<<<< HEAD
     dependency: transitive
+=======
+    dependency: "direct main"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
@@ -352,6 +433,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+<<<<<<< HEAD
   pointer_interceptor:
     dependency: "direct main"
     description:
@@ -359,6 +441,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.3+3"
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   process:
     dependency: transitive
     description:
@@ -366,6 +450,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+<<<<<<< HEAD
   prompt_dialog:
     dependency: "direct main"
     description:
@@ -373,6 +458,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.9"
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   pub_semver:
     dependency: transitive
     description:
@@ -380,6 +467,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+<<<<<<< HEAD
   shared_preferences:
     dependency: transitive
     description:
@@ -436,6 +524,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   sky_engine:
     dependency: transitive
     description: flutter
@@ -456,7 +546,7 @@ packages:
     source: hosted
     version: "1.10.0"
   stream_channel:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: stream_channel
       url: "https://pub.dartlang.org"
@@ -498,7 +588,11 @@ packages:
     source: hosted
     version: "1.3.1"
   uuid:
+<<<<<<< HEAD
     dependency: transitive
+=======
+    dependency: "direct main"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     description:
       name: uuid
       url: "https://pub.dartlang.org"
@@ -519,7 +613,11 @@ packages:
     source: hosted
     version: "1.0.2"
   web_socket_channel:
+<<<<<<< HEAD
     dependency: transitive
+=======
+    dependency: "direct main"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
     description:
       name: web_socket_channel
       url: "https://pub.dartlang.org"
@@ -532,6 +630,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.10"
+<<<<<<< HEAD
   webview_flutter:
     dependency: transitive
     description:
@@ -567,13 +666,19 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.1"
+=======
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   win32:
     dependency: transitive
     description:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "3.1.2"
+=======
+    version: "3.1.1"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c
   xdg_directories:
     dependency: transitive
     description:
@@ -589,5 +694,10 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.18.1 <3.0.0"
   flutter: ">=3.3.0"
+=======
+  dart: ">=2.18.0 <3.0.0"
+  flutter: ">=3.0.0"
+>>>>>>> 080dc6a39e3b1e37c942e5327ceeca177c3fdc8c

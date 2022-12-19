@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rsupport.unity_view_test">
+    package="com.example.flutter_janus_client">
    <application
-        android:label="unity_view_test"
+        android:label="flutter_janus_client"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
