@@ -221,6 +221,8 @@ struct UnityMessageManager_t3FB57FDD86818C144C13B2F1CB459C4566BE2E56;
 struct Void_t4861ACF8F4594C3437BB48B6E56783494B843915;
 // UnityEngine.Camera/CameraCallback
 struct CameraCallback_t844E527BFE37BC0495E7F67993E43C07642DA9DD;
+// MyCamera/IOSNativeAPI
+struct IOSNativeAPI_tAFD53BB635328195E3DDCC1413EDDE8B71969D4C;
 // FlutterUnityIntegration.UnityMessageManager/MessageDelegate
 struct MessageDelegate_tDF550588A628E583D53EB8B7B4D75F3F966F9BC9;
 // FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate
@@ -496,6 +498,11 @@ struct ValueType_t6D9B272BD21782F0A9A14F2E41F85A50E97A986F_marshaled_pinvoke
 };
 // Native definition for COM marshalling of System.ValueType
 struct ValueType_t6D9B272BD21782F0A9A14F2E41F85A50E97A986F_marshaled_com
+{
+};
+
+// MyCamera/IOSNativeAPI
+struct IOSNativeAPI_tAFD53BB635328195E3DDCC1413EDDE8B71969D4C  : public RuntimeObject
 {
 };
 
@@ -1248,6 +1255,8 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Material_t18053F08F347D0DCA5E1140EC7EC4533DD8
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Material_set_mainTexture_m389E048BA9C81B603EBF36BD792212B296317AC0 (Material_t18053F08F347D0DCA5E1140EC7EC4533DD8A14E3* __this, Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700* ___value0, const RuntimeMethod* method) ;
 // System.IntPtr UnityEngine.Texture::GetNativeTexturePtr()
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t Texture_GetNativeTexturePtr_mD3019CC9461338665885D431B86C03D3063867EE (Texture_t791CBB51219779964E0E8A2ED7C1AA5F92A4A700* __this, const RuntimeMethod* method) ;
+// UnityEngine.RuntimePlatform UnityEngine.Application::get_platform()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138 (const RuntimeMethod* method) ;
 // System.Void MyCamera::InitializeAndroidSurface(System.Int32,System.Int32)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MyCamera_InitializeAndroidSurface_mE284F19C1E83D6982F09C4BF4454A664A5080367 (MyCamera_t62596E4C3E5F71D34EC3B2DABC487558A961A022* __this, int32_t ___viewportWidth0, int32_t ___viewportHeight1, const RuntimeMethod* method) ;
 // T[] System.Array::Empty<System.Object>()
@@ -1258,6 +1267,10 @@ inline ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* Array_Empty_TisRu
 }
 // System.Void UnityEngine.AndroidJavaObject::Call(System.String,System.Object[])
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AndroidJavaObject_Call_mDEF7846E2AB1C5379069BB21049ED55A9D837B1C (AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* __this, String_t* ___methodName0, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* ___args1, const RuntimeMethod* method) ;
+// System.String System.IntPtr::ToString()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C (intptr_t* __this, const RuntimeMethod* method) ;
+// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (intptr_t ___texture0, String_t* ___textureId1, const RuntimeMethod* method) ;
 // System.Void UnityEngine.AndroidJavaClass::.ctor(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AndroidJavaClass__ctor_mB5466169E1151B8CC44C8FED234D79984B431389 (AndroidJavaClass_tE6296B30CC4BF84434A9B765267F3FD0DD8DDB03* __this, String_t* ___className0, const RuntimeMethod* method) ;
 // FieldType UnityEngine.AndroidJavaObject::GetStatic<UnityEngine.AndroidJavaObject>(System.String)
@@ -1285,8 +1298,6 @@ inline UnityMessageManager_t3FB57FDD86818C144C13B2F1CB459C4566BE2E56* SingletonM
 {
 	return ((  UnityMessageManager_t3FB57FDD86818C144C13B2F1CB459C4566BE2E56* (*) (const RuntimeMethod*))SingletonMonoBehaviour_1_get_Instance_m607F0B93984CCC4DBC13E391B53DEED876E6C123_gshared)(method);
 }
-// System.String System.IntPtr::ToString()
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C (intptr_t* __this, const RuntimeMethod* method) ;
 // System.Void FlutterUnityIntegration.UnityMessageManager::SendMessageToFlutter(System.String)
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnityMessageManager_SendMessageToFlutter_m01236AF27F51C863E80F5220F02BA45E9ED4BAB9 (UnityMessageManager_t3FB57FDD86818C144C13B2F1CB459C4566BE2E56* __this, String_t* ___message0, const RuntimeMethod* method) ;
 // System.Void UnityEngine.Vector3::.ctor(System.Single,System.Single,System.Single)
@@ -1454,6 +1465,7 @@ inline void SingletonMonoBehaviour_1__ctor_mB959CC5C4F5F613426011598A0FFADE2812F
 {
 	((  void (*) (SingletonMonoBehaviour_1_tBFAF7683DA4F979C6C7C7C3DFE18973BAB4231CF*, const RuntimeMethod*))SingletonMonoBehaviour_1__ctor_m951CBAC39C5B1891C1AF0673AF8B1CAC9078AAA9_gshared)(__this, method);
 }
+IL2CPP_EXTERN_C void DEFAULT_CALL sendMessageToMobileApp(intptr_t, char*);
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
@@ -1666,11 +1678,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MyCamera_Update_m222CD0C434E8B466C479E0B
 		s_Il2CppMethodInitialized = true;
 	}
 	{
-		// if (_androidApiInstance == null) {
-		AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* L_0 = __this->____androidApiInstance_6;
-		if (L_0)
+		// if (Application.platform == RuntimePlatform.Android) {
+		int32_t L_0;
+		L_0 = Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138(NULL);
+		if ((!(((uint32_t)L_0) == ((uint32_t)((int32_t)11)))))
 		{
-			goto IL_0019;
+			goto IL_0038;
+		}
+	}
+	{
+		// if (_androidApiInstance == null) {
+		AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* L_1 = __this->____androidApiInstance_6;
+		if (L_1)
+		{
+			goto IL_0022;
 		}
 	}
 	{
@@ -1679,14 +1700,38 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MyCamera_Update_m222CD0C434E8B466C479E0B
 		return;
 	}
 
-IL_0019:
+IL_0022:
 	{
 		// _androidApiInstance.Call("updateSurfaceTexture");
-		AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* L_1 = __this->____androidApiInstance_6;
-		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_2;
-		L_2 = Array_Empty_TisRuntimeObject_mFB8A63D602BB6974D31E20300D9EB89C6FE7C278_inline(Array_Empty_TisRuntimeObject_mFB8A63D602BB6974D31E20300D9EB89C6FE7C278_RuntimeMethod_var);
-		NullCheck(L_1);
-		AndroidJavaObject_Call_mDEF7846E2AB1C5379069BB21049ED55A9D837B1C(L_1, _stringLiteral760169E7AE156E641A9FAC31B690204CA3886D52, L_2, NULL);
+		AndroidJavaObject_t8FFB930F335C1178405B82AC2BF512BB1EEF9EB0* L_2 = __this->____androidApiInstance_6;
+		ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* L_3;
+		L_3 = Array_Empty_TisRuntimeObject_mFB8A63D602BB6974D31E20300D9EB89C6FE7C278_inline(Array_Empty_TisRuntimeObject_mFB8A63D602BB6974D31E20300D9EB89C6FE7C278_RuntimeMethod_var);
+		NullCheck(L_2);
+		AndroidJavaObject_Call_mDEF7846E2AB1C5379069BB21049ED55A9D837B1C(L_2, _stringLiteral760169E7AE156E641A9FAC31B690204CA3886D52, L_3, NULL);
+		return;
+	}
+
+IL_0038:
+	{
+		// } else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+		int32_t L_4;
+		L_4 = Application_get_platform_m59EF7D6155D18891B24767F83F388160B1FF2138(NULL);
+		if ((!(((uint32_t)L_4) == ((uint32_t)8))))
+		{
+			goto IL_0056;
+		}
+	}
+	{
+		// IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
+		intptr_t L_5 = __this->____nativeTexturePointer_5;
+		intptr_t* L_6 = (&__this->____nativeTexturePointer_5);
+		String_t* L_7;
+		L_7 = IntPtr_ToString_mDA1150F4802E1FB9313FB4E32C684EEE19116E5C(L_6, NULL);
+		IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72(L_5, L_7, NULL);
+	}
+
+IL_0056:
+	{
 		// }
 		return;
 	}
@@ -1805,6 +1850,39 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void MyCamera__ctor_m0CE88422A5D977C542707ED8
 {
 	{
 		MonoBehaviour__ctor_m592DB0105CA0BC97AA1C5F4AD27B12D68A3B7C1E(__this, NULL);
+		return;
+	}
+}
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winvalid-offsetof"
+#pragma clang diagnostic ignored "-Wunused-variable"
+#endif
+// System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (intptr_t ___texture0, String_t* ___textureId1, const RuntimeMethod* method) 
+{
+	typedef void (DEFAULT_CALL *PInvokeFunc) (intptr_t, char*);
+
+	// Marshaling of parameter '___textureId1' to native representation
+	char* ____textureId1_marshaled = NULL;
+	____textureId1_marshaled = il2cpp_codegen_marshal_string(___textureId1);
+
+	// Native function invocation
+	reinterpret_cast<PInvokeFunc>(sendMessageToMobileApp)(___texture0, ____textureId1_marshaled);
+
+	// Marshaling cleanup of parameter '___textureId1' native representation
+	il2cpp_codegen_marshal_free(____textureId1_marshaled);
+	____textureId1_marshaled = NULL;
+
+}
+// System.Void MyCamera/IOSNativeAPI::.ctor()
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void IOSNativeAPI__ctor_mDCC8E1542F201EE2B4E58932C8036A9AAF43B6F7 (IOSNativeAPI_tAFD53BB635328195E3DDCC1413EDDE8B71969D4C* __this, const RuntimeMethod* method) 
+{
+	{
+		Object__ctor_mE837C6B9FA8C6D5D109F4B2EC885D79919AC0EA2(__this, NULL);
 		return;
 	}
 }
