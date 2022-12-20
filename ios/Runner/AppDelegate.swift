@@ -6,6 +6,7 @@ import CoreVideo
 import CoreMedia
 import UnityFramework
 
+
 @UIApplicationMain
 
 @objc class AppDelegate: FlutterAppDelegate {
@@ -20,105 +21,61 @@ import UnityFramework
   
     // Initialize Unity
   	InitUnityIntegrationWithOptions(argc: CommandLine.argc, argv: CommandLine.unsafeArgv, launchOptions)
+      GeneratedPluginRegistrant.register(with: self)
+     let myRender =  MyRender.init()
+      let METHOD_CHANNEL_NAME = "rsupport_draw"
+      
+      let myTexture = MyCaptureData()
 
       
-//      let METHOD_CHANNEL_NAME = "com.rsupport.unityViewTest/opengl_texture"
-//          
-//        
-//
-//          let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+//      var flutterEvent = FlutterEventChannel
 
-//          let methodChannel = FlutterMethodChannel(name: METHOD_CHANNEL_NAME, binaryMessenger: controller.binaryMessenger)
-//
-//
-//          methodChannel.setMethodCallHandler({
-//              (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
-//              switch call.method {
-//              case "create":
-//
-//                  if let args = call.arguments as? Dictionary<String, Any>,
-//
-//                    let inputTexture = args["textureID"]{
-//
-//                      let _device = MyCameraGL()
-//                      _device.getTexture()
-//
-//
-////                      var cvret: CVReturn
-////                      var   _CVMTLTextureCache:CVMetalTextureCache
-////                      cvret = CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, _device,nil,&_CVMTLTextureCache)
-////                      print(cvret)
-////
-//
-//
-////                      let descriptor = MTLTextureDescriptor()
-////                      descriptor.width = 500
-////                      descriptor.height = 500
-////                      descriptor.pixelFormat = .etc2_rgb8
-////
-////                      let metalLayer = CAMetalLayer()
-////                      metalLayer.device = MTLCreateSystemDefaultDevice
-//
-//
-//
-//
-////                      controller.view.backgroundColor = .red
-////
-////
-////
-////
-////
-////
-////                      controller.textureFrameAvailable(inputTexture as! Int64)
-////                      controller.view.backgroundColor = .blue
-////
-////                      let _myView = MTKView()
-////
-////                                          print("da khoi tao view")
-////
-////
-////                      _myView.device = MTLCreateSystemDefaultDevice()
-////
-////
-//////                      NSAssert(_view.device, @"Metal is not supported on this device");
-////                      guard _myView != nil  else {
-////                          return
-////                      }
-////                                         print("tao render")
-////
-////                      let renderer = AAPLMetalRenderer(device: _myView.device!, colorPixelFormat: _myView.pixelFormat!)
-////
-////                           print("tao render xong")
-////                          renderer.mtkView(_myView, drawableSizeWillChange: _myView.drawableSize)
-////                           print("ve")
-////
-////
-////
-////                      _myView.delegate = renderer
-////
-////                      controller.view.addSubview(_myView)
-////                      print(_myView)
-////
-//
-//
-//
-//
-//
-//
-//                      result(true) // or your syntax
-//                  } else {
-//                      result(false)
-//                  }
-//
-//
-//
-//
-//              default:
-//                  result(FlutterMethodNotImplemented)
-//              }
-//          })
-    GeneratedPluginRegistrant.register(with: self)
-    MyRender.init()
+
+          let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+
+          let methodChannel = FlutterMethodChannel(name: METHOD_CHANNEL_NAME, binaryMessenger: controller.binaryMessenger)
+
+
+          methodChannel.setMethodCallHandler({
+              (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
+              switch call.method {
+              case "data_janus_server":
+                  print("clgt \(myTexture.getTexTureID())")
+                  
+                  if let args = call.arguments as? Dictionary<String, Any>,
+
+                    let inputTexture = args["textureId"]{
+               
+                      result(true) // or your syntax
+                  }
+                  
+                  else {
+                      result(false)
+                  }
+
+
+              case "draw_camera":
+                  if let args = call.arguments as? Dictionary<String, Any>,
+
+                    let inputTexture = args["textureId"]{
+
+             
+                      print("draw_camera ----> \(inputTexture)")
+
+
+                      result(true) // or your syntax
+                  }
+                  
+                  else {
+                      result(false)
+                  }
+
+              default:
+                  result(FlutterMethodNotImplemented)
+              }
+          })
+
+ 
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
     
@@ -141,7 +98,7 @@ import UnityFramework
 //    }
     
     func getTexture() -> Void {
-        
+     
 
         let textureImageWidth = 1024
             let textureImageHeight = 1024
@@ -242,5 +199,13 @@ extension UIImage {
 //            case .livePhoto: return kUTTypeLivePhoto
             }
         }
+    }
+}
+
+
+class MyCaptureData: FlutterRTCVideoRenderer {
+
+    func getTexTureID() -> String{
+        return String(textureId)
     }
 }

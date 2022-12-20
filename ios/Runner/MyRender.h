@@ -9,10 +9,14 @@
 #import <UnityFramework/NativeCallProxy.h>
 #import <UIKit/UIKit.h>
 
+
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
 @property NSString* oldTextureId;
+@property (nonatomic, retain)NSData *data;
+@property id<MTLTexture> myTexture;
 
     - (void) showHostMainWindow;
     - (void) unloadPlayer;

@@ -8,22 +8,52 @@
 #import "MyRender.h"
 #import <Metal/Metal.h>
 #import <UIKit/UIKit.h>
+#import <WebRTC/WebRTC.h>
+
 
 @implementation MyRender
 
 @synthesize oldTextureId = _oldTextureId;
+@synthesize myTexture;
+@synthesize data;
 
 -(id)init {
     if ( self = [super init] ) {
-        printf("MyRender initData \n");
         [FrameworkLibAPI registerAPIforNativeCalls: self];
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+             selector:@selector(receiveTestNotification:)
+             name:@"PhatKTrender"
+             object:nil];
     return self;
 }
 
 
 - (void)quitPlayer {
     printf("MyRender quitPlayer \n");
+}
+
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+    data = notification.object;
+   
+
+    printf("MyRender sendMessageToMobileApp width: %lu height: %lu\n", myTexture.width, myTexture.height);
+
+    UIImage *image = [UIImage imageWithData:data];
+    UIImage *reSizedImage = [self resizeImage: image centerSize: CGSizeMake(myTexture.width / 2, myTexture.height / 2)];
+    UIImage *finalImage = reSizedImage;
+    printf("MyRender sendMessageToMobileApp width: %f height: %f scale: %f \n", finalImage.size.width, finalImage.size.height, image.scale);
+    CGSize size = CGSizeMake(finalImage.size.width * 1.5, finalImage.size.height * 1.5 );
+    printf("MyRender 2 sendMessageToMobileApp width: %f height: %f\n", size.width, size.height);
+    
+
+    const NSUInteger bytesPerPixel = 4;
+    const NSUInteger bytesPerRow = bytesPerPixel * size.width;
+    uint8_t *imageData =  [self convertImageData: finalImage];
+    MTLRegion region = MTLRegionMake2D(10, 10, size.width, size.height);
+    
+    [myTexture replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow:bytesPerRow];
 }
 
 //- (void)sendMessageToMobileApp:(char *)mtlTexture textureId:(NSString *)unityTextureId {
@@ -55,24 +85,31 @@
 - (void)sendMessageToMobileApp:(char *)mtlTexture textureId:(NSString *)unityTextureId {
     if (![_oldTextureId isEqualToString: unityTextureId]) {
         _oldTextureId = unityTextureId;
-        id<MTLTexture> tex = (__bridge id<MTLTexture>)(void*)mtlTexture;
-        printf("MyRender sendMessageToMobileApp width: %lu height: %lu\n", tex.width, tex.height);
-
-        UIImage *image = [UIImage imageNamed: @"mount"];
-        UIImage *reSizedImage = [self resizeImage: image centerSize: CGSizeMake(tex.width / 2, tex.height / 2)];
-        UIImage *finalImage = reSizedImage;
-        printf("MyRender sendMessageToMobileApp width: %f height: %f scale: %f \n", finalImage.size.width, finalImage.size.height, image.scale);
-        CGSize size = CGSizeMake(finalImage.size.width * 2, finalImage.size.height * 2 );
-        printf("MyRender 2 sendMessageToMobileApp width: %f height: %f\n", size.width, size.height);
-        
     
-        const NSUInteger bytesPerPixel = 4;
-        const NSUInteger bytesPerRow = bytesPerPixel * size.width;
-        uint8_t *imageData =  [self convertImageData: finalImage];
-        MTLRegion region = MTLRegionMake2D(0, 0, size.width, size.height);
-        [tex replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow:bytesPerRow];
+    
+        
+        id<MTLTexture> tex = (__bridge id<MTLTexture>)(void*)mtlTexture;
+        myTexture = tex;
+//        printf("MyRender sendMessageToMobileApp width: %lu height: %lu\n", tex.width, tex.height);
+//
+//        UIImage *image = [UIImage imageNamed: @"mount"];
+//        UIImage *reSizedImage = [self resizeImage: image centerSize: CGSizeMake(tex.width / 2, tex.height / 2)];
+//        UIImage *finalImage = reSizedImage;
+//        printf("MyRender sendMessageToMobileApp width: %f height: %f scale: %f \n", finalImage.size.width, finalImage.size.height, image.scale);
+//        CGSize size = CGSizeMake(finalImage.size.width * 2, finalImage.size.height * 2 );
+//        printf("MyRender 2 sendMessageToMobileApp width: %f height: %f\n", size.width, size.height);
+//
+//
+//        const NSUInteger bytesPerPixel = 4;
+//        const NSUInteger bytesPerRow = bytesPerPixel * size.width;
+//        uint8_t *imageData =  [self convertImageData: finalImage];
+//        MTLRegion region = MTLRegionMake2D(0, 0, size.width, size.height);
+//
+//        [tex replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow:bytesPerRow];
     }
 }
+
+
 
 - (uint8_t *) convertImageData:(UIImage *) image
 {
@@ -94,28 +131,28 @@
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
     CGContextRelease(context);
     
-//    for (int lineIndex = 0; lineIndex < height; lineIndex++) {
-//        for (int pointPos = 0 ; pointPos < width / 2; pointPos++) {
-//            long byteIndex = (lineIndex * bytesPerRow) + (pointPos * 4);
-//            long targetIndex = (lineIndex * bytesPerRow) + ((width - pointPos - 1) * 4);
-//
-//            char m = rawData[targetIndex];
-//            rawData[targetIndex] = rawData[byteIndex];
-//            rawData[byteIndex] = m;
-//
-//            char m1 = rawData[targetIndex + 1];
-//            rawData[targetIndex + 1] = rawData[byteIndex + 1];
-//            rawData[byteIndex + 1] = m1;
-//
-//            char m2 = rawData[targetIndex + 2];
-//            rawData[targetIndex + 2] = rawData[byteIndex + 2];
-//            rawData[byteIndex + 2] = m2;
-//
-//            char m3 = rawData[targetIndex + 3];
-//            rawData[targetIndex + 3] = rawData[byteIndex + 3];
-//            rawData[byteIndex + 3] = m3;
-//        }
-//    }
+    for (int lineIndex = 0; lineIndex < height; lineIndex++) {
+        for (int pointPos = 0 ; pointPos < width / 2; pointPos++) {
+            long byteIndex = (lineIndex * bytesPerRow) + (pointPos * 4);
+            long targetIndex = (lineIndex * bytesPerRow) + ((width - pointPos - 1) * 4);
+
+            char m = rawData[targetIndex];
+            rawData[targetIndex] = rawData[byteIndex];
+            rawData[byteIndex] = m;
+
+            char m1 = rawData[targetIndex + 1];
+            rawData[targetIndex + 1] = rawData[byteIndex + 1];
+            rawData[byteIndex + 1] = m1;
+
+            char m2 = rawData[targetIndex + 2];
+            rawData[targetIndex + 2] = rawData[byteIndex + 2];
+            rawData[byteIndex + 2] = m2;
+
+            char m3 = rawData[targetIndex + 3];
+            rawData[targetIndex + 3] = rawData[byteIndex + 3];
+            rawData[byteIndex + 3] = m3;
+        }
+    }
     return rawData;
 }
 
