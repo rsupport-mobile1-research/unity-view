@@ -35,7 +35,7 @@ dependencies:
   path:
   image_to_byte:
   janus_client:
-    path: lib/utilities/flutter_janus_client
+    path: flutter_janus_client
   pointer_interceptor: ^0.9.3+2
 #  opengl_es_bindings:
 

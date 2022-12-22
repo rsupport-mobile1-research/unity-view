@@ -173,7 +173,7 @@ packages:
   flutter_webrtc:
     dependency: transitive
     description:
-      path: "lib/utilities/flutter_janus_client/flutter-webrtc"
+      path: "flutter_janus_client/flutter-webrtc"
       relative: true
     source: path
     version: "0.9.18"
@@ -215,10 +215,10 @@ packages:
   janus_client:
     dependency: "direct main"
     description:
-      path: "lib/utilities/flutter_janus_client"
+      path: flutter_janus_client
       relative: true
     source: path
-    version: "0.0.0"
+    version: "2.2.9"
   js:
     dependency: transitive
     description:

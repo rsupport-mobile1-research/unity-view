@@ -11,8 +11,6 @@ ScriptsOnlyBuild:
     - UnityEditor.XR.ARCore.ARCoreSettings
     Unity.XR.ARCore.dll:
     - UnityEngine.XR.ARCore.ARCoreLoader
-    Unity.XR.ARKit.Editor.dll:
-    - UnityEditor.XR.ARKit.ARKitSettings
     Unity.XR.ARKit.dll:
     - UnityEngine.XR.ARKit.ARKitLoader
     Unity.XR.Management.Editor.dll:
