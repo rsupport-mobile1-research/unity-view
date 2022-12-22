@@ -26,6 +26,9 @@ cd flutter_janus_client & git clone https://github.com/rsupport-mobile1-research
 
 # Launch code
 
+<details>
+ <summary>:information_source: <b>Android</b></summary>
+
 Build androidlibrary from Unity
 . Install Unity https://unity.com/download
 . Open source code Unity in unity/DemoApp
@@ -38,10 +41,20 @@ Config build setting for android on Unity. Select File -> Build Settings. In the
 
 Close the window and click on Switch Plaform on Build Settings popup & close the popup. Select Flutter -> Export Android Plugin. After done this step we will see unityLibrary under Android folder.
 
-Continue to change config NDK on android. We need to add ndk.dir in local.properties of android source code unity-view/android/local.properties with ndk.dir=/Applications/Unity/Hub/Editor/[ndk version]/PlaybackEngines/AndroidPlayer/NDK
+Continue to change config NDK on android. We need to add ndk.dir in local.properties of android folder at unity-view/android/local.properties with
+```
+ ndk.dir=/Applications/Unity/Hub/Editor/[ndk version]/PlaybackEngines/AndroidPlayer/NDK
+```
+> Make sure you get the correct version of ndk by move to /Applications/Unity/Hub/Editor/ to get it
 
 ![Alt text](/images/flutter_setup_guide_4.png "Guide 4")
 
 Open unity_view folder by android studio and start an android device to build the app.
+
+</details>
+
+<details>
+ <summary>:information_source: <b>iOS</b></summary>
+<details>
 
 > Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
