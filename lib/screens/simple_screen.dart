@@ -277,7 +277,6 @@ class _SimpleScreenState extends State<SimpleScreen>
     RemoteStream? remoteStream;
     if (items.length > 0) {
       /// Send remoteStream to native plugins
-      // _rsupportOpenGlPlugin.;
       remoteStream = items[0];
       debugPrint("start video ${remoteStream.videoRenderer.textureId}");
 

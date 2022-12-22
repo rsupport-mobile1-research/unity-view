@@ -40,108 +40,106 @@ extern void MyCamera_InitializeAndroidSurface_mE284F19C1E83D6982F09C4BF4454A664A
 extern void MyCamera_GetTextureId_m52DC91AB773CD613635A784C5DDE72251C81D5DD (void);
 // 0x00000012 System.Void MyCamera::.ctor()
 extern void MyCamera__ctor_m0CE88422A5D977C542707ED85B2ECFBD09D2A873 (void);
-// 0x00000013 System.Void MyCamera/IOSNativeAPI::sendMessageToMobileApp(System.IntPtr,System.String)
-extern void IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72 (void);
-// 0x00000014 System.Void MyCamera/IOSNativeAPI::.ctor()
+// 0x00000013 System.Void MyCamera/IOSNativeAPI::.ctor()
 extern void IOSNativeAPI__ctor_mDCC8E1542F201EE2B4E58932C8036A9AAF43B6F7 (void);
-// 0x00000015 System.Void Rotate::Start()
+// 0x00000014 System.Void Rotate::Start()
 extern void Rotate_Start_mD322E77A3CF2BEF28C4DF71D3F529107F511B1FB (void);
-// 0x00000016 System.Void Rotate::Update()
+// 0x00000015 System.Void Rotate::Update()
 extern void Rotate_Update_m73D585515036D9B7AAD8336BFB8567283CE4C7E7 (void);
-// 0x00000017 System.Void Rotate::SetRotationSpeed(System.String)
+// 0x00000016 System.Void Rotate::SetRotationSpeed(System.String)
 extern void Rotate_SetRotationSpeed_mD754DB628A79A7B2ADAED25DE732A29E7548F2F1 (void);
-// 0x00000018 System.Void Rotate::SetColor(System.String)
+// 0x00000017 System.Void Rotate::SetColor(System.String)
 extern void Rotate_SetColor_mE3C0CA983F786E8A9A0346E63B093A9DF79EB673 (void);
-// 0x00000019 System.Void Rotate::.ctor()
+// 0x00000018 System.Void Rotate::.ctor()
 extern void Rotate__ctor_m0EE5CC8EB699542BFC438DC3D547D39E442E9EE4 (void);
-// 0x0000001A System.Void SceneLoader::Start()
+// 0x00000019 System.Void SceneLoader::Start()
 extern void SceneLoader_Start_mB9AA9E8ADCE59F893E3EF8E891ED5E1F3AB80DA0 (void);
-// 0x0000001B System.Void SceneLoader::Update()
+// 0x0000001A System.Void SceneLoader::Update()
 extern void SceneLoader_Update_m1F381D68B1B1F69A0F9A5876813BB7D437E3A713 (void);
-// 0x0000001C System.Void SceneLoader::LoadScene(System.Int32)
+// 0x0000001B System.Void SceneLoader::LoadScene(System.Int32)
 extern void SceneLoader_LoadScene_m52CC0D044A8AB6655C06F870DD8FC071DE0F8875 (void);
-// 0x0000001D System.Void SceneLoader::MessengerFlutter()
+// 0x0000001C System.Void SceneLoader::MessengerFlutter()
 extern void SceneLoader_MessengerFlutter_mD72284AC6111B4DD6761AC527423C3C0AC88CA0B (void);
-// 0x0000001E System.Void SceneLoader::SwitchNative()
+// 0x0000001D System.Void SceneLoader::SwitchNative()
 extern void SceneLoader_SwitchNative_m68C165016C6A7B1F29960507F65455523EA3A5F8 (void);
-// 0x0000001F System.Void SceneLoader::UnloadNative()
+// 0x0000001E System.Void SceneLoader::UnloadNative()
 extern void SceneLoader_UnloadNative_mA699427D00E7DD75BD5EFA4B0D54AFE5A0AFEACA (void);
-// 0x00000020 System.Void SceneLoader::QuitNative()
+// 0x0000001F System.Void SceneLoader::QuitNative()
 extern void SceneLoader_QuitNative_mFE5B0B163F9D560A10ADB3574AFE755BAF6BFA43 (void);
-// 0x00000021 System.Void SceneLoader::.ctor()
+// 0x00000020 System.Void SceneLoader::.ctor()
 extern void SceneLoader__ctor_m2248766DF38AF07562AD31501C7275B8DF1B7D29 (void);
-// 0x00000022 System.Void FlutterUnityIntegration.NativeAPI::OnSceneLoaded(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode)
+// 0x00000021 System.Void FlutterUnityIntegration.NativeAPI::OnSceneLoaded(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode)
 extern void NativeAPI_OnSceneLoaded_m200A791C356A252E1D5F2BB13BC2CED455A02259 (void);
-// 0x00000023 System.Void FlutterUnityIntegration.NativeAPI::SendMessageToFlutter(System.String)
+// 0x00000022 System.Void FlutterUnityIntegration.NativeAPI::SendMessageToFlutter(System.String)
 extern void NativeAPI_SendMessageToFlutter_m38D270B3AAAF47AF673EF84063BB262D1AE3618C (void);
-// 0x00000024 System.Void FlutterUnityIntegration.NativeAPI::ShowHostMainWindow()
+// 0x00000023 System.Void FlutterUnityIntegration.NativeAPI::ShowHostMainWindow()
 extern void NativeAPI_ShowHostMainWindow_m38DDCC74D34CFE1F0B7E8528690C0E384002E9ED (void);
-// 0x00000025 System.Void FlutterUnityIntegration.NativeAPI::UnloadMainWindow()
+// 0x00000024 System.Void FlutterUnityIntegration.NativeAPI::UnloadMainWindow()
 extern void NativeAPI_UnloadMainWindow_m5B742B5232A7D45F54B723F025915ED46032556B (void);
-// 0x00000026 System.Void FlutterUnityIntegration.NativeAPI::QuitUnityWindow()
+// 0x00000025 System.Void FlutterUnityIntegration.NativeAPI::QuitUnityWindow()
 extern void NativeAPI_QuitUnityWindow_m877ACBFCA5B17C944C59FF57E973590FFB555BB5 (void);
-// 0x00000027 System.Void FlutterUnityIntegration.NativeAPI::.ctor()
+// 0x00000026 System.Void FlutterUnityIntegration.NativeAPI::.ctor()
 extern void NativeAPI__ctor_mA061363778EC083B262B2B1F2350ED7B9AE97AD9 (void);
-// 0x00000028 T FlutterUnityIntegration.SingletonMonoBehaviour`1::get_Instance()
-// 0x00000029 T FlutterUnityIntegration.SingletonMonoBehaviour`1::CreateSingleton()
-// 0x0000002A System.Void FlutterUnityIntegration.SingletonMonoBehaviour`1::.ctor()
-// 0x0000002B System.Void FlutterUnityIntegration.SingletonMonoBehaviour`1::.cctor()
-// 0x0000002C FlutterUnityIntegration.MessageHandler FlutterUnityIntegration.MessageHandler::Deserialize(System.String)
+// 0x00000027 T FlutterUnityIntegration.SingletonMonoBehaviour`1::get_Instance()
+// 0x00000028 T FlutterUnityIntegration.SingletonMonoBehaviour`1::CreateSingleton()
+// 0x00000029 System.Void FlutterUnityIntegration.SingletonMonoBehaviour`1::.ctor()
+// 0x0000002A System.Void FlutterUnityIntegration.SingletonMonoBehaviour`1::.cctor()
+// 0x0000002B FlutterUnityIntegration.MessageHandler FlutterUnityIntegration.MessageHandler::Deserialize(System.String)
 extern void MessageHandler_Deserialize_m995171F279A54669F5A0EFA4445D25F40757CE55 (void);
-// 0x0000002D T FlutterUnityIntegration.MessageHandler::getData()
-// 0x0000002E System.Void FlutterUnityIntegration.MessageHandler::.ctor(System.Int32,System.String,System.String,Newtonsoft.Json.Linq.JToken)
+// 0x0000002C T FlutterUnityIntegration.MessageHandler::getData()
+// 0x0000002D System.Void FlutterUnityIntegration.MessageHandler::.ctor(System.Int32,System.String,System.String,Newtonsoft.Json.Linq.JToken)
 extern void MessageHandler__ctor_m1B476AF6138B8567F1AC1613B57F26882755D0AE (void);
-// 0x0000002F System.Void FlutterUnityIntegration.MessageHandler::send(System.Object)
+// 0x0000002E System.Void FlutterUnityIntegration.MessageHandler::send(System.Object)
 extern void MessageHandler_send_m46F4AB9D42028AEA5D5F11F6BB10B4490385E963 (void);
-// 0x00000030 System.Void FlutterUnityIntegration.UnityMessage::.ctor()
+// 0x0000002F System.Void FlutterUnityIntegration.UnityMessage::.ctor()
 extern void UnityMessage__ctor_mDEC55E5CFC43BE8B679F2B49B6245BD6DD3DE9FC (void);
-// 0x00000031 System.Int32 FlutterUnityIntegration.UnityMessageManager::generateId()
+// 0x00000030 System.Int32 FlutterUnityIntegration.UnityMessageManager::generateId()
 extern void UnityMessageManager_generateId_mFFF63A1BDD06CED89C71F2DDCCD9C7AEFE73724B (void);
-// 0x00000032 System.Void FlutterUnityIntegration.UnityMessageManager::add_OnMessage(FlutterUnityIntegration.UnityMessageManager/MessageDelegate)
+// 0x00000031 System.Void FlutterUnityIntegration.UnityMessageManager::add_OnMessage(FlutterUnityIntegration.UnityMessageManager/MessageDelegate)
 extern void UnityMessageManager_add_OnMessage_m72A64B53769F3968F62E977712541F3EB6700CBD (void);
-// 0x00000033 System.Void FlutterUnityIntegration.UnityMessageManager::remove_OnMessage(FlutterUnityIntegration.UnityMessageManager/MessageDelegate)
+// 0x00000032 System.Void FlutterUnityIntegration.UnityMessageManager::remove_OnMessage(FlutterUnityIntegration.UnityMessageManager/MessageDelegate)
 extern void UnityMessageManager_remove_OnMessage_m7B30D079CD871DE3B1213E9E33179EEF595E48FD (void);
-// 0x00000034 System.Void FlutterUnityIntegration.UnityMessageManager::add_OnFlutterMessage(FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate)
+// 0x00000033 System.Void FlutterUnityIntegration.UnityMessageManager::add_OnFlutterMessage(FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate)
 extern void UnityMessageManager_add_OnFlutterMessage_mA4F4A939F058D2172A994AA83878FC49F4A60D28 (void);
-// 0x00000035 System.Void FlutterUnityIntegration.UnityMessageManager::remove_OnFlutterMessage(FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate)
+// 0x00000034 System.Void FlutterUnityIntegration.UnityMessageManager::remove_OnFlutterMessage(FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate)
 extern void UnityMessageManager_remove_OnFlutterMessage_mE9773A6B3A6DEF366B0FA9668DAA27532C005925 (void);
-// 0x00000036 System.Void FlutterUnityIntegration.UnityMessageManager::Start()
+// 0x00000035 System.Void FlutterUnityIntegration.UnityMessageManager::Start()
 extern void UnityMessageManager_Start_m513A44342D5A5336DB3BB0AD0501525BC0A4F63D (void);
-// 0x00000037 System.Void FlutterUnityIntegration.UnityMessageManager::OnSceneLoaded(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode)
+// 0x00000036 System.Void FlutterUnityIntegration.UnityMessageManager::OnSceneLoaded(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode)
 extern void UnityMessageManager_OnSceneLoaded_m9C97092396F4D86D596E39FEB791D14B7A98A726 (void);
-// 0x00000038 System.Void FlutterUnityIntegration.UnityMessageManager::ShowHostMainWindow()
+// 0x00000037 System.Void FlutterUnityIntegration.UnityMessageManager::ShowHostMainWindow()
 extern void UnityMessageManager_ShowHostMainWindow_mDD2898A6D41376DEB7033193BD31AA946EEEF460 (void);
-// 0x00000039 System.Void FlutterUnityIntegration.UnityMessageManager::UnloadMainWindow()
+// 0x00000038 System.Void FlutterUnityIntegration.UnityMessageManager::UnloadMainWindow()
 extern void UnityMessageManager_UnloadMainWindow_m1EC3A84E3AD1C76D7915A5DD44597E60CB4CF1FD (void);
-// 0x0000003A System.Void FlutterUnityIntegration.UnityMessageManager::QuitUnityWindow()
+// 0x00000039 System.Void FlutterUnityIntegration.UnityMessageManager::QuitUnityWindow()
 extern void UnityMessageManager_QuitUnityWindow_m15E0FC94CB42CDA85229509AD473E2BE0E27762F (void);
-// 0x0000003B System.Void FlutterUnityIntegration.UnityMessageManager::SendMessageToFlutter(System.String)
+// 0x0000003A System.Void FlutterUnityIntegration.UnityMessageManager::SendMessageToFlutter(System.String)
 extern void UnityMessageManager_SendMessageToFlutter_m01236AF27F51C863E80F5220F02BA45E9ED4BAB9 (void);
-// 0x0000003C System.Void FlutterUnityIntegration.UnityMessageManager::SendMessageToFlutter(FlutterUnityIntegration.UnityMessage)
+// 0x0000003B System.Void FlutterUnityIntegration.UnityMessageManager::SendMessageToFlutter(FlutterUnityIntegration.UnityMessage)
 extern void UnityMessageManager_SendMessageToFlutter_m5258B3CDED96288FA463D52AD7DF4D392674A5E0 (void);
-// 0x0000003D System.Void FlutterUnityIntegration.UnityMessageManager::onMessage(System.String)
+// 0x0000003C System.Void FlutterUnityIntegration.UnityMessageManager::onMessage(System.String)
 extern void UnityMessageManager_onMessage_mA23F949C1E38D874363AF6EFC0B9D7F7ABC9BD19 (void);
-// 0x0000003E System.Void FlutterUnityIntegration.UnityMessageManager::onFlutterMessage(System.String)
+// 0x0000003D System.Void FlutterUnityIntegration.UnityMessageManager::onFlutterMessage(System.String)
 extern void UnityMessageManager_onFlutterMessage_m5075BDBB0B6A49C5FB47DFCAFD55D1267BF5E3B5 (void);
-// 0x0000003F System.Void FlutterUnityIntegration.UnityMessageManager::.ctor()
+// 0x0000003E System.Void FlutterUnityIntegration.UnityMessageManager::.ctor()
 extern void UnityMessageManager__ctor_m33386834F5F300E49185600FC190C57D3E9C0233 (void);
-// 0x00000040 System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::.ctor(System.Object,System.IntPtr)
+// 0x0000003F System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::.ctor(System.Object,System.IntPtr)
 extern void MessageDelegate__ctor_m1309BD3DE28E87C0CC24EB097613F916E8E4A1DB (void);
-// 0x00000041 System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::Invoke(System.String)
+// 0x00000040 System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::Invoke(System.String)
 extern void MessageDelegate_Invoke_m42A129A125C34AB085FEBE1CC9B5984ACC1BB7C6 (void);
-// 0x00000042 System.IAsyncResult FlutterUnityIntegration.UnityMessageManager/MessageDelegate::BeginInvoke(System.String,System.AsyncCallback,System.Object)
+// 0x00000041 System.IAsyncResult FlutterUnityIntegration.UnityMessageManager/MessageDelegate::BeginInvoke(System.String,System.AsyncCallback,System.Object)
 extern void MessageDelegate_BeginInvoke_mBBFD55486390BFD20AD687A88C02D1C554C6A3E3 (void);
-// 0x00000043 System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::EndInvoke(System.IAsyncResult)
+// 0x00000042 System.Void FlutterUnityIntegration.UnityMessageManager/MessageDelegate::EndInvoke(System.IAsyncResult)
 extern void MessageDelegate_EndInvoke_m1C05B416E71A364B4560BA5085ECBBAF6BF87E97 (void);
-// 0x00000044 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::.ctor(System.Object,System.IntPtr)
+// 0x00000043 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::.ctor(System.Object,System.IntPtr)
 extern void MessageHandlerDelegate__ctor_m287CBD25D77011FC5A52D1090F6CC31353AB6364 (void);
-// 0x00000045 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::Invoke(FlutterUnityIntegration.MessageHandler)
+// 0x00000044 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::Invoke(FlutterUnityIntegration.MessageHandler)
 extern void MessageHandlerDelegate_Invoke_mD1EC9E1841D5014C40A26D4C4BA076482FFC8A4B (void);
-// 0x00000046 System.IAsyncResult FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::BeginInvoke(FlutterUnityIntegration.MessageHandler,System.AsyncCallback,System.Object)
+// 0x00000045 System.IAsyncResult FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::BeginInvoke(FlutterUnityIntegration.MessageHandler,System.AsyncCallback,System.Object)
 extern void MessageHandlerDelegate_BeginInvoke_m0CC5C5B29E11DD03F1726B49E4B1E516479AC58D (void);
-// 0x00000047 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::EndInvoke(System.IAsyncResult)
+// 0x00000046 System.Void FlutterUnityIntegration.UnityMessageManager/MessageHandlerDelegate::EndInvoke(System.IAsyncResult)
 extern void MessageHandlerDelegate_EndInvoke_mAD2746E001DB9A3D18A1D806610542321FE0CF16 (void);
-static Il2CppMethodPointer s_methodPointers[71] = 
+static Il2CppMethodPointer s_methodPointers[70] = 
 {
 	NULL,
 	NULL,
@@ -161,7 +159,6 @@ static Il2CppMethodPointer s_methodPointers[71] =
 	MyCamera_InitializeAndroidSurface_mE284F19C1E83D6982F09C4BF4454A664A5080367,
 	MyCamera_GetTextureId_m52DC91AB773CD613635A784C5DDE72251C81D5DD,
 	MyCamera__ctor_m0CE88422A5D977C542707ED85B2ECFBD09D2A873,
-	IOSNativeAPI_sendMessageToMobileApp_m39531089215682F5D622213055FEE8AB8ED84C72,
 	IOSNativeAPI__ctor_mDCC8E1542F201EE2B4E58932C8036A9AAF43B6F7,
 	Rotate_Start_mD322E77A3CF2BEF28C4DF71D3F529107F511B1FB,
 	Rotate_Update_m73D585515036D9B7AAD8336BFB8567283CE4C7E7,
@@ -215,7 +212,7 @@ static Il2CppMethodPointer s_methodPointers[71] =
 	MessageHandlerDelegate_BeginInvoke_m0CC5C5B29E11DD03F1726B49E4B1E516479AC58D,
 	MessageHandlerDelegate_EndInvoke_mAD2746E001DB9A3D18A1D806610542321FE0CF16,
 };
-static const int32_t s_InvokerIndices[71] = 
+static const int32_t s_InvokerIndices[70] = 
 {
 	0,
 	0,
@@ -235,7 +232,6 @@ static const int32_t s_InvokerIndices[71] =
 	1258,
 	1879,
 	2132,
-	3676,
 	2132,
 	2132,
 	2132,
@@ -293,7 +289,7 @@ static const Il2CppTokenRangePair s_rgctxIndices[3] =
 {
 	{ 0x02000002, { 0, 29 } },
 	{ 0x0200000A, { 29, 11 } },
-	{ 0x0600002D, { 40, 2 } },
+	{ 0x0600002C, { 40, 2 } },
 };
 extern const uint32_t g_rgctx_U3CU3Ef__AnonymousType0_4_t93FD0713D40011506D6B5581D9D5064D1A1A31B8;
 extern const uint32_t g_rgctx_U3CidU3Ej__TPar_tB4283D6614B0A1B9713411CF590AE6445EC76C76;
@@ -386,7 +382,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	71,
+	70,
 	s_methodPointers,
 	0,
 	NULL,
