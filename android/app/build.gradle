@@ -38,7 +38,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.xraph.plugin.flutter_unity_widget_example"
+        applicationId "com.rsupport.unity_view_test"
         minSdkVersion 28
         targetSdkVersion 31
         versionCode flutterVersionCode.toInteger()
