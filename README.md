@@ -4,16 +4,16 @@ Setup flutter app to display video call from Janus server on Unity view
 
 # Setup guide
 
-Clone main source code at https://github.com/rsupport-mobile1-research/unity-view
+Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
 ```
 git clone https://github.com/rsupport-mobile1-research/unity-view.git
 ```
 
-Move to unity-view folder and clone janus client source code into unity-view folder at https://github.com/rsupport-mobile1-research/flutter_janus_client
+Move to unity-view folder and clone janus client source code into unity-view folder at [Janus client lib](https://github.com/rsupport-mobile1-research/flutter_janus_client)
 ```
 cd unity-view & git clone https://github.com/rsupport-mobile1-research/flutter_janus_client.git
 ```
-Move to flutter_janus_client folder and clone webrtc source code into flutter_janus_client folder at https://github.com/rsupport-mobile1-research/flutter-webrtc
+Move to flutter_janus_client folder and clone webrtc source code into flutter_janus_client folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
 
 ```
 cd flutter_janus_client & git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
@@ -21,7 +21,7 @@ cd flutter_janus_client & git clone https://github.com/rsupport-mobile1-research
 
 ![Alt text](/images/Flutter setup guide 1.png "Guide 1")
 
-* In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for Webrtc I will create a new branch for main to do it from this repo https://github.com/rsupport-mobile1-research/flutter-webrtc
+> In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
 
 
 # Launch code
@@ -44,4 +44,4 @@ Continue to change config NDK on android. We need to add ndk.dir in local.proper
 
 Open unity_view folder by android studio and start an android device to build the app.
 
-** Reference docs: https://github.com/juicycleff/flutter-unity-view-widget**
+> Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget) **
