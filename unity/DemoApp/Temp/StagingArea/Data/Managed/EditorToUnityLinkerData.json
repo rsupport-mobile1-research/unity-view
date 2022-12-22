@@ -625,9 +625,9 @@
             "usedInScenes": []
         },
         {
-            "managedAssemblyName": "Unity.XR.ARCore.dll",
+            "managedAssemblyName": "Unity.XR.ARKit.dll",
             "nativeClass": "",
-            "fullManagedTypeName": "UnityEngine.XR.ARCore.ARCoreLoader",
+            "fullManagedTypeName": "UnityEngine.XR.ARKit.ARKitLoader",
             "moduleName": "",
             "usedInScenes": []
         },

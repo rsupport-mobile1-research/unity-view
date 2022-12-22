@@ -11,8 +11,6 @@ ScriptsOnlyBuild:
     - UnityEditor.XR.ARCore.ARCoreSettings
     Unity.XR.ARCore.dll:
     - UnityEngine.XR.ARCore.ARCoreLoader
-    Unity.XR.ARKit.Editor.dll:
-    - UnityEditor.XR.ARKit.ARKitSettings
     Unity.XR.ARKit.dll:
     - UnityEngine.XR.ARKit.ARKitLoader
     Unity.XR.Management.Editor.dll:
@@ -988,4 +986,4 @@ ScriptsOnlyBuild:
   - Assets/FlutterUnityIntegration/Demo/Scenes/SampleScene.unity
   - Assets/FlutterUnityIntegration/Demo/Scenes/scene_2.unity
   - Assets/FlutterUnityIntegration/Demo/Scenes/NativeScene.unity
-  playerPath: /Users/vuphan/Development/rsupport/unity-view/unity/example/ios_xcode/UnityLibrary
+  playerPath: /Users/vuphan/Development/rsupport/unity-view/ios_xcode/UnityLibrary

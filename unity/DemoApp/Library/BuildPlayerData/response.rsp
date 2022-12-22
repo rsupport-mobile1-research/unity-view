@@ -1,4 +1,5 @@
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Assembly-CSharp.dll"
+-a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.XR.ARKit.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.Services.Core.Telemetry.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/UnityEngine.TestRunner.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.Timeline.dll"
@@ -18,7 +19,6 @@
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.Services.Core.Environments.Internal.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.XR.Management.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.Services.Core.Threading.dll"
--a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.XR.ARCore.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.XR.ARSubsystems.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.XR.ARFoundation.dll"
 -a="/Users/vuphan/Development/rsupport/unity-view/unity/DemoApp/Library/PlayerScriptAssemblies/Unity.Services.Core.Device.dll"

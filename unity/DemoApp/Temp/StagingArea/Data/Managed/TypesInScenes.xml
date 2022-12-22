@@ -5,8 +5,8 @@
 		<type fullname="Rotate" preserve="nothing"/>
 		<type fullname="SceneLoader" preserve="nothing"/>
 	</assembly>
-	<assembly fullname="Unity.XR.ARCore">
-		<type fullname="UnityEngine.XR.ARCore.ARCoreLoader" preserve="nothing"/>
+	<assembly fullname="Unity.XR.ARKit">
+		<type fullname="UnityEngine.XR.ARKit.ARKitLoader" preserve="nothing"/>
 	</assembly>
 	<assembly fullname="Unity.XR.Management">
 		<type fullname="UnityEngine.XR.Management.XRGeneralSettings" preserve="nothing"/>
