@@ -40,6 +40,10 @@ Config build setting for android on Unity. Select **File -> Build Settings**. In
 
 ![Alt text](/images/flutter_setup_guide_3.png "Guide 3")
 
+Make sure **Export Project** is on
+
+![Alt text](/images/flutter_setup_guide_3.1.png "Guide 3.1")
+
 Close the window and click on Switch Plaform on Build Settings popup & close the popup. Select **Flutter -> Export Android Plugin**. After done this step we will see unityLibrary under Android folder.
 
 Continue to change config NDK on android. We need to add **ndk.dir in local.properties** of android folder at **unity-view/android/local.properties** with
@@ -50,7 +54,14 @@ Continue to change config NDK on android. We need to add **ndk.dir in local.prop
 
 ![Alt text](/images/flutter_setup_guide_4.png "Guide 4")
 
-Open unity_view folder by android studio and start an android device to build the app.
+Open unity_view folder by android studio. Add unity-classes.jar in android/unityLibrary as a library by right click on unity-classes.jar -> Add as library...
+
+![Alt text](/images/flutter_setup_guide_5.png "Guide 5")
+
+Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandroidpermissions.aar, UnityARCore.aar.
+> If missing, check config build on Unity setting again
+
+Start an android device to build the app.
 
 </details>
 
