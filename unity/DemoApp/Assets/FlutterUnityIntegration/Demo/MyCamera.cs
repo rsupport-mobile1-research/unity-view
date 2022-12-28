@@ -15,11 +15,12 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
     
     private AndroidJavaObject _androidApiInstance;
 
-
+    #if !UNITY_ANDROID
     public class IOSNativeAPI {
         [DllImport("__Internal")]
         public static extern void sendMessageToMobileApp(System.IntPtr texture, String textureId);
     }
+    #endif
 
     // Start is called before the first frame update
     void Start() {
@@ -39,9 +40,12 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
             } else {
                 _androidApiInstance.Call("updateSurfaceTexture");
             }
-        } else if (Application.platform == RuntimePlatform.IPhonePlayer) {
+        }
+        #if !UNITY_ANDROID
+        if (Application.platform == RuntimePlatform.IPhonePlayer) {
             IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
         }
+        #endif
     }
 
     public void InitializeAndroidSurface( int viewportWidth, int viewportHeight) {
