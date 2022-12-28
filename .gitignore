@@ -67,6 +67,7 @@ android/.idea/
 build/
 
 android/UnityLibrary/
+iOS/UnityLibrary/
 
 #example/
 example/unity/DemoApp/Builds/

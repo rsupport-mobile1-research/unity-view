@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../flutter_janus_client/flutter-webrtc/common">
+      location = "group:UnityLibrary/Unity-iPhone.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../ios_xcode/UnityLibrary/Unity-iPhone.xcodeproj">
+      location = "group:../flutter_janus_client/flutter-webrtc/common">
    </FileRef>
    <FileRef
       location = "group:Runner.xcodeproj">
