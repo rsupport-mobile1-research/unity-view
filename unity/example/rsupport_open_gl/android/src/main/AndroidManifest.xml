@@ -1,6 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.rsupport.opengl.rsupport_open_gl">
-
-    <uses-feature android:glEsVersion="0x00030000" />
-
-</manifest>

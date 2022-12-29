@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
 @property NSString* oldTextureId;
-@property (nonatomic, retain)NSData *data;
+@property NSData* data;
+@property Boolean isDraw;
 @property id<MTLTexture> myTexture;
 
     - (void) showHostMainWindow;
