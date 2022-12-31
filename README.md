@@ -78,9 +78,15 @@ Build iOS library from Unity
 Then you do following Steps like this:
 
 > <b> Step 1 </b>
+ Select menu 'File' -> Build Setting
+ 
 ![Alt text](/images/ios_setup_1.png)
 
-
+> <b> Step 2 </b>
+ Build Setting Panel Appear -> choose iOS -> Click Switch platform
+ 
+ ![Alt text](/images/ios_setup_2.png)
+ 
 </details>
 
 > Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
