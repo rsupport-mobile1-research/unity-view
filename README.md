@@ -67,6 +67,10 @@ Start an android device to build the app.
 
 <details>
  <summary>:information_source: <b>iOS</b></summary>
+ Build iOS library from Unity
+- [Install Unity](https://unity.com/download)
+- Open source code Unity in **unity/DemoApp**
+![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
 
 </details>
