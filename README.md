@@ -83,9 +83,13 @@ Then you do following Steps like this:
 ![Alt text](/images/ios_setup_1.png)
 
 > <b> Step 2 </b>
- Build Setting Panel Appear -> choose iOS -> Click Switch platform
+ Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
  
  ![Alt text](/images/ios_setup_2.png)
+ 
+ > <b> Step 3 </b>
+ 
+ 
  
 </details>
 
