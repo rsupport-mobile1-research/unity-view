@@ -75,6 +75,10 @@ Build iOS library from Unity
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
+Then you do following Steps like this:
+
+> <b> Step 1 </b>
+![Alt text](/images/ios_setup_1.png)
 
 
 </details>
