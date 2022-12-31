@@ -74,8 +74,7 @@ Build iOS library from Unity
 - Open source code Unity in **unity/DemoApp**
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
- 
-![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
+
 
 
 </details>
