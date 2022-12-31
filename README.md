@@ -67,11 +67,13 @@ Start an android device to build the app.
 
 <details>
  <summary>:information_source: <b>iOS</b></summary>
- 
- Build iOS library from Unity
-   #0969DA [Install Unity](https://unity.com/download)
-   #0969DA Open source code Unity in **unity/DemoApp**
- 
+
+
+Build iOS library from Unity
+- [Install Unity](https://unity.com/download)
+- Open source code Unity in **unity/DemoApp**
+
+![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
  
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
