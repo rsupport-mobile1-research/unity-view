@@ -31,14 +31,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_unity_widget: 2022.2.0
+  flutter_unity_widget:
+  path:
+  image_to_byte:
   janus_client:
     path: flutter_janus_client
   pointer_interceptor: ^0.9.3+2
+#  opengl_es_bindings:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  prompt_dialog: ^1.0.9
   flutter_foreground_task: ^3.10.0
 
 dev_dependencies:

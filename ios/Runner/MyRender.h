@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UnityFramework/NativeCallProxy.h>
 #import <UIKit/UIKit.h>
+#import "FlutterRTCVideoRenderer.h"
 
 
 
@@ -15,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
 @property NSString* oldTextureId;
-@property NSData* data;
-@property Boolean isDraw;
+@property (nonatomic, retain)NSData *data;
 @property id<MTLTexture> myTexture;
+//-(void) handleDelegate;
 
     - (void) showHostMainWindow;
     - (void) unloadPlayer;
