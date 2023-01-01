@@ -86,6 +86,32 @@ Then you do following Steps like this:
  Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
  
  ![Alt text](/images/ios_setup_2.png)
+ ![Alt text](/images/ios_setup_2_1.png)
+
+> <b> Step 3 </b>
+Be select all type property like the red squard in these images
+
+ ![Alt text](/images/ios_setup_3.png)
+ ![Alt text](/images/ios_setup_4.png)
+
+> <b> Step 4 </b>
+Import package from folder 'Unity package'
+
+
+![Alt text](/images/ios_setup_5.png)
+![Alt text](/images/ios_setup_6.png)
+
+> <b> Step 5 </b>
+Now, Export Plugin for iOS from unity. You should export 'Export iOS Debug' and 'Export iOS Plugin',Unity tool will auto export to folder ios in flutter project
+
+
+![Alt text](/images/ios_setup_7.png)
+![Alt text](/images/ios_setup_8.png)
+
+
+
+
+
  
  > <b> Step 3 </b>
  
