@@ -117,12 +117,24 @@ Open folder 'unity-view' -> 'ios' -> Open Folder 'Runner.xcworkspace'. Then conf
  
 > <b> Step 7 </b>
 Add file for custom workflow WebRTC
+ 
 
+  ![Alt text](/images/ios_setup_11_1.png)
+  ![Alt text](/images/ios_setup_11_2.png)
+  ![Alt text](/images/ios_setup_11_3.png)
 
 > <b> Step 8 </b>
 Login your Developer Apple ID. Then register App bundle ID to build application on device.
 
-then you can build on device
+ 
+  ![Alt text](/images/ios_setup_12.png)
+  ![Alt text](/images/ios_setup_13.png)
+ 
+ then you should setup all environment sdk flutter
+ 
+  ![Alt text](/images/ios_setup_14.png)
+ 
+then you can build on device.
 
 
 
