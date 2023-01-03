@@ -189,3 +189,27 @@ unity/DemoApp/[Aa]ssets/[Ss]treamingAssets/aa.meta
 unity/DemoApp/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 
+unity/virtual-tv/Assets/Resources.meta
+unity/virtual-tv/Assets/Resources/BillingMode.json
+unity/virtual-tv/Assets/Resources/BillingMode.json.meta
+unity/virtual-tv/ProjectSettings/AudioManager.asset
+unity/virtual-tv/ProjectSettings/ClusterInputManager.asset
+unity/virtual-tv/ProjectSettings/DynamicsManager.asset
+unity/virtual-tv/ProjectSettings/EditorBuildSettings.asset
+unity/virtual-tv/ProjectSettings/EditorSettings.asset
+unity/virtual-tv/ProjectSettings/GraphicsSettings.asset
+unity/virtual-tv/ProjectSettings/InputManager.asset
+unity/virtual-tv/ProjectSettings/MemorySettings.asset
+unity/virtual-tv/ProjectSettings/NavMeshAreas.asset
+unity/virtual-tv/ProjectSettings/PackageManagerSettings.asset
+unity/virtual-tv/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
+unity/virtual-tv/ProjectSettings/Physics2DSettings.asset
+unity/virtual-tv/ProjectSettings/PresetManager.asset
+unity/virtual-tv/ProjectSettings/ProjectSettings.asset
+unity/virtual-tv/ProjectSettings/ProjectVersion.txt
+unity/virtual-tv/ProjectSettings/QualitySettings.asset
+unity/virtual-tv/ProjectSettings/TagManager.asset
+unity/virtual-tv/ProjectSettings/TimeManager.asset
+unity/virtual-tv/ProjectSettings/UnityConnectSettings.asset
+unity/virtual-tv/ProjectSettings/VFXManager.asset
+unity/virtual-tv/ProjectSettings/VersionControlSettings.asset
