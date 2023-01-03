@@ -108,12 +108,33 @@ Now, Export Plugin for iOS from unity. You should export 'Export iOS Debug' and 
 ![Alt text](/images/ios_setup_7.png)
 ![Alt text](/images/ios_setup_8.png)
 
+> <b> Step 6 </b>
+Open folder 'unity-view' -> 'ios' -> Open Folder 'Runner.xcworkspace'. Then config like theses images
 
-
-
-
+ ![Alt text](/images/ios_setup_9.png)
+ ![Alt text](/images/ios_setup_10.png)
+ ![Alt text](/images/ios_setup_11.png)
  
- > <b> Step 3 </b>
+> <b> Step 7 </b>
+Add file for custom workflow WebRTC
+
+
+> <b> Step 8 </b>
+Login your Developer Apple ID. Then register App bundle ID to build application on device.
+
+then you can build on device
+
+
+
+
+
+
+
+
+
+
+
+
  
  
  
