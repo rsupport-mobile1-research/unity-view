@@ -105,8 +105,8 @@ Import package from folder 'Unity package'
 Now, Export Plugin for iOS from unity. You should export 'Export iOS Debug' and 'Export iOS Plugin',Unity tool will auto export to folder ios in flutter project
 
 
-![Alt text](/images/ios_setup_7.png)
-![Alt text](/images/ios_setup_8.png)
+ ![Alt text](/images/ios_setup_7.png)
+ ![Alt text](/images/ios_setup_8.png)
 
 > <b> Step 6 </b>
 Open folder 'unity-view' -> 'ios' -> Open Folder 'Runner.xcworkspace'. Then config like theses images
