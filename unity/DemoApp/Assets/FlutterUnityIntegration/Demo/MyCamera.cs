@@ -12,6 +12,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     private Texture2D _imageTexture2D;
     private IntPtr _nativeTexturePointer;
+    private long currentNativeTextureId = -1;
     
     private AndroidJavaObject _androidApiInstance;
 
@@ -24,11 +25,24 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     // Start is called before the first frame update
     void Start() {
-        _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
-        _imageTexture2D.filterMode = FilterMode.Point;
-		_imageTexture2D.Apply();
+        // _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
+        // _imageTexture2D.filterMode = FilterMode.Point;
+		// _imageTexture2D.Apply();
+		// GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
+        // _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
+    }
+
+    void createTexture(long id) {
+        Debug.Log("currentNativeTextureId step 1");
+        _imageTexture2D = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.RGB24, true, true, new System.IntPtr(id));
+        // _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
+        // _imageTexture2D.filterMode = FilterMode.Point;
+                Debug.Log("currentNativeTextureId step 2");
+		// _imageTexture2D.Apply();
 		GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
-        _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
+                Debug.Log("currentNativeTextureId step 3");
+
+        // _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
     }
 
     // Update is called once per frame
@@ -36,19 +50,24 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
         if (Application.platform == RuntimePlatform.Android) {
             if (_androidApiInstance == null) {
                 // it is important to call this in update method. Single Threaded Rendering will run in UnityMain Thread
-                InitializeAndroidSurface(500, 500);
+                InitializeAndroidSurface();
             } else {
-                _androidApiInstance.Call("updateSurfaceTexture");
+                long nativeTextureId = _androidApiInstance.Call<long>("getTextureId");
+                if (currentNativeTextureId != nativeTextureId) {
+                    currentNativeTextureId = nativeTextureId;
+                    createTexture(currentNativeTextureId);
+                    Debug.Log("currentNativeTextureId = " + nativeTextureId);
+                }
             }
         }
-        #if !UNITY_ANDROID
-        if (Application.platform == RuntimePlatform.IPhonePlayer) {
-            IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
-        }
-        #endif
+        // #if !UNITY_ANDROID
+        // if (Application.platform == RuntimePlatform.IPhonePlayer) {
+        //     IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
+        // }
+        // #endif
     }
 
-    public void InitializeAndroidSurface( int viewportWidth, int viewportHeight) {
+    public void InitializeAndroidSurface() {
         AndroidJavaClass androidWebViewApiClass =
             new AndroidJavaClass("com.cloudwebrtc.webrtc.TextureRendererPlugIn");
         
@@ -57,8 +76,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
         AndroidJavaObject currentActivityObject = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
 
         _androidApiInstance =
-            androidWebViewApiClass.CallStatic<AndroidJavaObject>("Instance", currentActivityObject,
-                viewportWidth, viewportHeight, _nativeTexturePointer.ToInt32());
+            androidWebViewApiClass.CallStatic<AndroidJavaObject>("Instance", currentActivityObject);
     }
 
     public void GetTextureId(String data) {
