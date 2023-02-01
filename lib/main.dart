@@ -15,7 +15,7 @@ import 'screens/api_screen.dart';
 import 'screens/loader_screen.dart';
 import 'screens/simple_screen.dart';
 
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }

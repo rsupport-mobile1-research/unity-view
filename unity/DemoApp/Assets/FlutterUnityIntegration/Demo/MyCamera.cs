@@ -33,6 +33,11 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
     }
 
     void createTexture(long id) {
+        if (id == -1 && _imageTexture2D != null) {
+            _imageTexture2D = null;
+            GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
+            return;
+        }
         Debug.Log("currentNativeTextureId step 1");
         _imageTexture2D = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.RGB24, true, true, new System.IntPtr(id));
         // _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
