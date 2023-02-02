@@ -1,12 +1,13 @@
 
-import 'dart:typed_data';
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 import 'package:janus_client/janus_client.dart';
-import 'package:janus_client/method_platform/rsupport_draw.dart';
+//import 'package:janus_client/method_platform/rsupport_draw.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
 import 'package:flutter/foundation.dart';
-
+import 'dart:async';
 import 'janus/Helper.dart';
 import 'janus/conf.dart';
 
@@ -16,7 +17,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage('Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage(this.title);
 
   final String title;
 
@@ -44,25 +45,25 @@ class _MyHomePageState extends State<MyHomePage> {
   late UnityWidgetController _unityWidgetController;
   int myid  = 0;
   bool isInit = false;
-
-  final janusDrawController = RsupportDraw();
+  late JanusClient j;
+  //final janusDrawController = RsupportDraw();
   final _width = 200.0;
   final _height = 200.0;
   bool front = true;
-  dynamic myRoom = 1234;
-  Map<dynamic, dynamic> feedStreams = {};
-  Map<dynamic, dynamic> subscriptions = {};
-  Map<dynamic, dynamic> subStreams = {};
-  late JanusClient j;
-  Map<dynamic, dynamic> remoteStreams = {};
-  Map<dynamic, dynamic> mediaStreams = {};
-  List<SubscriberUpdateStream> subscribeStreams = [];
-  List<SubscriberUpdateStream> unSubscribeStreams = [];
   late RestJanusTransport rest;
   late WebSocketJanusTransport ws;
   late JanusSession session;
   late JanusVideoRoomPlugin plugin;
   JanusVideoRoomPlugin? remoteHandle;
+  late int myId;
+  int myRoom = 1234;
+  Map<int, dynamic> feedStreams = {};
+  Map<int?, dynamic> subscriptions = {};
+  Map<int, dynamic> feeds = {};
+  Map<String, int> subStreams = {};
+
+
+  Map<int, RemoteStream> remoteStreams = {};
 
 
 
@@ -80,17 +81,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   initialize() async {
-    ws = WebSocketJanusTransport(url: servermap['servercheap']);
-    j = JanusClient(
-        transport: ws,
-        isUnifiedPlan: true,
-        iceServers: [
-          RTCIceServer(
-              urls: "stun:stun1.l.google.com:19302",
-              username: "",
-              credential: "")
-        ]);
+    ws = WebSocketJanusTransport(url: servermap['janus_ws']);
+    j = JanusClient(transport: ws, isUnifiedPlan: true, iceServers: [
+      RTCIceServer(
+          urls: "stun:stun1.l.google.com:19302", username: "", credential: "")
+    ]);
     session = await j.createSession();
+    plugin = await session.attach<JanusVideoRoomPlugin>();
   }
   @override
   Widget build(BuildContext context) {
@@ -198,7 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _onUnityCreated(controller) {
     controller.resume();
     _unityWidgetController = controller;
-    janusDrawController.testJanusSever(myid.toString());
+    //janusDrawController.testJanusSever(myid.toString());
   }
 
   void setRotationSpeed(Uint8List speed) {
@@ -212,33 +209,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-  subscribeTo(List<Map<dynamic, dynamic>> sources) async {
+  subscribeTo(List<Map<String, dynamic>> sources) async {
     if (sources.length == 0) return;
     var streams = (sources)
         .map((e) => PublisherStream(mid: e['mid'], feed: e['feed']))
         .toList();
     if (remoteHandle != null) {
-      await remoteHandle?.update(
-          subscribe: subscribeStreams, unsubscribe: unSubscribeStreams);
-      subscribeStreams = [];
-      unSubscribeStreams = [];
+      await remoteHandle?.subscribeToStreams(streams);
       return;
     }
     remoteHandle = await session.attach<JanusVideoRoomPlugin>();
-    remoteHandle?.initDataChannel();
-    remoteHandle?.data?.listen((event) {
-      print('subscriber data:=>');
-      print(event.text);
-    });
-    remoteHandle?.webRTCHandle?.peerConnection?.onRenegotiationNeeded =
-        () async {
-      await remoteHandle?.start(myRoom);
-    };
-    await remoteHandle?.joinSubscriber(myRoom, streams: streams);
+    print(sources);
+    var start = await remoteHandle?.joinSubscriber(myRoom, streams: streams);
     remoteHandle?.typedMessages?.listen((event) async {
       Object data = event.event.plugindata?.data;
-
       if (data is VideoRoomAttachedEvent) {
+        print('Attached event');
         data.streams?.forEach((element) {
           if (element.mid != null && element.feedId != null) {
             subStreams[element.mid!] = element.feedId!;
@@ -248,23 +234,22 @@ class _MyHomePageState extends State<MyHomePage> {
             subscriptions[element.feedId] = {};
           subscriptions[element.feedId][element.mid] = true;
         });
+        print('substreams');
+        print(subStreams);
       }
       if (event.jsep != null) {
         await remoteHandle?.handleRemoteJsep(event.jsep);
-        await remoteHandle?.start(myRoom);
+        await start!();
       }
     }, onError: (error, trace) {
-      print('error');
-      print(error.toString());
       if (error is JanusError) {
         print(error.toMap());
       }
     });
-
     remoteHandle?.remoteTrack?.listen((event) async {
       String mid = event.mid!;
       if (subStreams[mid] != null) {
-        dynamic feedId = subStreams[mid]!;
+        int feedId = subStreams[mid]!;
         if (!remoteStreams.containsKey(feedId)) {
           RemoteStream temp = RemoteStream(feedId.toString());
           await temp.init();
@@ -284,42 +269,33 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return;
   }
+
   Future<void> joinRoom() async {
-    plugin = await session.attach<JanusVideoRoomPlugin>();
-    await plugin.initDataChannel();
-    plugin.data?.listen((event) {
-      print('subscriber data:=>');
-      print(event.text);
-    });
-    await plugin.initializeMediaDevices(
-        mediaConstraints: {'video': true, 'audio': false});
-    RemoteStream myStream = RemoteStream('0');
-    await myStream.init();
-    myStream.videoRenderer.srcObject = plugin.webRTCHandle!.localStream;
+    await plugin.initializeMediaDevices();
+    RemoteStream mystr = RemoteStream('0');
+    await mystr.init();
+    mystr.videoRenderer.srcObject = plugin.webRTCHandle!.localStream;
     setState(() {
-      remoteStreams.putIfAbsent(0, () => myStream);
+      remoteStreams.putIfAbsent(0, () => mystr);
     });
     await plugin.joinPublisher(myRoom, displayName: "Shivansh");
-    plugin.webRTCHandle?.peerConnection?.onRenegotiationNeeded = () async {
-      var offer = await plugin.createOffer(
-          audioRecv: false, audioSend: true, videoRecv: false, videoSend: true);
-      await plugin.configure(sessionDescription: offer);
-    };
     plugin.typedMessages?.listen((event) async {
       Object data = event.event.plugindata?.data;
       if (data is VideoRoomJoinedEvent) {
         (await plugin.publishMedia(bitrate: 3000000));
-        List<Map<dynamic, dynamic>> publisherStreams = [];
+        List<Map<String, dynamic>> publisherStreams = [];
         for (Publishers publisher in data.publishers ?? []) {
-          feedStreams[publisher.id!] = {
-            "id": publisher.id,
-            "display": publisher.display,
-            "streams": publisher.streams
-          };
           for (Streams stream in publisher.streams ?? []) {
-            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            feedStreams[publisher.id!] = {
+              "id": publisher.id,
+              "display": publisher.display,
+              "streams": publisher.streams
+            };
+            publisherStreams.add({"feed": publisher.id, ...stream.toJson()});
             if (publisher.id != null && stream.mid != null) {
               subStreams[stream.mid!] = publisher.id!;
+              print("substreams is:");
+              print(subStreams);
             }
           }
         }
@@ -334,21 +310,27 @@ class _MyHomePageState extends State<MyHomePage> {
             "streams": publisher.streams
           };
           for (Streams stream in publisher.streams ?? []) {
-            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            publisherStreams.add({"feed": publisher.id, ...stream.toJson()});
             if (publisher.id != null && stream.mid != null) {
               subStreams[stream.mid!] = publisher.id!;
+              print("substreams is:");
+              print(subStreams);
             }
-            subscribeStreams.add(SubscriberUpdateStream(
-                feed: publisher.id, mid: stream.mid, crossrefid: null));
           }
         }
+        print('got new publishers');
+        print(publisherStreams);
         subscribeTo(publisherStreams);
       }
       if (data is VideoRoomLeavingEvent) {
-      //  unSubscribeStream(data.leaving!);
+        print('publisher is leaving');
+        print(data.leaving);
+        //unSubscribeStream(data.leaving!);
       }
-      // if (data is VideoRoomConfigured) {}
-      plugin.handleRemoteJsep(event.jsep);
+      if (data is VideoRoomConfigured) {
+        print('typed event with jsep' + event.jsep.toString());
+        await plugin.handleRemoteJsep(event.jsep);
+      }
     }, onError: (error, trace) {
       if (error is JanusError) {
         print(error.toMap());
