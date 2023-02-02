@@ -6,12 +6,9 @@ import 'dart:convert';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import 'package:janus_client/janus_client.dart';
 
-List<StreamingItem> streamingItemFromMap(String str) =>
-    List<StreamingItem>.from(
-        json.decode(str).map((x) => StreamingItem.fromMap(x)));
+List<StreamingItem> streamingItemFromMap(String str) => List<StreamingItem>.from(json.decode(str).map((x) => StreamingItem.fromMap(x)));
 
-String streamingItemToMap(List<StreamingItem> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+String streamingItemToMap(List<StreamingItem> data) => json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
 
 class StreamingItem {
   StreamingItem({
@@ -53,9 +50,7 @@ class StreamingItem {
     description: json["description"],
     metadata: json["metadata"],
     enabled: json["enabled"],
-    media: json["media"] == null
-        ? []
-        : (json["media"] as List).map((x) => Media.fromMap(x)).toList(),
+    media: json["media"] == null ? [] : (json["media"] as List).map((x) => Media.fromMap(x)).toList(),
   );
 
   Map<String, dynamic> toMap() => {
@@ -64,7 +59,7 @@ class StreamingItem {
     "description": description,
     "metadata": metadata,
     "enabled": enabled,
-    "media": List<dynamic>.from(media.map((x) => x.toMap())),
+    "media":  List<dynamic>.from(media.map((x) => x.toMap())),
   };
 }
 
@@ -116,21 +111,20 @@ class RemoteStream {
   RTCVideoRenderer audioRenderer = RTCVideoRenderer();
   String id;
 
-  Future<void> dispose() async {
+ Future<void> dispose()async{
     await stopAllTracksAndDispose(video);
     await stopAllTracksAndDispose(audio);
-    videoRenderer.srcObject = null;
-    audioRenderer.srcObject = null;
+    videoRenderer.srcObject=null;
+    audioRenderer.srcObject=null;
     await videoRenderer.dispose();
     await audioRenderer.dispose();
   }
 
   RemoteStream(this.id);
-  createAudio() async {
+  createAudio()async{
     audio = await createLocalMediaStream('audio_$id');
   }
-
-  createVideo() async {
+  createVideo()async{
     video = await createLocalMediaStream('video_$id');
   }
 
@@ -143,3 +137,4 @@ class RemoteStream {
     videoRenderer.srcObject = video;
   }
 }
+
