@@ -25,11 +25,13 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     // Start is called before the first frame update
     void Start() {
-        // _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
-        // _imageTexture2D.filterMode = FilterMode.Point;
-		// _imageTexture2D.Apply();
-		// GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
-        // _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
+        #if !UNITY_ANDROID
+        _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
+        _imageTexture2D.filterMode = FilterMode.Point;
+		_imageTexture2D.Apply();
+		GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
+        _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
+        #endif
     }
 
     void createTexture(long id) {
@@ -38,20 +40,13 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
             GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
             return;
         }
-        Debug.Log("currentNativeTextureId step 1");
         _imageTexture2D = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.RGB24, true, true, new System.IntPtr(id));
-        // _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
-        // _imageTexture2D.filterMode = FilterMode.Point;
-                Debug.Log("currentNativeTextureId step 2");
-		// _imageTexture2D.Apply();
 		GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
-                Debug.Log("currentNativeTextureId step 3");
-
-        // _nativeTexturePointer = _imageTexture2D.GetNativeTexturePtr();
     }
 
     // Update is called once per frame
     void Update() {
+        #if UNITY_ANDROID
         if (Application.platform == RuntimePlatform.Android) {
             if (_androidApiInstance == null) {
                 // it is important to call this in update method. Single Threaded Rendering will run in UnityMain Thread
@@ -65,11 +60,12 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
                 }
             }
         }
-        // #if !UNITY_ANDROID
-        // if (Application.platform == RuntimePlatform.IPhonePlayer) {
-        //     IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
-        // }
-        // #endif
+        #endif
+        #if !UNITY_ANDROID
+        if (Application.platform == RuntimePlatform.IPhonePlayer) {
+            IOSNativeAPI.sendMessageToMobileApp(_nativeTexturePointer, _nativeTexturePointer.ToString());
+        }
+        #endif
     }
 
     public void InitializeAndroidSurface() {
