@@ -13,7 +13,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
     private Texture2D _imageTexture2D;
     private IntPtr _nativeTexturePointer;
     private long currentNativeTextureId = -1;
-    
+
     private AndroidJavaObject _androidApiInstance;
 
     #if !UNITY_ANDROID
@@ -26,7 +26,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
     // Start is called before the first frame update
     void Start() {
         #if !UNITY_ANDROID
-        _imageTexture2D = new Texture2D(500, 500, TextureFormat.ARGB32, false);
+        _imageTexture2D = new Texture2D(640, 480, TextureFormat.ARGB32, false);
         _imageTexture2D.filterMode = FilterMode.Point;
 		_imageTexture2D.Apply();
 		GetComponent<Renderer>().material.mainTexture = _imageTexture2D;
