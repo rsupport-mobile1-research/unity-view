@@ -7,7 +7,6 @@ import 'package:janus_client/janus_client.dart';
 import 'package:flutter_webrtc/flutter_webrtc.dart';
 import '../janus/Helper.dart';
 import '../janus/conf.dart';
-import 'package:logging/logging.dart';
 import 'package:flutter/foundation.dart';
 
 class SimpleScreen extends StatefulWidget {
