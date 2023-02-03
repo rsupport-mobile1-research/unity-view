@@ -211,7 +211,7 @@ packages:
       path: flutter_janus_client
       relative: true
     source: path
-    version: "2.2.9"
+    version: "2.2.4"
   js:
     dependency: transitive
     description:
@@ -359,6 +359,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  prompt_dialog:
+    dependency: "direct main"
+    description:
+      name: prompt_dialog
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.9"
   pub_semver:
     dependency: transitive
     description:

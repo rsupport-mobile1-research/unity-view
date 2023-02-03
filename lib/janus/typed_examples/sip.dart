@@ -15,11 +15,11 @@ class _SipExampleState extends State<TypedSipExample> {
   late JanusSession session;
   JanusSipPlugin? sip;
   TextEditingController proxyController =
-      TextEditingController(text: "sip:sip.linphone.org");
+      TextEditingController(text: "sip:sip.theansr.com");
   TextEditingController usernameController =
-      TextEditingController(text: "sip:maksim11111@sip.linphone.org");
+      TextEditingController(text: "sip:test_janus@sip.theansr.com");
   TextEditingController secretController =
-      TextEditingController(text: "1234567q");
+      TextEditingController(text: "+iBBfWDygkaF8P21tXkV");
   TextEditingController callUriController =
       TextEditingController(text: "sip:00918744849050@sip.theansr.com");
   RTCVideoRenderer _remoteVideoRenderer = RTCVideoRenderer();
@@ -28,7 +28,6 @@ class _SipExampleState extends State<TypedSipExample> {
   dynamic incomingDialog;
   MediaStream? localStream;
   bool enableCallButton = true;
-  bool isIncomingCall = false;
 
   dynamic registerDialog;
   dynamic callDialog;
@@ -36,8 +35,7 @@ class _SipExampleState extends State<TypedSipExample> {
   dynamic _setState;
 
   Future<void> localMediaSetup() async {
-    MediaStream? temp = await sip?.initializeMediaDevices(
-        mediaConstraints: {'audio': true, 'video': false});
+    MediaStream? temp = await sip?.initializeMediaDevices(useDisplayMediaDevices: false);
     localStream = temp;
   }
 
@@ -52,6 +50,7 @@ class _SipExampleState extends State<TypedSipExample> {
         videoSend: false, videoRecv: false, audioSend: true, audioRecv: true);
     await sip?.call(callUriController.text,
         offer: offer, autoAcceptReInvites: false);
+    // nameController.text = "";
   }
 
   openRegisterDialog() async {
@@ -210,9 +209,6 @@ class _SipExampleState extends State<TypedSipExample> {
         await makeCallDialog();
       }
       if (data is SipIncomingCallEvent) {
-        setState(() {
-          isIncomingCall = true;
-        });
         var dialog =
             await showIncomingCallDialog(data.result?.callee, even.jsep);
         setState(() {
@@ -254,12 +250,10 @@ class _SipExampleState extends State<TypedSipExample> {
         print(data);
       }
       if (data is SipHangupEvent) {
-        if (!isIncomingCall) {
-          _setState(() {
-            enableCallButton = true;
-            statusMessage = "";
-          });
-        }
+        _setState(() {
+          enableCallButton = true;
+          statusMessage = "";
+        });
 
         await stopAllTracksAndDispose(localStream);
         var dialog;
@@ -292,9 +286,7 @@ class _SipExampleState extends State<TypedSipExample> {
                       onPressed: () async {
                         await stopAllTracksAndDispose(localStream);
                         Navigator.of(context).pop(dialog);
-                        if (isIncomingCall) {
-                          Navigator.of(context).pop(dialog);
-                        }
+                        // nameController.clear();
                       },
                       child: Text('Okay'))
                 ],
@@ -333,8 +325,7 @@ class _SipExampleState extends State<TypedSipExample> {
   }
 
   Future<dynamic> showIncomingCallDialog(
-      String? caller, RTCSessionDescription? remoteOffer) async {
-    await sip?.handleRemoteJsep(remoteOffer);
+      String? caller, RTCSessionDescription? jsep) async {
     return showDialog(
         context: context,
         builder: (context) {
@@ -347,13 +338,7 @@ class _SipExampleState extends State<TypedSipExample> {
                     Navigator.of(context, rootNavigator: true)
                         .pop(incomingDialog);
                     Navigator.of(context, rootNavigator: true).pop(callDialog);
-                    // since in this example for calling we are using offer so we have to send answer to complete the circle
-                    var answer = await sip?.createAnswer(
-                        audioRecv: true,
-                        audioSend: true,
-                        videoRecv: false,
-                        videoSend: false);
-                    await sip?.accept(sessionDescription: answer);
+                    await sip?.accept();
                   },
                   child: Text('Accept')),
               ElevatedButton(

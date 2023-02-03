@@ -31,13 +31,8 @@ class _SimpleScreenState extends State<SimpleScreen>
 
   /// Video call
   late JanusClient j;
-  Map<dynamic, RemoteStream> remoteStreams = {};
-  Map<dynamic, dynamic> feedStreams = {};
-  Map<dynamic, dynamic> subscriptions = {};
-  Map<dynamic, dynamic> subStreams = {};
-  Map<dynamic, MediaStream?> mediaStreams = {};
-  List<SubscriberUpdateStream> subscribeStreams = [];
-  List<SubscriberUpdateStream> unSubscribeStreams = [];
+  Map<int, RemoteStream> remoteStreams = {};
+
   late RestJanusTransport rest;
   late WebSocketJanusTransport ws;
   late JanusSession session;
@@ -45,56 +40,44 @@ class _SimpleScreenState extends State<SimpleScreen>
   JanusVideoRoomPlugin? remoteHandle;
   late int myId;
   bool front = true;
-  dynamic myRoom = 1234;
+  int myRoom = 1234;
+  Map<int, dynamic> feedStreams = {};
+  Map<int?, dynamic> subscriptions = {};
+  Map<int, dynamic> feeds = {};
+  Map<String, int> subStreams = {};
+  Map<int, MediaStream?> mediaStreams = {};
 
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
     initialize();
   }
-
   initialize() async {
-    ws = WebSocketJanusTransport(url: servermap['servercheap']);
-    j = JanusClient(
-        transport: ws,
-        isUnifiedPlan: true,
-        iceServers: [
-          RTCIceServer(
-              urls: "stun:stun1.l.google.com:19302",
-              username: "",
-              credential: "")
-        ],
-        loggerLevel: Level.FINE);
+    ws = WebSocketJanusTransport(url: servermap['janus_ws']);
+    j = JanusClient(transport: ws, isUnifiedPlan: true, iceServers: [
+      RTCIceServer(
+          urls: "stun:stun1.l.google.com:19302", username: "", credential: "")
+    ]);
     session = await j.createSession();
+    plugin = await session.attach<JanusVideoRoomPlugin>();
   }
 
-  subscribeTo(List<Map<dynamic, dynamic>> sources) async {
+  subscribeTo(List<Map<String, dynamic>> sources) async {
     if (sources.length == 0) return;
     var streams = (sources)
         .map((e) => PublisherStream(mid: e['mid'], feed: e['feed']))
         .toList();
     if (remoteHandle != null) {
-      await remoteHandle?.update(
-          subscribe: subscribeStreams, unsubscribe: unSubscribeStreams);
-      subscribeStreams = [];
-      unSubscribeStreams = [];
+      await remoteHandle?.subscribeToStreams(streams);
       return;
     }
     remoteHandle = await session.attach<JanusVideoRoomPlugin>();
-    remoteHandle?.initDataChannel();
-    remoteHandle?.data?.listen((event) {
-      print('subscriber data:=>');
-      print(event.text);
-    });
-    remoteHandle?.webRTCHandle?.peerConnection?.onRenegotiationNeeded =
-        () async {
-      await remoteHandle?.start(myRoom);
-    };
-    await remoteHandle?.joinSubscriber(myRoom, streams: streams);
+    print(sources);
+    var start = await remoteHandle?.joinSubscriber(myRoom, streams: streams);
     remoteHandle?.typedMessages?.listen((event) async {
       Object data = event.event.plugindata?.data;
-
       if (data is VideoRoomAttachedEvent) {
+        print('Attached event');
         data.streams?.forEach((element) {
           if (element.mid != null && element.feedId != null) {
             subStreams[element.mid!] = element.feedId!;
@@ -104,14 +87,14 @@ class _SimpleScreenState extends State<SimpleScreen>
             subscriptions[element.feedId] = {};
           subscriptions[element.feedId][element.mid] = true;
         });
+        print('substreams');
+        print(subStreams);
       }
       if (event.jsep != null) {
         await remoteHandle?.handleRemoteJsep(event.jsep);
-        await remoteHandle?.start(myRoom);
+        await start!();
       }
     }, onError: (error, trace) {
-      print('error');
-      print(error.toString());
       if (error is JanusError) {
         print(error.toMap());
       }
@@ -119,7 +102,7 @@ class _SimpleScreenState extends State<SimpleScreen>
     remoteHandle?.remoteTrack?.listen((event) async {
       String mid = event.mid!;
       if (subStreams[mid] != null) {
-        dynamic feedId = subStreams[mid]!;
+        int feedId = subStreams[mid]!;
         if (!remoteStreams.containsKey(feedId)) {
           RemoteStream temp = RemoteStream(feedId.toString());
           await temp.init();
@@ -141,41 +124,31 @@ class _SimpleScreenState extends State<SimpleScreen>
   }
 
   Future<void> joinRoom() async {
-    plugin = await session.attach<JanusVideoRoomPlugin>();
-    await plugin.initDataChannel();
-    plugin.data?.listen((event) {
-      print('subscriber data:=>');
-      print(event.text);
-    });
-    await plugin.initializeMediaDevices(
-        mediaConstraints: {'video': true, 'audio': false});
-    RemoteStream myStream = RemoteStream('0');
-    await myStream.init();
-    myStream.videoRenderer.srcObject = plugin.webRTCHandle!.localStream;
+    await plugin.initializeMediaDevices();
+    RemoteStream mystr = RemoteStream('0');
+    await mystr.init();
+    mystr.videoRenderer.srcObject = plugin.webRTCHandle!.localStream;
     setState(() {
-      remoteStreams.putIfAbsent(0, () => myStream);
+      remoteStreams.putIfAbsent(0, () => mystr);
     });
     await plugin.joinPublisher(myRoom, displayName: "Shivansh");
-    plugin.webRTCHandle?.peerConnection?.onRenegotiationNeeded = () async {
-      var offer = await plugin.createOffer(
-          audioRecv: false, audioSend: true, videoRecv: false, videoSend: true);
-      await plugin.configure(sessionDescription: offer);
-    };
     plugin.typedMessages?.listen((event) async {
       Object data = event.event.plugindata?.data;
       if (data is VideoRoomJoinedEvent) {
         (await plugin.publishMedia(bitrate: 3000000));
-        List<Map<dynamic, dynamic>> publisherStreams = [];
+        List<Map<String, dynamic>> publisherStreams = [];
         for (Publishers publisher in data.publishers ?? []) {
-          feedStreams[publisher.id!] = {
-            "id": publisher.id,
-            "display": publisher.display,
-            "streams": publisher.streams
-          };
           for (Streams stream in publisher.streams ?? []) {
-            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            feedStreams[publisher.id!] = {
+              "id": publisher.id,
+              "display": publisher.display,
+              "streams": publisher.streams
+            };
+            publisherStreams.add({"feed": publisher.id, ...stream.toJson()});
             if (publisher.id != null && stream.mid != null) {
               subStreams[stream.mid!] = publisher.id!;
+              print("substreams is:");
+              print(subStreams);
             }
           }
         }
@@ -190,21 +163,27 @@ class _SimpleScreenState extends State<SimpleScreen>
             "streams": publisher.streams
           };
           for (Streams stream in publisher.streams ?? []) {
-            publisherStreams.add({"feed": publisher.id, ...stream.toMap()});
+            publisherStreams.add({"feed": publisher.id, ...stream.toJson()});
             if (publisher.id != null && stream.mid != null) {
               subStreams[stream.mid!] = publisher.id!;
+              print("substreams is:");
+              print(subStreams);
             }
-            subscribeStreams.add(SubscriberUpdateStream(
-                feed: publisher.id, mid: stream.mid, crossrefid: null));
           }
         }
+        print('got new publishers');
+        print(publisherStreams);
         subscribeTo(publisherStreams);
       }
       if (data is VideoRoomLeavingEvent) {
+        print('publisher is leaving');
+        print(data.leaving);
         unSubscribeStream(data.leaving!);
       }
-      // if (data is VideoRoomConfigured) {}
-      plugin.handleRemoteJsep(event.jsep);
+      if (data is VideoRoomConfigured) {
+        print('typed event with jsep' + event.jsep.toString());
+        await plugin.handleRemoteJsep(event.jsep);
+      }
     }, onError: (error, trace) {
       if (error is JanusError) {
         print(error.toMap());
@@ -223,13 +202,14 @@ class _SimpleScreenState extends State<SimpleScreen>
     streamRemoved?.getTracks().forEach((element) async {
       await element.stop();
     });
-    unSubscribeStreams = (feed['streams'] as List<Streams>).map((stream) {
-      return SubscriberUpdateStream(
-          feed: id, mid: stream.mid, crossrefid: null);
-    }).toList();
+    var unsubscribe = {
+      "request": "unsubscribe",
+      "streams": [
+        {feed: id}
+      ]
+    };
     if (remoteHandle != null)
-      await remoteHandle?.update(unsubscribe: unSubscribeStreams);
-    unSubscribeStreams = [];
+      await remoteHandle?.send(data: {"message": unsubscribe});
     this.subscriptions.remove(id);
   }
 
@@ -239,8 +219,6 @@ class _SimpleScreenState extends State<SimpleScreen>
     await remoteHandle?.dispose();
     await plugin.dispose();
     session.dispose();
-
-    _unityWidgetController.dispose();
   }
 
   callEnd() async {
@@ -251,22 +229,14 @@ class _SimpleScreenState extends State<SimpleScreen>
     remoteStreams.forEach((key, value) async {
       value.dispose();
     });
+    setState(() {
+      remoteStreams = {};
+    });
+    subStreams.clear();
+    subscriptions.clear();
     await plugin.webRTCHandle!.localStream?.dispose();
     await plugin.dispose();
     await remoteHandle?.dispose();
-    remoteHandle = null;
-    setState(() {
-      remoteStreams.clear();
-      feedStreams.clear();
-      subStreams.clear();
-      subscriptions.clear();
-      mediaStreams.clear();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -423,28 +393,15 @@ class _SimpleScreenState extends State<SimpleScreen>
                                           front = !front;
                                         });
                                         await plugin.switchCamera(
-                                            deviceId:
-                                            await getCameraDeviceId(front));
-                                        RemoteStream myStream =
-                                        RemoteStream('0');
-                                        await myStream.init();
-                                        myStream.videoRenderer.srcObject =
+                                            deviceId: await getCameraDeviceId(front));
+                                        RemoteStream mystr = RemoteStream('0');
+                                        await mystr.init();
+                                        mystr.videoRenderer.srcObject =
                                             plugin.webRTCHandle!.localStream;
                                         setState(() {
                                           remoteStreams.remove(0);
-                                          remoteStreams[0] = myStream;
+                                          remoteStreams[0] = mystr;
                                         });
-                                      }),
-                                  flex: 1),
-                              Expanded(
-                                  child: IconButton(
-                                      icon: Icon(
-                                        Icons.send_sharp,
-                                        color: Colors.blue,
-                                      ),
-                                      onPressed: () async {
-                                        await plugin.sendData("cool");
-                                        await remoteHandle?.sendData("cool");
                                       }),
                                   flex: 1),
                             ]),

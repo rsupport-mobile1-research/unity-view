@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:unity_view_test/screens/no_interaction_screen.dart';
 import 'package:unity_view_test/screens/orientation_screen.dart';
 
-import 'janus/JanusHome.dart';
+import 'janus/Home.dart';
 import 'janus/typed_examples/audio_bridge.dart';
 import 'janus/typed_examples/screen_share_videoroom.dart';
 import 'janus/typed_examples/sip.dart';
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MenuScreen(),
         '/simple': (context) => SimpleScreen(),
-        '/janus': (context) => JanusHome(),
+        '/janus': (context) => Home(),
         '/loader': (context) => LoaderScreen(),
         '/orientation': (context) => OrientationScreen(),
         '/api': (context) => ApiScreen(),

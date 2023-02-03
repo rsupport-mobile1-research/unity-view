@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class JanusHome extends StatefulWidget {
+class Home extends StatefulWidget {
   @override
-  _JanusHomeState createState() => _JanusHomeState();
+  _HomeState createState() => _HomeState();
 }
 
-class _JanusHomeState extends State<JanusHome> {
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,12 +18,11 @@ class _JanusHomeState extends State<JanusHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ListTile(
-                    title: Text.rich(
-                      TextSpan(children: [
+                    title:
+                      Text.rich(TextSpan(children: [
                         TextSpan(text: "Typed Video Room V2 Unified"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
@@ -32,15 +31,14 @@ class _JanusHomeState extends State<JanusHome> {
                     },
                   ),
                   ListTile(
-                    title: Text.rich(TextSpan(children: [
-                      TextSpan(
-                          text: "Screen Share Typed Video Room V2 Unified"),
-                      TextSpan(
-                          text: "  New", style: TextStyle(color: Colors.green))
-                    ])),
+                    title: Text.rich(
+                        TextSpan(children: [
+                          TextSpan(text: "Screen Share Typed Video Room V2 Unified"),
+                          TextSpan(
+                              text: "  New", style: TextStyle(color: Colors.green))
+                        ])),
                     onTap: () {
-                      Navigator.of(context).pushNamed(
-                          "/screen_share_typed_video_room_v2_unified");
+                      Navigator.of(context).pushNamed("/screen_share_typed_video_room_v2_unified");
                     },
                   ),
                   ListTile(
@@ -48,8 +46,7 @@ class _JanusHomeState extends State<JanusHome> {
                       TextSpan(children: [
                         TextSpan(text: "Typed streaming Unified"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
@@ -58,11 +55,10 @@ class _JanusHomeState extends State<JanusHome> {
                   ),
                   ListTile(
                     title: Text.rich(
-                      TextSpan(children: [
+                       TextSpan(children: [
                         TextSpan(text: "Typed Video Call Unified"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
@@ -74,8 +70,7 @@ class _JanusHomeState extends State<JanusHome> {
                       TextSpan(children: [
                         TextSpan(text: "Typed Audio Bridge Unified"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
@@ -87,8 +82,7 @@ class _JanusHomeState extends State<JanusHome> {
                       TextSpan(children: [
                         TextSpan(text: "Typed Text Room"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
@@ -100,8 +94,7 @@ class _JanusHomeState extends State<JanusHome> {
                       TextSpan(children: [
                         TextSpan(text: "Typed Sip Example"),
                         TextSpan(
-                            text: "  New",
-                            style: TextStyle(color: Colors.green))
+                            text: "  New", style: TextStyle(color: Colors.green))
                       ]),
                     ),
                     onTap: () {
