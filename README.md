@@ -9,15 +9,18 @@ Clone main source code at [Main repo](https://github.com/rsupport-mobile1-resear
 git clone https://github.com/rsupport-mobile1-research/unity-view.git
 ```
 
-Move to unity-view folder and clone janus client source code into unity-view folder at [Janus client lib](https://github.com/rsupport-mobile1-research/flutter_janus_client) & switch to **stable_v2_dev** branch
+Move to unity-view folder and clone janus client source code into unity-view folder at [Janus client lib](https://github.com/rsupport-mobile1-research/flutter_janus_client) and then move to flutter_janus_client to switch source branch **stable_v2_dev** branch
 ```
-cd unity-view & git clone https://github.com/rsupport-mobile1-research/flutter_janus_client.git & git checkout stable_v2_dev
+cd unity-view
+git clone https://github.com/rsupport-mobile1-research/flutter_janus_client.git
+cd flutter_janus_client
+git checkout stable_v2_dev
 ```
 
-Move to flutter_janus_client folder and clone webrtc source code into flutter_janus_client folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+Clone webrtc source code into flutter_janus_client folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
 
 ```
-cd flutter_janus_client & git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 ```
 
 ![Alt text](/images/flutter_setup_guide_1.png "Guide 1")
