@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{8454A3E8-CD6F-E229-B101-0AFF15D18447}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/FlutterUnityIntegration/Demo/MyCamera.cs">
+    <Files>
+      <File FileName="Assets/FlutterUnityIntegration/Demo/MyCamera.cs" Line="27" Column="49" />
+      <File FileName="Assets/FlutterUnityIntegration/Editor/XCodePostBuild.cs" Line="54" Column="1" />
+      <File FileName="Assets/FlutterUnityIntegration/Demo/GameManager.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/Demo/SceneLoader.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/UnityMessageManager.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/Editor/Build.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/link.xml" />
+      <File FileName="Assets/FlutterUnityIntegration/NativeAPI.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/Editor/SweetShellHelper.cs" />
+      <File FileName="Assets/FlutterUnityIntegration/SingletonMonoBehaviour.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="DemoApp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="FlutterUnityIntegration" expanded="True">
+                <Node name="Demo" expanded="True">
+                  <Node name="MyCamera.cs" selected="True" />
+                </Node>
+                <Node name="Editor" expanded="True" />
+                <Node name="Plugins" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f21f8af3-6895-46d4-9edd-f1625f6ed0b8" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
