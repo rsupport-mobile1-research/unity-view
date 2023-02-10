@@ -8,8 +8,11 @@ import '../webrtc/call_sample/data_channel_sample.dart';
 import '../webrtc/route_item.dart';
 
 class WebRTCScreen extends StatefulWidget {
+
+  const WebRTCScreen({super.key});
+
   @override
-  _WebRTCState createState() => new _WebRTCState();
+  _WebRTCState createState() => _WebRTCState();
 }
 
 enum DialogDemoAction {
@@ -23,39 +26,42 @@ class _WebRTCState extends State<WebRTCScreen> {
   late SharedPreferences _prefs;
 
   bool _datachannel = false;
+
   @override
   initState() {
     super.initState();
     _initData();
-    _initItems();
-  }
-
-  _buildRow(context, item) {
-    return ListBody(children: <Widget>[
-      ListTile(
-        title: Text(item.title),
-        onTap: () => item.push(context),
-        trailing: Icon(Icons.arrow_right),
-      ),
-      Divider()
-    ]);
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Flutter-WebRTC example'),
-          ),
-          body: ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(0.0),
-              itemCount: items.length,
-              itemBuilder: (context, i) {
-                return _buildRow(context, items[i]);
-              })),
-    );
+        home: Scaffold(
+            appBar: AppBar(
+              title: const Text('Flutter-WebRTC example'),
+            ),
+            body: Column(children: [
+              ListTile(
+                title: const Text('P2P Call Sample'),
+                subtitle: const Text("P2P Call Sample."),
+                onTap: () => {
+                    _datachannel = false,
+                    _showAddressDialog(context)
+                  },
+                trailing: const Icon(Icons.arrow_right),
+              ),
+              const Divider(),
+              ListTile(
+                subtitle: const Text('P2P Data Channel.'),
+                title: const Text("Data Channel Sample"),
+                onTap: () => {
+                  _datachannel = true,
+                  _showAddressDialog(context)
+                },
+                trailing: Icon(Icons.arrow_right),
+              ),
+              const Divider()
+            ])));
   }
 
   _initData() async {
@@ -114,24 +120,5 @@ class _WebRTCState extends State<WebRTCScreen> {
                     Navigator.pop(context, DialogDemoAction.connect);
                   })
             ]));
-  }
-
-  _initItems() {
-    items = <RouteItem>[
-      RouteItem(
-          title: 'P2P Call Sample',
-          subtitle: 'P2P Call Sample.',
-          push: (BuildContext context) {
-            _datachannel = false;
-            _showAddressDialog(context);
-          }),
-      RouteItem(
-          title: 'Data Channel Sample',
-          subtitle: 'P2P Data Channel.',
-          push: (BuildContext context) {
-            _datachannel = true;
-            _showAddressDialog(context);
-          }),
-    ];
   }
 }
