@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unity_view_test/screens/webrtc_screen.dart';
 
 import 'menu_screen.dart';
 import 'screens/simple_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => MenuScreen(),
         '/simple': (context) => SimpleScreen(),
+        '/webrtc': (context) => WebRTCScreen(),
       },
     );
   }
