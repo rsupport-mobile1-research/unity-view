@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:unity_view_test/screens/simple_screen.dart';
 
 import '../webrtc/call_sample/call_sample.dart';
 import '../webrtc/call_sample/data_channel_sample.dart';
@@ -9,7 +10,9 @@ import '../webrtc/route_item.dart';
 
 class WebRTCScreen extends StatefulWidget {
 
-  const WebRTCScreen({super.key});
+  final bool isUnityView;
+
+  const WebRTCScreen({super.key, required this.isUnityView});
 
   @override
   _WebRTCState createState() => _WebRTCState();
@@ -81,12 +84,21 @@ class _WebRTCState extends State<WebRTCScreen> {
       if (value != null) {
         if (value == DialogDemoAction.connect) {
           _prefs.setString('server', _server);
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => _datachannel
-                      ? DataChannelSample(host: _server)
-                      : CallSample(host: _server)));
+          if (widget.isUnityView) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => _datachannel
+                        ? DataChannelSample(host: _server)
+                        : SimpleScreen(host: _server)));
+          } else {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => _datachannel
+                        ? DataChannelSample(host: _server)
+                        : CallSample(host: _server)));
+          }
         }
       }
     });

@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => MenuScreen(),
-        '/simple': (context) => SimpleScreen(),
-        '/webrtc': (context) => WebRTCScreen(),
+        '/simple': (context) => const WebRTCScreen(isUnityView: true),
+        '/webrtc': (context) => const WebRTCScreen(isUnityView: false),
       },
     );
   }

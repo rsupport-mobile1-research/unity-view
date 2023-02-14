@@ -56,7 +56,7 @@ packages:
       name: dart_webrtc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.15"
+    version: "1.0.12"
   fake_async:
     dependency: transitive
     description:
@@ -124,10 +124,10 @@ packages:
   flutter_webrtc:
     dependency: "direct main"
     description:
-      name: flutter_webrtc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.21"
+      path: flutter-webrtc
+      relative: true
+    source: path
+    version: "0.9.18"
   http:
     dependency: "direct main"
     description:
@@ -419,7 +419,7 @@ packages:
       name: webrtc_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.11"
+    version: "1.0.10"
   webview_flutter:
     dependency: transitive
     description:
