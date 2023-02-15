@@ -1,6 +1,6 @@
 # Rsupport app
 
-Setup flutter app to display video call from Janus server on Unity view
+Setup flutter app to display video call from Flutter-WebRTC on Unity view
 
 # Setup guide
 
@@ -9,21 +9,15 @@ Clone main source code at [Main repo](https://github.com/rsupport-mobile1-resear
 git clone https://github.com/rsupport-mobile1-research/unity-view.git
 ```
 
-Move to unity-view folder and clone janus client source code into unity-view folder at [Janus client lib](https://github.com/rsupport-mobile1-research/flutter_janus_client) and then move to flutter_janus_client to switch source branch **stable_v2_dev** branch
+For this example all the source code in webrtc folder. In next step, we need to clone webrtc source code into webrtc folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
 ```
 cd unity-view
-git clone https://github.com/rsupport-mobile1-research/flutter_janus_client.git
-cd flutter_janus_client
-git checkout stable_v2_dev
-```
-
-Clone webrtc source code into flutter_janus_client folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
-
-```
+cd webrtc
 git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+git checkout feature/draw_video_stream_from_external_texture_with_webrtc
 ```
 
-![Alt text](/images/flutter_setup_guide_1.png "Guide 1")
+![Alt text](/images/flutter_setup_guide_6.png "Guide 1")
 
 > In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
 
