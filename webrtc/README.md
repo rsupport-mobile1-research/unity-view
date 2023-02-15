@@ -60,6 +60,32 @@ Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandr
 > If missing, check config build on Unity setting again
 
 Start an android device to build the app.
+> For mobile, you need to check your IP address to input to the demo. For mac we can go to Setting -> Open details of connected wifi and copy IP address. Example: 192.168.165.51
+
+Run server
+Move to server folder at webrtc/server.
+
+Use mkcert to create a self-signed certificate.
+```
+brew update
+brew install mkcert
+mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+```
+
+Run
+```
+brew install golang
+go run cmd/server/main.go
+``` 
+
+> In case, you already setup golang & mkcert. Just need to move to server folder and run cmd
+
+```
+go run cmd/server/main.go
+```
+
+Open https://0.0.0.0:8086 to use flutter web demo.
+> On popup input address of web demo, just need to input localhost to run
 
 </details>
 
