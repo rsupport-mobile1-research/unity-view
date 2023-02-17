@@ -120,6 +120,7 @@ example/unity/DemoApp/Temp/
 
 android/unityLibrary
 ios_xcode/unityLibrary
+mediasoup/ios/unityLibrary
 unity/android/unityLibrary
 unity/ios_xcode/unityLibrary
 unity/DemoApp/[Ll]ibrary/
