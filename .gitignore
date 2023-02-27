@@ -119,10 +119,20 @@ example/unity/DemoApp/Temp/
 !/unitypackages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 android/unityLibrary
-ios_xcode/unityLibrary
-mediasoup/ios/unityLibrary
+webrtc/android/unityLibrary
+mediasoup/android/unityLibrary
 unity/android/unityLibrary
+
+ios_xcode/unityLibrary
+mediasoup/ios_xcode/unityLibrary
+webrtc/ios_xcode/unityLibrary
 unity/ios_xcode/unityLibrary
+
+ios/unityLibrary
+webrtc/ios/unityLibrary
+unity/ios/unityLibrary
+mediasoup/ios/unityLibrary
+
 unity/DemoApp/[Ll]ibrary/
 unity/DemoApp/[Tt]emp/
 unity/DemoApp/[Oo]bj/
