@@ -1,6 +1,6 @@
 # Rsupport app
 
-Setup flutter app to display video call from Janus server on Unity view
+Setup flutter app to display video call on Unity view
 
 # Setup guide
 
@@ -63,9 +63,10 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 
 <b>Android</b>
 
-Start an android device to build the app.
 <details>
  <summary>:information_source: <b>WebRTC</b></summary>
+Start an android device to build the app.
+
 Build androidlibrary from Unity
 - [Install Unity](https://unity.com/download)
 - Open source code Unity in **unity/DemoApp**
@@ -128,6 +129,7 @@ Open https://0.0.0.0:8086 to use flutter web demo.
 <details>
  <summary>:information_source: <b>Janus Client</b></summary>
 
+Start an android device to build the app.
 
 Build androidlibrary from Unity
 - [Install Unity](https://unity.com/download)
@@ -244,4 +246,6 @@ then you can build on device.
  <summary>:information_source: <b>MediaSoup</b></summary>
 </details>
 
-> Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
+# Reference docs
+
+. [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
