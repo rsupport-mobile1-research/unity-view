@@ -61,8 +61,7 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 
 # Launch code
 
-<details>
- <summary>:information_source: <b>Android</b></summary>
+<b>Android</b>
 
 Start an android device to build the app.
 <details>
@@ -166,12 +165,14 @@ Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandr
  <summary>:information_source: <b>MediaSoup</b></summary>
 </details>
 
-</details>
+
+<b>iOS</b>
 
 <details>
- <summary>:information_source: <b>iOS</b></summary>
-
-
+ <summary>:information_source: <b>WebRTC</b></summary>
+</details>
+<details>
+ <summary>:information_source: <b>Janus Client</b></summary>
 Build iOS library from Unity
 - [Install Unity](https://unity.com/download)
 - Open source code Unity in **unity/DemoApp**
@@ -181,21 +182,21 @@ Build iOS library from Unity
 Then you do following Steps like this:
 
 > <b> Step 1 </b>
- Select menu 'File' -> Build Setting
- 
+Select menu 'File' -> Build Setting
+
 ![Alt text](/images/ios_setup_1.png)
 
 > <b> Step 2 </b>
- Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
- 
- ![Alt text](/images/ios_setup_2.png)
- ![Alt text](/images/ios_setup_2_1.png)
+Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
+
+![Alt text](/images/ios_setup_2.png)
+![Alt text](/images/ios_setup_2_1.png)
 
 > <b> Step 3 </b>
 Be select all type property like the red squard in these images
 
- ![Alt text](/images/ios_setup_3.png)
- ![Alt text](/images/ios_setup_4.png)
+![Alt text](/images/ios_setup_3.png)
+![Alt text](/images/ios_setup_4.png)
 
 > <b> Step 4 </b>
 Import package from folder 'Unity package'
@@ -208,37 +209,39 @@ Import package from folder 'Unity package'
 Now, Export Plugin for iOS from unity. You should export 'Export iOS Debug' and 'Export iOS Plugin',Unity tool will auto export to folder ios in flutter project
 
 
- ![Alt text](/images/ios_setup_7.png)
- ![Alt text](/images/ios_setup_8.png)
+![Alt text](/images/ios_setup_7.png)
+![Alt text](/images/ios_setup_8.png)
 
 > <b> Step 6 </b>
 Open folder 'unity-view' -> 'ios' -> Open Folder 'Runner.xcworkspace'. Then config like theses images
 
- ![Alt text](/images/ios_setup_9.png)
- ![Alt text](/images/ios_setup_10.png)
- ![Alt text](/images/ios_setup_11.png)
- 
+![Alt text](/images/ios_setup_9.png)
+![Alt text](/images/ios_setup_10.png)
+![Alt text](/images/ios_setup_11.png)
+
 > <b> Step 7 </b>
 Add file for custom workflow WebRTC
- 
 
-  ![Alt text](/images/ios_setup_11_1.png)
-  ![Alt text](/images/ios_setup_11_2.png)
-  ![Alt text](/images/ios_setup_11_3.png)
+
+![Alt text](/images/ios_setup_11_1.png)
+![Alt text](/images/ios_setup_11_2.png)
+![Alt text](/images/ios_setup_11_3.png)
 
 > <b> Step 8 </b>
 Login your Developer Apple ID. Then register App bundle ID to build application on device.
 
- 
-  ![Alt text](/images/ios_setup_12.png)
-  ![Alt text](/images/ios_setup_13.png)
- 
- then you should setup all environment sdk flutter
- 
-  ![Alt text](/images/ios_setup_14.png)
- 
+
+![Alt text](/images/ios_setup_12.png)
+![Alt text](/images/ios_setup_13.png)
+
+then you should setup all environment sdk flutter
+
+![Alt text](/images/ios_setup_14.png)
+
 then you can build on device.
- 
+</details>
+<details>
+ <summary>:information_source: <b>MediaSoup</b></summary>
 </details>
 
 > Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
