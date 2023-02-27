@@ -2,10 +2,10 @@
 
 Setup flutter app to display video call on Unity view
 
-# Setup guide
+# Clone source code
 
 <details>
- <summary>:information_source: <b>Unity with WebRTC</b></summary>
+ <summary>:information_source: <b>WebRTC</b></summary>
 
 Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
 ```
@@ -22,12 +22,10 @@ git checkout feature/draw_video_stream_from_external_texture_with_webrtc
 
 ![Alt text](/images/flutter_setup_guide_6.png "Guide 1")
 
-> In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
-
 </details>
 
 <details>
- <summary>:information_source: <b>Unity with Janus client</b></summary>
+ <summary>:information_source: <b>Janus client</b></summary>
 
 Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
 ```
@@ -50,16 +48,33 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 
 ![Alt text](/images/flutter_setup_guide_1.png "Guide 1")
 
-> In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
-
 </details>
 
 <details>
- <summary>:information_source: <b>Unity with MediaSoup</b></summary>
+ <summary>:information_source: <b>MediaSoup</b></summary>
 
+Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
+```
+git clone https://github.com/rsupport-mobile1-research/unity-view.git
+```
+
+For this example all the source code in webrtc folder. In next step, we need to clone webrtc source code into webrtc folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+```
+cd unity-view
+git clone https://github.com/rsupport-mobile1-research/mediasoup-client-flutter.git
+cd mediasoup-client-flutter
+```
+
+Clone webrtc source code into mediasoup-client-flutter folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+
+```
+git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+```
+
+![Alt text](/images/flutter_setup_guide_6.png "Guide 1")
 </details>
 
-# Launch code
+# Launch the demo
 
 <b>Android</b>
 
