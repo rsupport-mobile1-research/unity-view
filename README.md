@@ -4,6 +4,31 @@ Setup flutter app to display video call from Janus server on Unity view
 
 # Setup guide
 
+<details>
+ <summary>:information_source: <b>Unity with WebRTC</b></summary>
+
+Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
+```
+git clone https://github.com/rsupport-mobile1-research/unity-view.git
+```
+
+For this example all the source code in webrtc folder. In next step, we need to clone webrtc source code into webrtc folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+```
+cd unity-view
+cd webrtc
+git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+git checkout feature/draw_video_stream_from_external_texture_with_webrtc
+```
+
+![Alt text](/images/flutter_setup_guide_6.png "Guide 1")
+
+> In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
+
+</details>
+
+<details>
+ <summary>:information_source: <b>Unity with Janus client</b></summary>
+
 Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
 ```
 git clone https://github.com/rsupport-mobile1-research/unity-view.git
@@ -27,11 +52,82 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 
 > In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
 
+</details>
+
+<details>
+ <summary>:information_source: <b>Unity with MediaSoup</b></summary>
+
+</details>
 
 # Launch code
 
 <details>
  <summary>:information_source: <b>Android</b></summary>
+
+Start an android device to build the app.
+<details>
+ <summary>:information_source: <b>WebRTC</b></summary>
+Build androidlibrary from Unity
+- [Install Unity](https://unity.com/download)
+- Open source code Unity in **unity/DemoApp**
+
+![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
+
+Config build setting for android on Unity. Select **File -> Build Settings**. In the window, select Android platform and click on Player Settings below of the window. Select Player and find Multithreaded Rendering* option. We need to disable this option.
+
+![Alt text](/images/flutter_setup_guide_3.png "Guide 3")
+
+Make sure **Export Project** is on
+
+![Alt text](/images/flutter_setup_guide_3.1.png "Guide 3.1")
+
+Close the window and click on Switch Plaform on Build Settings popup & close the popup. Select **Flutter -> Export Android Plugin**. After done this step we will see unityLibrary under Android folder.
+
+Continue to change config NDK on android. We need to add **ndk.dir in local.properties** of android folder at **unity-view/android/local.properties** with
+```
+ ndk.dir=/Applications/Unity/Hub/Editor/[ndk version]/PlaybackEngines/AndroidPlayer/NDK
+```
+> Make sure you get the correct version of ndk by move to /Applications/Unity/Hub/Editor/ to get it
+
+![Alt text](/images/flutter_setup_guide_4.png "Guide 4")
+
+Open unity_view folder by android studio. Add unity-classes.jar in android/unityLibrary as a library by right click on unity-classes.jar -> Add as library...
+
+![Alt text](/images/flutter_setup_guide_5.png "Guide 5")
+
+Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandroidpermissions.aar, UnityARCore.aar.
+> If missing, check config build on Unity setting again
+
+Start an android device to build the app.
+> For mobile, you need to check your IP address to input to the demo. For mac we can go to Setting -> Open details of connected wifi and copy IP address. Example: 192.168.165.51
+
+Run server
+Move to server folder at webrtc/server.
+
+Use mkcert to create a self-signed certificate.
+```
+brew update
+brew install mkcert
+mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+```
+
+Run
+```
+brew install golang
+go run cmd/server/main.go
+``` 
+
+> In case, you already setup golang & mkcert. Just need to move to server folder and run cmd
+
+```
+go run cmd/server/main.go
+```
+
+Open https://0.0.0.0:8086 to use flutter web demo.
+> On popup input address of web demo, just need to input localhost to run
+</details>
+<details>
+ <summary>:information_source: <b>Janus Client</b></summary>
 
 
 Build androidlibrary from Unity
@@ -65,7 +161,10 @@ Open unity_view folder by android studio. Add unity-classes.jar in android/unity
 Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandroidpermissions.aar, UnityARCore.aar.
 > If missing, check config build on Unity setting again
 
-Start an android device to build the app.
+</details>
+<details>
+ <summary>:information_source: <b>MediaSoup</b></summary>
+</details>
 
 </details>
 
@@ -139,20 +238,6 @@ Login your Developer Apple ID. Then register App bundle ID to build application 
   ![Alt text](/images/ios_setup_14.png)
  
 then you can build on device.
-
-
-
-
-
-
-
-
-
-
-
-
- 
- 
  
 </details>
 
