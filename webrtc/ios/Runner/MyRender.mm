@@ -12,11 +12,13 @@
 #import <MetalKit/MetalKit.h>
 
 
+
 @implementation MyRender
 
 @synthesize oldTextureId = _oldTextureId;
 @synthesize myTexture;
 @synthesize data;
+@synthesize context;
 
 -(id)init {
     if ( self = [super init] ) {
@@ -75,20 +77,16 @@
 }
 
 - (void) receiveDataRemote:(NSNotification *) notification {
-  
-    NSLog(@"receiveDataRemote");
     __weak MyRender* weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async( dispatch_get_main_queue(), ^{
         MyRender* strongSelf = weakSelf;
-        NSData * myData = [NSData dataWithData:notification.object];
-        NSLog(@"remote ve ne %lu", myData.length);
-        UIImage *image = [UIImage imageWithData:myData];
         
         CGSize size = CGSizeMake([[notification.userInfo valueForKey:@"width"] floatValue] , [[notification.userInfo valueForKey:@"height"] floatValue] );
         
-         uint8_t *imageData = [strongSelf convertImageData: image];
+         uint8_t *imageData = [strongSelf convertImageData: notification.object];
         MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
-        textureDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
+        textureDescriptor.pixelFormat = MTLPixelFormatRGBA32Float;
+
         
         // Set the pixel dimensions of the texture
         textureDescriptor.width = size.width;
@@ -99,6 +97,7 @@
         
         [strongSelf.myTexture replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow: bytesPerRow];
         free(imageData);
+        CGContextRelease(strongSelf.context);
     });
 
 
@@ -108,17 +107,14 @@
 {
     NSLog(@"receiveDataRemote");
     __weak MyRender* weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async( dispatch_get_main_queue(), ^{
         MyRender* strongSelf = weakSelf;
-        NSData * myData = [NSData dataWithData:notification.object];
-        NSLog(@"remote ve ne %lu", myData.length);
-        UIImage *image = [UIImage imageWithData:myData];
-        
         CGSize size = CGSizeMake([[notification.userInfo valueForKey:@"width"] floatValue] , [[notification.userInfo valueForKey:@"height"] floatValue] );
         
-         uint8_t *imageData = [strongSelf convertImageData: image];
+         uint8_t *imageData = [strongSelf convertImageData: notification.object];
         MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
-        textureDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;
+        textureDescriptor.pixelFormat = MTLPixelFormatRG32Uint;
+        textureDescriptor.resourceOptions = MTLResourceOptionCPUCacheModeWriteCombined;
         
         // Set the pixel dimensions of the texture
         textureDescriptor.width = size.width;
@@ -128,6 +124,7 @@
         MTLRegion region = MTLRegionMake2D(0, 0, size.width, size.height);
         
         [strongSelf.myTexture replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow: bytesPerRow];
+        CGContextRelease(strongSelf.context);
         free(imageData);
     });
 }
@@ -161,14 +158,11 @@
     const NSUInteger bytesPerPixel = 4;
     const NSUInteger bytesPerRow = bytesPerPixel * width;
     const NSUInteger bitsPerComponent = 8;
-
     
-    CGContextRef context = CGBitmapContextCreate(rawData, width, height,
+    context = CGBitmapContextCreate(rawData, width, height,
                                                  bitsPerComponent, bytesPerRow, colorSpace,
                                                  kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);//kCGBitmapByteOrder32Big
-  
-
-   
+     
     if(context != nil && imageRef != nil){
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         if(!context) {
@@ -176,7 +170,7 @@
                 NSLog(@"Bitmap context not created");
             }
         CGColorSpaceRelease(colorSpace);
-        
+
     
       
     } else {
@@ -188,7 +182,7 @@
 
 
 - (UIImage *)resizeImage:(UIImage *)image centerSize:(CGSize)size {
-    CGFloat scale = 0.9;
+    CGFloat scale = 0.8f;
     CGFloat width = image.size.width * scale;
     CGFloat height = image.size.height * scale;
     CGRect imageRect = CGRectMake((size.width - width)/2.0f,
