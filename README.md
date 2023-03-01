@@ -77,15 +77,14 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 # Launch the demo
 
 <b>Android</b>
-Start an android device to build the app.
 
 Build androidlibrary from Unity
 - [Install Unity](https://unity.com/download)
 
 Open source code Unity 
-- in **webrtc/unity/DemoApp** for Janus client
-- in **unity/DemoApp** for Janus client
-- in **mediasoup/unity/DemoApp** for Janus client
+- in **webrtc/unity/DemoApp** for testing with WebRTC
+- in **unity/DemoApp** for testing with Janus client
+- in **mediasoup/unity/DemoApp** for testing with Mediasoup
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
@@ -149,14 +148,17 @@ Open https://0.0.0.0:8086 to use flutter web demo.
 <details>
  <summary>:information_source: <b>Janus Client</b></summary>
 
-Build app on 2 devices to test
+Don't need build server local in this case 
+Just need to build app on 2 devices to test
 
 </details>
 <details>
  <summary>:information_source: <b>MediaSoup</b></summary>
-</details>
 
-Build app on 2 devices to test
+Don't need build server local in this case
+Just need to build app on 2 devices to test
+
+</details>
 
 <b>iOS</b>
 
