@@ -162,14 +162,13 @@ Just need to build app on 2 devices to test
 
 <b>iOS</b>
 
-<details>
- <summary>:information_source: <b>WebRTC</b></summary>
-</details>
-<details>
- <summary>:information_source: <b>Janus Client</b></summary>
 Build iOS library from Unity
 - [Install Unity](https://unity.com/download)
-- Open source code Unity in **unity/DemoApp**
+
+Open source code Unity
+- in **webrtc/unity/DemoApp** for testing with WebRTC
+- in **unity/DemoApp** for testing with Janus client
+- in **mediasoup/unity/DemoApp** for testing with Mediasoup
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
@@ -233,9 +232,50 @@ then you should setup all environment sdk flutter
 ![Alt text](/images/ios_setup_14.png)
 
 then you can build on device.
+
+<details>
+ <summary>:information_source: <b>WebRTC</b></summary>
+
+> For mobile, you need to check your IP address to input to the demo. For mac we can go to Setting -> Open details of connected wifi and copy IP address. Example: 192.168.165.51
+
+Run server
+Move to server folder at webrtc/server.
+
+Use mkcert to create a self-signed certificate.
+```
+brew update
+brew install mkcert
+mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+```
+
+Run
+```
+brew install golang
+go run cmd/server/main.go
+``` 
+
+> In case, you already setup golang & mkcert. Just need to move to server folder and run cmd
+
+```
+go run cmd/server/main.go
+```
+
+Open https://0.0.0.0:8086 to use flutter web demo.
+> On popup input address of web demo, just need to input localhost to run
+</details>
+<details>
+ <summary>:information_source: <b>Janus Client</b></summary>
+
+Don't need build server local in this case
+Just need to build app on 2 devices to test
+
 </details>
 <details>
  <summary>:information_source: <b>MediaSoup</b></summary>
+
+Don't need build server local in this case
+Just need to build app on 2 devices to test
+
 </details>
 
 # Reference docs
