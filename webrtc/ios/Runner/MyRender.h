@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MyRender : NSObject <NativeCallsProtocol>
 @property NSString* oldTextureId;
 @property (nonatomic, retain)NSData *data;
+@property (nonatomic) CGContextRef context;
 @property id<MTLTexture> myTexture;
 //-(void) handleDelegate;
 
