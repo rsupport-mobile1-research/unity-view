@@ -1,8 +1,30 @@
 # Rsupport app
 
-Setup flutter app to display video call from Janus server on Unity view
+Setup flutter app to display video call on Unity view
 
-# Setup guide
+# Clone source code
+
+<details>
+ <summary>:information_source: <b>WebRTC</b></summary>
+
+Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
+```
+git clone https://github.com/rsupport-mobile1-research/unity-view.git
+```
+
+For this example all the source code in webrtc folder. In next step, we need to clone webrtc source code into webrtc folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+```
+cd unity-view
+cd webrtc
+git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+```
+
+![Alt text](/images/flutter_setup_guide_6.png "Guide 1")
+
+</details>
+
+<details>
+ <summary>:information_source: <b>Janus client</b></summary>
 
 Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
 ```
@@ -25,18 +47,44 @@ git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
 
 ![Alt text](/images/flutter_setup_guide_1.png "Guide 1")
 
-> In case you need to do some changes, please create a new branch for which part you need to edit. For example, I want to do some change for WebRTC I will create a new branch for main to do it from this repo [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc) **
-
-
-# Launch code
+</details>
 
 <details>
- <summary>:information_source: <b>Android</b></summary>
+ <summary>:information_source: <b>MediaSoup</b></summary>
 
+Clone main source code at [Main repo](https://github.com/rsupport-mobile1-research/unity-view)
+```
+git clone https://github.com/rsupport-mobile1-research/unity-view.git
+```
+
+For this example all the source code in mediasoup folder. In next step, we need to clone mediasoup-client-flutter source code into mediasoup folder at [Mediasoup client lib](https://github.com/rsupport-mobile1-research/mediasoup-client-flutter)
+```
+cd unity-view
+cd mediasoup
+git clone https://github.com/rsupport-mobile1-research/mediasoup-client-flutter.git
+cd mediasoup-client-flutter
+```
+
+Clone webrtc source code into mediasoup-client-flutter folder at [WebRTC lib](https://github.com/rsupport-mobile1-research/flutter-webrtc)
+
+```
+git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+```
+
+![Alt text](/images/flutter_setup_guide_7.png "Guide 1")
+</details>
+
+# Launch the demo
+
+<b>Android</b>
 
 Build androidlibrary from Unity
 - [Install Unity](https://unity.com/download)
-- Open source code Unity in **unity/DemoApp**
+
+Open source code Unity 
+- in **webrtc/unity/DemoApp** for testing with WebRTC
+- in **unity/DemoApp** for testing with Janus client
+- in **mediasoup/unity/DemoApp** for testing with Mediasoup
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
@@ -67,36 +115,81 @@ Check if there are missing some files arcore_client.aar, ARPresto.aar, unityandr
 
 Start an android device to build the app.
 
+<details>
+ <summary>:information_source: <b>WebRTC</b></summary>
+
+> For mobile, you need to check your IP address to input to the demo. For mac we can go to Setting -> Open details of connected wifi and copy IP address. Example: 192.168.165.51
+
+Run server
+Move to server folder at webrtc/server.
+
+Use mkcert to create a self-signed certificate.
+```
+brew update
+brew install mkcert
+mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+```
+
+Run
+```
+brew install golang
+go run cmd/server/main.go
+``` 
+
+> In case, you already setup golang & mkcert. Just need to move to server folder and run cmd
+
+```
+go run cmd/server/main.go
+```
+
+Open https://0.0.0.0:8086 to use flutter web demo.
+> On popup input address of web demo, just need to input localhost to run
+</details>
+<details>
+ <summary>:information_source: <b>Janus Client</b></summary>
+
+Don't need build server local in this case 
+Just need to build app on 2 devices to test
+
+</details>
+<details>
+ <summary>:information_source: <b>MediaSoup</b></summary>
+
+Don't need build server local in this case
+Just need to build app on 2 devices to test
+
 </details>
 
-<details>
- <summary>:information_source: <b>iOS</b></summary>
-
+<b>iOS</b>
 
 Build iOS library from Unity
 - [Install Unity](https://unity.com/download)
-- Open source code Unity in **unity/DemoApp**
+
+Open source code Unity
+- in **webrtc/unity/DemoApp** for testing with WebRTC
+- in **unity/DemoApp** for testing with Janus client
+- in **mediasoup/unity/DemoApp** for testing with Mediasoup
 
 ![Alt text](/images/flutter_setup_guide_2.png "Guide 2")
 
 Then you do following Steps like this:
 
 > <b> Step 1 </b>
- Select menu 'File' -> Build Setting
- 
+Select menu 'File' -> Build Setting
+
 ![Alt text](/images/ios_setup_1.png)
 
 > <b> Step 2 </b>
- Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
- 
- ![Alt text](/images/ios_setup_2.png)
- ![Alt text](/images/ios_setup_2_1.png)
+Build Setting Panel Appear -> choose iOS -> Click Switch platform -> Click 'Payer Settings'
+
+![Alt text](/images/ios_setup_2.png)
+![Alt text](/images/ios_setup_2_1.png)
 
 > <b> Step 3 </b>
 Be select all type property like the red squard in these images
 
- ![Alt text](/images/ios_setup_3.png)
- ![Alt text](/images/ios_setup_4.png)
+![Alt text](/images/ios_setup_3.png)
+![Alt text](/images/ios_setup_4.png)
 
 > <b> Step 4 </b>
 Import package from folder 'Unity package'
@@ -109,51 +202,82 @@ Import package from folder 'Unity package'
 Now, Export Plugin for iOS from unity. You should export 'Export iOS Debug' and 'Export iOS Plugin',Unity tool will auto export to folder ios in flutter project
 
 
- ![Alt text](/images/ios_setup_7.png)
- ![Alt text](/images/ios_setup_8.png)
+![Alt text](/images/ios_setup_7.png)
+![Alt text](/images/ios_setup_8.png)
 
 > <b> Step 6 </b>
 Open folder 'unity-view' -> 'ios' -> Open Folder 'Runner.xcworkspace'. Then config like theses images
 
- ![Alt text](/images/ios_setup_9.png)
- ![Alt text](/images/ios_setup_10.png)
- ![Alt text](/images/ios_setup_11.png)
- 
+![Alt text](/images/ios_setup_9.png)
+![Alt text](/images/ios_setup_10.png)
+![Alt text](/images/ios_setup_11.png)
+
 > <b> Step 7 </b>
 Add file for custom workflow WebRTC
- 
 
-  ![Alt text](/images/ios_setup_11_1.png)
-  ![Alt text](/images/ios_setup_11_2.png)
-  ![Alt text](/images/ios_setup_11_3.png)
+
+![Alt text](/images/ios_setup_11_1.png)
+![Alt text](/images/ios_setup_11_2.png)
+![Alt text](/images/ios_setup_11_3.png)
 
 > <b> Step 8 </b>
 Login your Developer Apple ID. Then register App bundle ID to build application on device.
 
- 
-  ![Alt text](/images/ios_setup_12.png)
-  ![Alt text](/images/ios_setup_13.png)
- 
- then you should setup all environment sdk flutter
- 
-  ![Alt text](/images/ios_setup_14.png)
- 
+
+![Alt text](/images/ios_setup_12.png)
+![Alt text](/images/ios_setup_13.png)
+
+then you should setup all environment sdk flutter
+
+![Alt text](/images/ios_setup_14.png)
+
 then you can build on device.
 
+<details>
+ <summary>:information_source: <b>WebRTC</b></summary>
 
+> For mobile, you need to check your IP address to input to the demo. For mac we can go to Setting -> Open details of connected wifi and copy IP address. Example: 192.168.165.51
 
+Run server
+Move to server folder at webrtc/server.
 
+Use mkcert to create a self-signed certificate.
+```
+brew update
+brew install mkcert
+mkcert -key-file configs/certs/key.pem -cert-file configs/certs/cert.pem  localhost 127.0.0.1 ::1 0.0.0.0
+```
 
+Run
+```
+brew install golang
+go run cmd/server/main.go
+``` 
 
+> In case, you already setup golang & mkcert. Just need to move to server folder and run cmd
 
+```
+go run cmd/server/main.go
+```
 
+Open https://0.0.0.0:8086 to use flutter web demo.
+> On popup input address of web demo, just need to input localhost to run
+</details>
+<details>
+ <summary>:information_source: <b>Janus Client</b></summary>
 
+Don't need build server local in this case
+Just need to build app on 2 devices to test
 
+</details>
+<details>
+ <summary>:information_source: <b>MediaSoup</b></summary>
 
+Don't need build server local in this case
+Just need to build app on 2 devices to test
 
- 
- 
- 
 </details>
 
-> Reference docs: [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
+# Reference docs
+
+. [Flutter Unity View](https://github.com/juicycleff/flutter-unity-view-widget)
