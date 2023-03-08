@@ -37,13 +37,8 @@
     return self;
 }
 
-- (void) updateImageForTexture {
-
-}
-
 - (id<MTLTexture>) getTextureId {
     if (myTexture != nil) {
-        [self updateImageForTexture];
         return myTexture;
     }
     return nil;
