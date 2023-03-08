@@ -24,16 +24,16 @@
         [FrameworkLibAPI registerAPIforNativeCalls: self];
     }
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//             selector:@selector(receiveDataRemote:)
-//             name:@"PhatKTLocal"
-//             object:nil];
-//
+    //    [[NSNotificationCenter defaultCenter] addObserver:self
+    //             selector:@selector(receiveDataRemote:)
+    //             name:@"PhatKTLocal"
+    //             object:nil];
+    //
     [[NSNotificationCenter defaultCenter] addObserver:self
-             selector:@selector(receiveDataRemote:)
-             name:@"PhatKTRemote"
-             object:nil];
- 
+                                             selector:@selector(receiveDataRemote:)
+                                                 name:@"PhatKTRemote"
+                                               object:nil];
+    
     return self;
 }
 
@@ -58,7 +58,7 @@
         uint8_t *imageData = [strongSelf convertImageData: notification.object];
         MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
         textureDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm_sRGB;
-
+        
         // Set the pixel dimensions of the texture
         textureDescriptor.width = size.width;
         textureDescriptor.height = size.height;
@@ -70,23 +70,22 @@
             id<MTLDevice> device = MTLCreateSystemDefaultDevice();
             MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
             textureDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm_sRGB;
-
+            
             textureDescriptor.width = size.width;
             textureDescriptor.height = size.height;
-
+            
             strongSelf.myTexture = [device newTextureWithDescriptor:textureDescriptor];
         }
         
         [strongSelf.myTexture replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow: bytesPerRow];
-
+        
         free(imageData);
         CGContextRelease(strongSelf.context);
     });
 }
 
-- (uint8_t *) convertImageData:(UIImage *) image
-{
-   // UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
+- (uint8_t *) convertImageData:(UIImage *) image {
+    // UIGraphicsBeginImageContextWithOptions(image.size, NO, image.scale);
     CGImageRef imageRef = [image CGImage];
     if (imageRef == nil) {
         return  nil;
@@ -101,19 +100,16 @@
     const NSUInteger bitsPerComponent = 8;
     
     context = CGBitmapContextCreate(rawData, width, height,
-                                                 bitsPerComponent, bytesPerRow, colorSpace,
-                                                 kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);//kCGBitmapByteOrder32Big
-     
+                                    bitsPerComponent, bytesPerRow, colorSpace,
+                                    kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);//kCGBitmapByteOrder32Big
+    
     if(context != nil && imageRef != nil){
         CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
         if(!context) {
             free(context);
-                NSLog(@"Bitmap context not created");
-            }
+            NSLog(@"Bitmap context not created");
+        }
         CGColorSpaceRelease(colorSpace);
-
-    
-      
     } else {
         return  nil;
     }
@@ -129,7 +125,7 @@
                                   (size.height - height)/2.0f,
                                   width,
                                   height);
-
+    
     UIGraphicsBeginImageContextWithOptions(size, NO, 0);
     [image drawInRect:imageRect];
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
