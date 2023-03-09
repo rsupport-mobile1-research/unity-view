@@ -16,13 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
 @property NSString* oldTextureId;
-@property (nonatomic, retain)NSData *data;
+@property uint8_t *data;
+@property (nonatomic) CGContextRef context;
 @property id<MTLTexture> myTexture;
+
 //-(void) handleDelegate;
 
     - (void) showHostMainWindow;
     - (void) unloadPlayer;
     - (void) quitPlayer;
+    - (id<MTLTexture>) getTextureId;
     - (void) sendMessageToMobileApp:(char *) mtlTexture
                           textureId:(NSString *) unityTextureId;
 
