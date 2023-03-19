@@ -19,8 +19,8 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
     private IntPtr _nativeTexturePointer;
     private long currentNativeTextureId = -1;
 
-    private List<GameObject> objects = new List<GameObject>();
-    private List<Texture2D> textureObjects = new List<Texture2D>();
+    private List<GameObject> gameObjects = new List<GameObject>();
+    private List<TextureEntity> textureObjects = new List<TextureEntity>();
 
     private AndroidJavaObject _androidApiInstance;
 
@@ -30,7 +30,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
         public static extern void sendMessageToMobileApp(System.IntPtr texture, String textureId);
 
         [DllImport("__Internal")]
-        public static extern IntPtr getTextureId();
+        public static extern IntPtr getTextureId(String itemId);
     }
     #endif
 
@@ -38,7 +38,11 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
 
     // Start is called before the first frame update
     void Start() {
-        // testCreateiOSTexture();
+        for (int i = 0; i < rows * cols; i++) {
+            TextureEntity newEntity = new TextureEntity("item-" + i, null, false);
+            textureObjects.Add(newEntity);
+        }
+        testCreateiOSTexture();
     }
 
     void testCreateiOSTexture() {
@@ -46,33 +50,33 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
            for (int col = 0; col < cols; col++) {
                 GameObject tile = Instantiate(myPrefab);
                 tile.name = $"Title {row} {col}";
-                if (row == 0 && col == 0) {
-                    // tile.GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, id);
-                } else {
-                    Texture2D originTexture = Resources.Load("test") as Texture2D; 
-                    if (originTexture) {
-                        Texture2D texture = new Texture2D(originTexture.width, originTexture.height); 
-                        int xN = originTexture.width;
-                        int yN = originTexture.height;
-                        for (int i = 0; i < xN; i++) {
-                            for (int j = 0; j < yN; j++) {
-                                texture.SetPixel(j, xN - i - 1, originTexture.GetPixel(j, i));
-                                // texture.SetPixel(xN - i - 1, j, originTexture.GetPixel(i, j));
-                            }
-                        }
-                        texture.Apply();
-                        Debug.Log("Texture Loaded Sucessfully...");
-                        tile.GetComponent<MeshRenderer>().material.mainTexture = texture;
-                    } else {
-                        Debug.Log("Unable to Load texture...");
-                    }
-                }
+                // if (row == 0 && col == 0) {
+                //     // tile.GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, id);
+                // } else {
+                // Texture2D originTexture = Resources.Load("test") as Texture2D; 
+                // if (originTexture) {
+                //     Texture2D texture = new Texture2D(originTexture.width, originTexture.height); 
+                //     int xN = originTexture.width;
+                //     int yN = originTexture.height;
+                //     for (int i = 0; i < xN; i++) {
+                //         for (int j = 0; j < yN; j++) {
+                //             texture.SetPixel(j, xN - i - 1, originTexture.GetPixel(j, i));
+                //             // texture.SetPixel(xN - i - 1, j, originTexture.GetPixel(i, j));
+                //         }
+                //     }
+                //     texture.Apply();
+                //     Debug.Log("Texture Loaded Sucessfully...");
+                //     tile.GetComponent<MeshRenderer>().material.mainTexture = texture;
+                // } else {
+                //     Debug.Log("Unable to Load texture...");
+                // }
+                // }
                 float x = col * tile_size;
                 float y = row * -tile_size;
                 tile.transform.position = new Vector2(x - (tile_size/rows), y + 3.5f);
                 tile.transform.localScale = new Vector2(2.5f, 2.5f);
                 int pos = (row * 100) + col;
-                objects.Add(tile);
+                gameObjects.Add(tile);
                 Debug.Log("item pos: " + pos);
             }   
         }
@@ -122,7 +126,7 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
                 tile.transform.position = new Vector2(x - (tile_size/rows), y + 3.5f);
                 tile.transform.localScale = new Vector2(2.5f, 2.5f);
                 int pos = (row * 100) + col;
-                objects.Add(tile);
+                gameObjects.Add(tile);
                 Debug.Log("item pos: " + pos);
             }   
         }
@@ -151,15 +155,35 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
         #endif
         #if !UNITY_ANDROID
         if (Application.platform == RuntimePlatform.IPhonePlayer) {
-            IntPtr nativeTextureId = IOSNativeAPI.getTextureId();
-            if (_nativeTexturePointer != nativeTextureId) {
-                Debug.Log("New nativeTextureId = " + nativeTextureId);
-                _nativeTexturePointer = nativeTextureId;
-                createiOSTexture(_nativeTexturePointer);
+            for (int i = 0; i < textureObjects.Count; i++) {
+                if (textureObjects[i].texture == null) {
+                    IntPtr nativeTextureId = IOSNativeAPI.getTextureId(textureObjects[i].id);
+                    if (nativeTextureId != null && nativeTextureId != IntPtr.Zero) {
+                        Debug.Log("New nativeTextureId = " + nativeTextureId!);
+                        textureObjects[i].setTexture(nativeTextureId!);
+                        gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, nativeTextureId!);
+                    }
+                }
             }
         }
         #endif
     }
 
     public void InitializeAndroidSurface() {}
+
+    struct TextureEntity {
+        public String id;
+        public IntPtr? texture;
+        public bool isNew;
+
+        public TextureEntity(String newId, IntPtr? newTexture, bool isNewValue) {
+            this.id = newId;
+            this.texture = newTexture;
+            this.isNew = isNewValue;
+        }
+
+        public void setTexture(IntPtr texture) {
+            this.texture = texture;
+        }
+    }
 }

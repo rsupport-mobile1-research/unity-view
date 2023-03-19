@@ -17,7 +17,8 @@ extern "C" {
     void showHostMainWindow() { return [api showHostMainWindow]; }
     void unloadPlayer() { return [api unloadPlayer]; }
     void quitPlayer() { return [api quitPlayer]; }
-    long getTextureId() { return [api getTextureId]; }
+    long getTextureId(const char* itemId) { return [api getTextureId: [NSString stringWithUTF8String: itemId]];
+    }
     void sendMessageToMobileApp(char* mtlTexture, const char* unityTextureId) {
         return [api sendMessageToMobileApp: mtlTexture
                                  textureId: [NSString stringWithUTF8String: unityTextureId]];
