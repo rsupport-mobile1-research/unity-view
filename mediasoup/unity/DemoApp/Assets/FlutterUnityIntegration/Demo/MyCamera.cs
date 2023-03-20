@@ -158,9 +158,12 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
             for (int i = 0; i < textureObjects.Count; i++) {
                 if (textureObjects[i].texture == null) {
                     IntPtr nativeTextureId = IOSNativeAPI.getTextureId(textureObjects[i].id);
+                    Debug.Log("Read index = " + i);
+                    Debug.Log("Read id = " + textureObjects[i].id!);
                     if (nativeTextureId != null && nativeTextureId != IntPtr.Zero) {
                         Debug.Log("New nativeTextureId = " + nativeTextureId!);
-                        textureObjects[i].setTexture(nativeTextureId!);
+                        TextureEntity newEntity = new TextureEntity("item-" + i, nativeTextureId, false);
+                        textureObjects[i] = newEntity!;
                         gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, nativeTextureId!);
                     }
                 }
@@ -180,10 +183,6 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
             this.id = newId;
             this.texture = newTexture;
             this.isNew = isNewValue;
-        }
-
-        public void setTexture(IntPtr texture) {
-            this.texture = texture;
         }
     }
 }

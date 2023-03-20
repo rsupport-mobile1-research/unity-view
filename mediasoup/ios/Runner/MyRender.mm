@@ -26,12 +26,12 @@
     }
     myTexture = [NSMutableDictionary new];
     myTextureId = [NSMutableArray new];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
-             selector:@selector(receiveDataLocalRemote:)
-             name:@"PhatKTLocal"
-             object:nil];
-
+                                             selector:@selector(receiveDataLocalRemote:)
+                                                 name:@"PhatKTLocal"
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveDataRemote:)
                                                  name:@"PhatKTRemote"
@@ -87,18 +87,18 @@
     __weak MyRender* weakSelf = self;
     dispatch_async( dispatch_get_main_queue(), ^{
         MyRender* strongSelf = weakSelf;
-
+        
         CGSize size = CGSizeMake([[notification.userInfo valueForKey:@"width"] floatValue] , [[notification.userInfo valueForKey:@"height"] floatValue] );
-
+        
         uint8_t *imageData = [strongSelf convertImageData: notification.object];
         MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
         textureDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm_sRGB;
-
+        
         // Set the pixel dimensions of the texture
         textureDescriptor.width = size.width;
         textureDescriptor.height = size.height;
         NSUInteger bytesPerRow = 4 * size.width;
-
+        
         MTLRegion region = MTLRegionMake2D(0, 0, size.width, size.height);
         
         NSString *cTextureId = [notification.userInfo valueForKey:@"texture"];
@@ -107,26 +107,26 @@
         for (int i = 0; i < strongSelf.myTextureId.count; i++) {
             if (strongSelf.myTextureId[i] == cTextureId) {
                 isExist = true;
-                newId = strongSelf.myTextureId[i];
+                newId = [NSString stringWithFormat:@"item-%d", i];
                 break;
             }
         }
-
+        
         if (isExist == false) {
             newId = [NSString stringWithFormat:@"item-%lu", (unsigned long)strongSelf.myTextureId.count];
             id<MTLDevice> device = MTLCreateSystemDefaultDevice();
             MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
             textureDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm_sRGB;
-
+            
             textureDescriptor.width = size.width;
             textureDescriptor.height = size.height;
-
+            
             [strongSelf.myTextureId addObject: cTextureId];
             strongSelf.myTexture[newId] = [device newTextureWithDescriptor:textureDescriptor];
         }
-
+        
         [strongSelf.myTexture[newId] replaceRegion:region mipmapLevel:0 withBytes:imageData bytesPerRow: bytesPerRow];
-
+        
         free(imageData);
         CGContextRelease(strongSelf.context);
     });
