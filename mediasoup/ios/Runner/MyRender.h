@@ -18,7 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString* oldTextureId;
 @property uint8_t *data;
 @property (nonatomic) CGContextRef context;
-@property id<MTLTexture> myTexture;
+@property NSMutableArray* myTextureId;
+@property NSMutableDictionary<NSString *, id<MTLTexture>>* myTexture;
 
 //-(void) handleDelegate;
 

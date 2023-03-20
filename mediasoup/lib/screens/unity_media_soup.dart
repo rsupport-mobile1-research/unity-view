@@ -13,8 +13,11 @@ import '../features/me/bloc/me_bloc.dart';
 import '../features/media_devices/bloc/media_devices_bloc.dart';
 import '../features/peers/bloc/peers_bloc.dart';
 import '../features/producers/bloc/producers_bloc.dart';
+import '../features/producers/ui/renderer/local_stream.dart';
 import '../features/room/bloc/room_bloc.dart';
 import '../features/signaling/room_client_repository.dart';
+
+import 'package:flutter_webrtc/flutter_webrtc.dart';
 
 class UnityMediaSoup extends StatefulWidget {
   const UnityMediaSoup({super.key});
@@ -27,8 +30,10 @@ class UnityMediaSoup extends StatefulWidget {
 
 class UnityMediaSoupState extends State<UnityMediaSoup> {
   late UnityWidgetController _unityWidgetController;
+
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
@@ -147,6 +152,7 @@ class UnityMediaSoupState extends State<UnityMediaSoup> {
                   },
                   child:  Stack(
                     children: [
+                      LocalStream(),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: UnityWidget(
@@ -157,64 +163,64 @@ class UnityMediaSoupState extends State<UnityMediaSoup> {
                           borderRadius: const BorderRadius.all(Radius.circular(70)),
                         ),
                       ),
-                      PointerInterceptor(
-                        child: Positioned(
-                          bottom: 20,
-                          left: 20,
-                          right: 20,
-                          child: Card(
-                            elevation: 10,
-                            child: Padding(
-                              padding:const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                              child: Column(
-
-                                children: [
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 1,
-                                          child: TextButton(
-                                              onPressed: () {
-                                                // Navigator.pushNamed(
-                                                //   context,
-                                                //   '/room',
-                                                //   arguments: "",
-                                                // );
-                                                // setCameraAction("Stop image");
-                                                // getCubeTextureId();
-                                              },
-                                              style: TextButton.styleFrom(
-                                                backgroundColor: Colors.red, // background
-                                                foregroundColor:
-                                                Colors.green,
-                                                // foreground
-                                              ),
-                                              child: const Text('Call',
-                                                  style: TextStyle(fontSize: 20)))),
-                                      const SizedBox(width: 10),
-                                      Expanded(
-                                          flex: 1,
-                                          child: TextButton(
-                                              onPressed: () {
-
-                                                // setCameraAction("Stop image");
-                                                // getCubeTextureId();
-                                              },
-                                              style: TextButton.styleFrom(
-                                                //backgroundColor: Colors.white, // background
-                                                foregroundColor:
-                                                Colors.red, // foreground
-                                              ),
-                                              child: const Text('End Call',
-                                                  style: TextStyle(fontSize: 20)))),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
+                      // PointerInterceptor(
+                      //   child: Positioned(
+                      //     bottom: 20,
+                      //     left: 20,
+                      //     right: 20,
+                      //     child: Card(
+                      //       elevation: 10,
+                      //       child: Padding(
+                      //         padding:const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                      //         child: Column(
+                      //
+                      //           children: [
+                      //             Row(
+                      //               children: [
+                      //                 Expanded(
+                      //                     flex: 1,
+                      //                     child: TextButton(
+                      //                         onPressed: () {
+                      //                           // Navigator.pushNamed(
+                      //                           //   context,
+                      //                           //   '/room',
+                      //                           //   arguments: "",
+                      //                           // );
+                      //                           // setCameraAction("Stop image");
+                      //                           // getCubeTextureId();
+                      //                         },
+                      //                         style: TextButton.styleFrom(
+                      //                           backgroundColor: Colors.red, // background
+                      //                           foregroundColor:
+                      //                           Colors.green,
+                      //                           // foreground
+                      //                         ),
+                      //                         child: const Text('Call',
+                      //                             style: TextStyle(fontSize: 20)))),
+                      //                 const SizedBox(width: 10),
+                      //                 Expanded(
+                      //                     flex: 1,
+                      //                     child: TextButton(
+                      //                         onPressed: () {
+                      //
+                      //                           // setCameraAction("Stop image");
+                      //                           // getCubeTextureId();
+                      //                         },
+                      //                         style: TextButton.styleFrom(
+                      //                           //backgroundColor: Colors.white, // background
+                      //                           foregroundColor:
+                      //                           Colors.red, // foreground
+                      //                         ),
+                      //                         child: const Text('End Call',
+                      //                             style: TextStyle(fontSize: 20)))),
+                      //               ],
+                      //             )
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 )),
