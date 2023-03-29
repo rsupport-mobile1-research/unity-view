@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UnityFramework/NativeCallProxy.h>
 #import <UIKit/UIKit.h>
+#import "UnityTextureEnity.h"
 #import "FlutterRTCVideoRenderer.h"
 
 
@@ -15,17 +16,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyRender : NSObject <NativeCallsProtocol>
-@property NSString* oldTextureId;
-@property uint8_t *data;
 @property (nonatomic) CGContextRef context;
-@property NSMutableArray* myTextureId;
-@property NSMutableDictionary<NSString *, id<MTLTexture>>* myTexture;
+@property NSMutableDictionary<NSString *, UnityTextureEnity *>* myTextures;
 
 //-(void) handleDelegate;
 
     - (void) showHostMainWindow;
     - (void) unloadPlayer;
     - (void) quitPlayer;
+    - (void) renderTextureImage:(UnityTextureEnity *) data;
     - (id<MTLTexture>) getTextureId;
     - (void) sendMessageToMobileApp:(char *) mtlTexture
                           textureId:(NSString *) unityTextureId;

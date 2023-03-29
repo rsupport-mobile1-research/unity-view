@@ -183,6 +183,9 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
                         textureObjects[i] = newEntity!;
                         gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, nativeTextureId!);
                     }
+                } else {
+                    Debug.Log("Refresh index = " + textureObjects[i].id!);
+                    IOSNativeAPI.getTextureId(textureObjects[i].id);
                 }
             }
         }
