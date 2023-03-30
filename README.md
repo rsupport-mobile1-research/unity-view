@@ -69,6 +69,7 @@ Clone webrtc source code into mediasoup-client-flutter folder at [WebRTC lib](ht
 
 ```
 git clone https://github.com/rsupport-mobile1-research/flutter-webrtc.git
+git checkout main_media_soup
 ```
 
 ![Alt text](/images/flutter_setup_guide_7.png "Guide 1")
