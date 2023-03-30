@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		320962C429B622470012FC2C /* common in Resources */ = {isa = PBXBuildFile; fileRef = 320962C329B622470012FC2C /* common */; };
+		32B42AEB29D1DC8400277FA0 /* UnityTextureEntity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 32B42AEA29D1DC8400277FA0 /* UnityTextureEntity.mm */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		4E471AA3E4C8F3AAF4E74885 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C67AD091B94A237CE55DA80D /* Pods_Runner.framework */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
@@ -40,6 +41,8 @@
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		1C58C77F407868448D44D98D /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		320962C329B622470012FC2C /* common */ = {isa = PBXFileReference; lastKnownFileType = folder; name = common; path = "../mediasoup-client-flutter/flutter-webrtc/common"; sourceTree = "<group>"; };
+		32B42AE929D1DBD800277FA0 /* UnityTextureEnity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnityTextureEnity.h; sourceTree = "<group>"; };
+		32B42AEA29D1DC8400277FA0 /* UnityTextureEntity.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = UnityTextureEntity.mm; path = " MyClass.h @interface MyClass : NSObject /UnityTextureEntity.mm"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		4EF34574819E9978AF0D32B2 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				C8C7729B2946E29B00394C1E /* MyRender.mm */,
 				C8835AA5293742150014F1B8 /* PrefixHeader.pch */,
 				C8F71E3C293F22DE00EEEC10 /* Unity.swift */,
+				32B42AE929D1DBD800277FA0 /* UnityTextureEnity.h */,
+				32B42AEA29D1DC8400277FA0 /* UnityTextureEntity.mm */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32B42AEB29D1DC8400277FA0 /* UnityTextureEntity.mm in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				C8C7729C2946E29B00394C1E /* MyRender.mm in Sources */,
 				C8F71E3D293F22DE00EEEC10 /* Unity.swift in Sources */,
@@ -555,7 +561,7 @@
 					"$(OTHER_CFLAGS)",
 					"-fcxx-modules",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.rsupport.unityViewTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rsupport.unityViewTest2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "watchsimulator watchos macosx iphonesimulator iphoneos driverkit appletvsimulator appletvos";
 				SUPPORTS_MACCATALYST = YES;
