@@ -35,10 +35,11 @@
         UnityTextureEnity *item = [self.myTextures objectForKey:itemId];
         if ([item.isCreatedExternaltexture isEqual: @"true"]) {
             [self renderTextureImage: item];
+            return nil;
         } else {
             item.isCreatedExternaltexture = @"true";
+            return item.unityTextureId;
         }
-        return item.unityTextureId;
     }
     return nil;
 }
@@ -100,7 +101,20 @@
             [strongSelf.myTextures setObject:newEntity forKey:newId];
         } else {
             UnityTextureEnity *item = [strongSelf.myTextures objectForKey: newId];
-            if (size.width <= item.size.size.width && size.height <= item.size.size.height && item.notification == nil) {
+            if (item.notification == nil) {
+                if (size.width != item.size.size.width || size.height != item.size.size.height) {
+                    id<MTLDevice> device = MTLCreateSystemDefaultDevice();
+
+                    MTLTextureDescriptor *textureDescriptor = [[MTLTextureDescriptor alloc] init];
+                    textureDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm_sRGB;
+
+                    textureDescriptor.width = size.width;
+                    textureDescriptor.height = size.height;
+                    
+                    item.size = CGRectMake(0, 0, size.width, size.height);
+                    item.unityTextureId = [device newTextureWithDescriptor:textureDescriptor];
+                    item.isCreatedExternaltexture = @"false";
+                }
                 item.notification = notification;
             }
         }

@@ -173,19 +173,14 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
         #if !UNITY_ANDROID
         if (Application.platform == RuntimePlatform.IPhonePlayer) {
             for (int i = 0; i < textureObjects.Count; i++) {
-                if (textureObjects[i].texture == null) {
-                    IntPtr nativeTextureId = IOSNativeAPI.getTextureId(textureObjects[i].id);
-                    Debug.Log("Read index = " + i);
-                    Debug.Log("Read id = " + textureObjects[i].id!);
-                    if (nativeTextureId != null && nativeTextureId != IntPtr.Zero) {
-                        Debug.Log("New nativeTextureId = " + nativeTextureId!);
-                        TextureEntity newEntity = new TextureEntity("item-" + i, nativeTextureId, false);
-                        textureObjects[i] = newEntity!;
-                        gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, nativeTextureId!);
-                    }
-                } else {
-                    Debug.Log("Refresh index = " + textureObjects[i].id!);
-                    IOSNativeAPI.getTextureId(textureObjects[i].id);
+                IntPtr nativeTextureId = IOSNativeAPI.getTextureId(textureObjects[i].id);
+                Debug.Log("Read index = " + i);
+                Debug.Log("Read id = " + textureObjects[i].id!);
+                if (nativeTextureId != null && nativeTextureId != IntPtr.Zero) {
+                    Debug.Log("New nativeTextureId = " + nativeTextureId!);
+                    TextureEntity newEntity = new TextureEntity("item-" + i, nativeTextureId, false);
+                    textureObjects[i] = newEntity!;
+                    gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, nativeTextureId!);
                 }
             }
         }
