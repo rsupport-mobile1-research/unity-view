@@ -142,31 +142,17 @@ public class MyCamera : MonoBehaviour, IEventSystemHandler {
                 AndroidJavaObject currentActivityObject = playerClass.GetStatic<AndroidJavaObject>("currentActivity");
                 _androidApiInstance = androidWebViewApiClass.CallStatic<AndroidJavaObject>("Instance", currentActivityObject);
             } else {
-                bool isCalled = false;
                 for (int i = 0; i < textureObjects.Count; i++) {
-                    if (textureObjects[i].texture == null) {
-                        isCalled = true;
-                        long nativeTextureId = _androidApiInstance.Call<long>("getTextureId", textureObjects[i].id);
-                        // IntPtr nativeTextureId = IOSNativeAPI.getTextureId(textureObjects[i].id);
-                        Debug.Log("Read index = " + i);
-                        Debug.Log("Read id = " + textureObjects[i].id!);
-                        if (new System.IntPtr(nativeTextureId) != null && nativeTextureId > 0 && new System.IntPtr(nativeTextureId) != IntPtr.Zero) {
-                            Debug.Log("New nativeTextureId = " + new System.IntPtr(nativeTextureId)!);
-                            TextureEntity newEntity = new TextureEntity("item-" + i, new System.IntPtr(nativeTextureId), false);
-                            textureObjects[i] = newEntity!;
-                            gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, new System.IntPtr(nativeTextureId));
-                        }
+                    long nativeTextureId = _androidApiInstance.Call<long>("getTextureId", textureObjects[i].id);
+                    Debug.Log("Read index = " + i);
+                    Debug.Log("Read id = " + textureObjects[i].id!);
+                    if (new System.IntPtr(nativeTextureId) != null && nativeTextureId > 0 && new System.IntPtr(nativeTextureId) != IntPtr.Zero) {
+                        Debug.Log("New nativeTextureId = " + new System.IntPtr(nativeTextureId)!);
+                        TextureEntity newEntity = new TextureEntity("item-" + i, new System.IntPtr(nativeTextureId), false);
+                        textureObjects[i] = newEntity!;
+                        gameObjects[i].GetComponent<Renderer>().material.mainTexture = Texture2D.CreateExternalTexture(1080, 1920, TextureFormat.ARGB32, false, false, new System.IntPtr(nativeTextureId));
                     }
                 }
-                if (!isCalled) {
-                    _androidApiInstance.Call<long>("getTextureId", "refreshView");
-                }
-                // long nativeTextureId = _androidApiInstance.Call<long>("getTextureId");
-                // if (currentNativeTextureId != nativeTextureId) {
-                //     currentNativeTextureId = nativeTextureId;
-                //     createAndroidTexture(currentNativeTextureId);
-                //     Debug.Log("currentNativeTextureId = " + nativeTextureId);
-                // }
             }
         }
         #endif
